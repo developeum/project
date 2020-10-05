@@ -19,6 +19,13 @@ create table stacks (
         primary key (id)
 );
 
+create table categories (
+    id       serial not null,
+    category varchar(32),
+    constraint categories_pk
+        primary key (id)
+);
+
 create table events (
     id          serial not null,
     event_time  timestamp with time zone,
@@ -70,4 +77,15 @@ create table user_stack_links (
         foreign key (user_id) references users,
     constraint user_stack_links_stacks_id_fk
         foreign key (stack_id) references stacks
+);
+
+create table event_category_links (
+    event_id    serial not null,
+    category_id serial not null,
+    constraint event_category_links_pk
+        primary key (event_id, category_id),
+    constraint event_category_links_events_id_fk
+        foreign key (event_id) references events,
+    constraint event_category_links_categories_id_fk
+        foreign key (category_id) references categories
 );
