@@ -11,6 +11,11 @@ const routes: Routes = [
     loadChildren: () => import('../app/modules/auth/auth.module').then(m => m.AuthModule)
   },
   {
+    path: ':username',
+    loadChildren: () => import('../app/modules/personal/personal.module').then(m => m.PersonalModule),
+    // canActivate: [AuthGuard]
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'

@@ -5,10 +5,10 @@
         </div>
         <div class="formContainer">
             <p>SignIn</p>
-            <form action="">
-                <input type="text" placeholder="login" />
-                <input type="text" placeholder="password" />
-                <button >Enter</button>
+            <form [formGroup] = "loginForm" (ngSubmit) = "onSubmit()" >
+                <input formControlName = "username" type="text" placeholder="login" />
+                <input formControlName = "password" type="text" placeholder="password" />
+                <button type="submit button">Enter</button>
             </form>
         </div>
     </div>
