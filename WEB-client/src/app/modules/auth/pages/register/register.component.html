@@ -1,1 +1,15 @@
-<p>register works!</p>
+<div class="container">
+    <div class="loginContainer">
+        <div class="imgContainer">
+
+        </div>
+        <div class="formContainer">
+            <p>SignIn</p>
+            <form [formGroup] = "registerForm" (ngSubmit) = "onSubmit()" >
+                <input formControlName = "username" type="text" placeholder="login" />
+                <input formControlName = "password" type="text" placeholder="password" />
+                <button type="submit button">Enter</button>
+            </form>
+        </div>
+    </div>
+</div>
