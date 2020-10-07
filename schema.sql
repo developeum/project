@@ -28,10 +28,12 @@ create table categories (
 
 create table events (
     id          serial not null,
+    name        varchar(64),
     event_time  timestamp with time zone,
     city        serial not null,
-    description text,
     place       varchar(64),
+    source_url  varchar(128),
+    description text,
     logo_path   varchar(128),
     constraint events_pk
         primary key (id),
