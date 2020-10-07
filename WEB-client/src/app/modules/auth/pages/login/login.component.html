@@ -4,11 +4,11 @@
 
         </div>
         <div class="formContainer">
-            <p>SignIn</p>
+            <p class="signIn">SignIn</p>
             <form [formGroup] = "loginForm" (ngSubmit) = "onSubmit()" >
-                <input formControlName = "username" type="text" placeholder="login" />
-                <input formControlName = "password" type="text" placeholder="password" />
-                <button type="submit button">Enter</button>
+                <input formControlName = "username" class="input" type="text" placeholder="login" />
+                <input formControlName = "password" class="input" type="text" placeholder="password" />
+                <button type="submit button" class="subButton">Enter</button>
             </form>
         </div>
     </div>

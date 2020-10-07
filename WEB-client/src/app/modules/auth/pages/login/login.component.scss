@@ -3,6 +3,8 @@ $backgroundColor: #FAFAFA;
 $primaryTextColor: #2C2C2C;
 $secondaryTextColor: #FFF;
 
+$testBackColor: rgb(233, 233, 233);
+
 $containerWidth: 100%;
 
 .container{
@@ -12,7 +14,7 @@ $containerWidth: 100%;
 }
 
 .loginContainer{
-    background-color: $primaryColor;
+    background-color: $testBackColor;
     margin-top: 25vh;
     border-radius: 1vh;
     width: 50vw;
@@ -38,4 +40,29 @@ $containerWidth: 100%;
 form{
     display: flex;
     flex-direction: column;
+}
+
+.input{
+    outline: none;
+    border: none;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    border-bottom: 1px solid #555555;
+    width: $containerWidth;
+    height: 3vh;
+    font-size: 2vh;
+    background-color: $backgroundColor;
+}
+
+.subButton{
+    outline: none;
+    border: none;
+    width: $containerWidth;
+    height: 3vh;
+    border-radius: 1vh;
+    font-size: 1.5vh;
+}
+
+.signIn{
+    font-size: 2vh;
 }

@@ -4,11 +4,12 @@
 
         </div>
         <div class="formContainer">
-            <p>SignIn</p>
+            <p class="signUp">SignUp</p>
             <form [formGroup] = "registerForm" (ngSubmit) = "onSubmit()" >
-                <input formControlName = "username" type="text" placeholder="login" />
-                <input formControlName = "password" type="text" placeholder="password" />
-                <button type="submit button">Enter</button>
+                <input formControlName = "username" class="input" type="text" placeholder="login" />
+                <input formControlName = "password" class="input" type="text" placeholder="password" />
+                <button type="submit button" class="subButton">Enter</button>
+                <a routerLink = "/auth" href="">Allready has account</a>
             </form>
         </div>
     </div>
