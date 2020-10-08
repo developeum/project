@@ -7,30 +7,32 @@ $testBackColor: rgb(233, 233, 233);
 
 $containerWidth: 100%;
 
+
+
 .container{
+    margin: 0;
+    width: $containerWidth;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    // background: url(../../../../imges/auth.jpg);
+    // -moz-background-size: 100%; /* Firefox 3.6+ */
+    // -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    // -o-background-size: 100%; /* Opera 9.6+ */
+    // background-size: 100%; /* Современные браузеры */
 }
 
 .loginContainer{
     background-color: $testBackColor;
-    margin-top: 25vh;
     border-radius: 1vh;
-    width: 50vw;
-    height: 50vh;
+    width: 33vw;
+    height: 38vh;
     display: flex;
-
-}
-
-.imgContainer{
-    width: $containerWidth/2;
-    background-color: $backgroundColor;
-    height: $containerWidth;
 }
 
 .formContainer{
-    width: $containerWidth/2;
+    width: $containerWidth;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -44,6 +46,7 @@ form{
 }
 
 .input{
+    display: flex;
     outline: none;
     border: none;
     margin-top: 1vh;
@@ -68,8 +71,57 @@ form{
     font-size: 2vh;
 }
 
-@media (max-width: 1070px) {
+@media screen and (max-width: 1070px) {
     .loginContainer{
+        width: 101vw;
+    }
+}
+
+@media screen and(max-width: 420px) {
+    .container{
+        position: relative;
+    }
+
+    .loginContainer{
+        position: absolute;
+        justify-content: center;
+        width: 100vw;
+        height: 75vh;
+        bottom: 0;
+        border-radius: 0 11vh 0 0;
+    }
+
+    .formContainer{
+        justify-content: center;
+        position: absolute;
+        width: $containerWidth/1.5;
         width: 100vw;
     }
+
+    .input{
+        width: 80vw;
+        height: 6vh;
+        margin-top: 2vh;
+        font-size: 4vh;
+    }
+
+    .signUp{
+        margin-top:10vh;
+        font-size: 5vh;
+    }
+
+    .subButton{
+        width: 80vw;
+        height: 6vh;
+        margin-top: 2vh;
+        font-size: 4vh;
+    }
+
+    form{
+        justify-content: space-evenly;
+    }
+}
+
+a{
+    margin-top: 1vh;
 }
