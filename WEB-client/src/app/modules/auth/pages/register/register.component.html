@@ -3,10 +3,19 @@
         <div class="formContainer">
             <p class="signUp">SignUp</p>
             <form [formGroup] = "registerForm" (ngSubmit) = "onSubmit()" >
-                <input formControlName = "username" class="input" type="text" placeholder="login" />
-                <input formControlName = "password" class="input" type="text" placeholder="password" />
-                <button type="submit button" class="subButton">Enter</button>
-                <a routerLink = "/auth" href="">Allready has account</a>
+                <div class="formGroup">
+                    <p class="inputDescription">Логин</p>
+                    <input formControlName = "username" class="input" type="text" placeholder="login" />
+                </div>
+                <div class="formGroup">
+                    <p class="inputDescription">Пароль</p>
+                    <div class="wrapInput">
+                        <input #password formControlName = "password" class="input" type="password" placeholder="password" />
+                        <input class="inputVisible" type="text" (mouseenter) = "changePassVisibility($event)" (mouseleave) = "changePassVisibility($event)" value="">
+                    </div>                    
+                </div>  
+                <button type="submit button" class="subButton">Войти</button>
+                <a routerLink = "/auth" href="">Уже есть аккаунт?</a>
             </form>
         </div>
     </div>

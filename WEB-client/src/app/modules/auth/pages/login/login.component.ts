@@ -1,5 +1,5 @@
 import { AuthService } from './../../services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
 
+  @ViewChild("password") pass: ElementRef;
+
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       username: [ "", Validators.required ],
@@ -23,6 +25,14 @@ export class LoginComponent implements OnInit {
 
   get form() {
     return this.loginForm.controls;
+  }
+
+  changePassVisibility(i){
+    if(this.pass.nativeElement.type === "password"){
+      this.pass.nativeElement.type = "text";
+    } else {
+      this.pass.nativeElement.type = "password"
+    }
   }
 
   onSubmit(){
