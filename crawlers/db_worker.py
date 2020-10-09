@@ -46,10 +46,10 @@ def select_or_insert(table: str, column: str, value: str):
         id_cache[value] = entry[0]
         return entry[0]
 
-def add_event(name: str, event_time: datetime, city: str, place: str,
-              source_url: str, description: str,
-              categories: List[str] = [],
-              logo_path: str = None):
+def store_event(name: str, event_time: datetime, city: str, place: str,
+                source_url: str, description: str,
+                categories: List[str] = [],
+                logo_path: str = None):
     """
         Add event to database, but do not commit changes
     """

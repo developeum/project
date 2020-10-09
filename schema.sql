@@ -21,7 +21,7 @@ create table stacks (
 
 create table categories (
     id       serial not null,
-    category varchar(32),
+    category varchar(64),
     constraint categories_pk
         primary key (id)
 );
@@ -31,10 +31,10 @@ create table events (
     name        varchar(128),
     event_time  timestamp with time zone,
     city        serial not null,
-    place       varchar(128),
-    source_url  varchar(128),
+    place       varchar(256),
+    source_url  varchar(256),
     description text,
-    logo_path   varchar(128),
+    logo_path   varchar(256),
     constraint events_pk
         primary key (id),
     constraint events_cities_id_fk
@@ -49,7 +49,7 @@ create table users (
     first_name  varchar(20),
     last_name   varchar(20),
     status      serial not null,
-    profile_img varchar(128),
+    profile_img varchar(256),
     city        serial not null,
     constraint users_pk
         primary key (id),
