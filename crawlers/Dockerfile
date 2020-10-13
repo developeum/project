@@ -1,8 +1,7 @@
 FROM ubuntu:latest
 
 # Copy out application into container
-RUN mkdir -p /app
-COPY app/* /app/
+COPY app/ /app/
 
 # Install requirements
 RUN apt-get update
