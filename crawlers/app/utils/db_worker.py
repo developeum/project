@@ -2,6 +2,7 @@ from config import (
     DB_NAME, DB_HOST, DB_USER,
     DB_PASS, DB_PORT
 )
+from .sanitizers import sanitize
 from datetime import datetime
 from typing import List
 import psycopg2
@@ -59,6 +60,10 @@ def store_event(name: str, event_time: datetime, city: str, place: str,
                          'VALUES (%s, %s, %s, %s, %s, %s, %s) RETURNING id'
     links_insert_query = 'INSERT INTO event_category_links (event_id, '\
                          'category_id) VALUES (%s, %s)'
+
+    name = sanitize(name)
+    place = sanitize(place)
+    description = sanitize(description)
 
     city_id = select_or_insert('cities', 'city', city)
 

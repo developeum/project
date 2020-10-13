@@ -1,4 +1,4 @@
-from db_worker import store_event, commit_changes
+from utils.db_worker import store_event, commit_changes
 from config import TIMEPAD_API_TOKEN
 from datetime import timedelta
 from datetime import timezone
@@ -40,7 +40,7 @@ def update_timestamp():
 
     if last_update_filename not in os.listdir('.'):
         logging.info('Crawler launched at the first time')
-        last_launch_timestamp = current_timestamp - week_as_secs
+        last_launch_timestamp = current_timestamp - 2*week_as_secs
     else:
         logging.info('Got last launch timestamp')
         with open(last_update_filename, 'r') as handle:
