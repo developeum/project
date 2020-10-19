@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-# Copy out application into container
+# Copy our application into container
 COPY app/ /app/
 
 # Install requirements

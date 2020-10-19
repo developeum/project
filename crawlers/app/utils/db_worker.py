@@ -1,11 +1,10 @@
-from config import (
-    DB_NAME, DB_HOST, DB_USER,
-    DB_PASS, DB_PORT
-)
-from .sanitizers import sanitize
 from datetime import datetime
-from typing import List
+from typing import List, Optional
+
 import psycopg2
+from config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
+
+from .sanitizers import sanitize
 
 connection = psycopg2.connect(
     database=DB_NAME,
@@ -49,8 +48,8 @@ def select_or_insert(table: str, column: str, value: str):
 
 def store_event(name: str, event_time: datetime, city: str, place: str,
                 source_url: str, description: str,
-                categories: List[str] = [],
-                logo_path: str = None):
+                categories: Optional[List[str]] = [],
+                logo_path: Optional[str] = None):
     """
         Add event to database, but do not commit changes
     """
