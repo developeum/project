@@ -1,1 +1,16 @@
-<p>user-info works!</p>
+<div class="container">
+    <div class="infoContainer">
+        <div class="imgContainer">
+            <img class="userImg" src="https://images.unsplash.com/photo-1600704613492-edaa3f8cbd2a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=632&q=80" alt="">
+        </div>
+        <div class="textContainer">
+            <p>{{userInfo.first_name}} {{userInfo.last_name}}</p>
+            <br>
+            <p>{{userInfo.status.name}}</p>
+            <p>{{userInfo.email}}</p>
+            <p>{{userInfo.phone}}</p>
+            <p>{{userInfo.city.name}}</p>
+            <button click = "logout()">Выйти</button>
+        </div>
+    </div>
+</div>
