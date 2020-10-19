@@ -9,6 +9,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-info.component.scss']
 })
 export class UserInfoComponent implements OnInit {
+  currentUserId: string;
+  base64Img: string;
+  
   userInfo$: Observable<User>;
   userInfo = new User;
 
@@ -16,7 +19,8 @@ export class UserInfoComponent implements OnInit {
   constructor(private pageService: PersonalService) { }
 
   ngOnInit(): void {
-    this.loadUserInfo()
+    this.loadUserInfo();
+    this.loadUserImg();
   }
 
   loadUserInfo(){
@@ -25,6 +29,13 @@ export class UserInfoComponent implements OnInit {
 
   processUserInfo(data: User){
     this.userInfo = data;
+  }
+
+  loadUserImg(){
+    this.pageService.getPicBase64(this.currentUserId).subscribe(x => {
+      this.base64Img = x.base64;
+      console.log(this.base64Img)
+    })
   }
 
   logout(){

@@ -1,3 +1,4 @@
+import { Base64 } from './../../../models/Base64';
 import { EventFL } from './../../../models/eventsFL';
 import { User } from './../../../models/user';
 import { Observable } from 'rxjs';
@@ -26,6 +27,12 @@ export class PersonalService {
   getFavEvents(): Observable<EventFL[]>{
     return this.http
     .get<EventFL[]>("http://localhost:8000/api/user/me/favorites", this.httpOptions)
+    .pipe(retry(1))
+  }
+
+  getPicBase64(id: string){
+    return this.http
+    .get<Base64>("http://localhost:8000/api/user/me/avatar", this.httpOptions)
     .pipe(retry(1))
   }
 }
