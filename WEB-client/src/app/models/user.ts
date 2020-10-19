@@ -1,6 +1,17 @@
 export class User{
-    id: string;
-    username: string;
-    password: string;
-    token?: string;
+    email: string;
+    phone: string;
+    first_name: string;
+    last_name: {
+        id: number;
+        name: string;
+    };
+    city: {
+        id: number;
+        name: string;
+    }
+    stack: [{
+        id: number;
+        name: string;
+    }]
 }
