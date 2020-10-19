@@ -5,12 +5,16 @@ create table cities (
         primary key (id)
 );
 
+insert into cities (city) values ('Не указан');
+
 create table statuses (
     id     serial not null,
     status varchar(32),
     constraint statuses_pk
         primary key (id)
 );
+
+insert into statuses (status) values ('Не указан');
 
 create table stacks (
     id    serial not null,
@@ -26,11 +30,21 @@ create table categories (
         primary key (id)
 );
 
+create table event_types (
+    id         serial not null,
+    event_type varchar(32),
+    constraint event_types_pk
+        primary key (id)
+);
+
+insert into event_types (event_type) values ('Не указан');
+
 create table events (
     id          serial not null,
     name        varchar(128),
+    event_type  integer not null default 1,
     event_time  timestamp with time zone,
-    city        serial not null,
+    city        integer not null default 1,
     place       varchar(256),
     source_url  varchar(256),
     description text,
@@ -38,7 +52,9 @@ create table events (
     constraint events_pk
         primary key (id),
     constraint events_cities_id_fk
-        foreign key (city) references cities
+        foreign key (city) references cities,
+    constraint events_event_types_id_fk
+        foreign key (event_type) references event_types
 );
 
 create table users (
@@ -48,9 +64,9 @@ create table users (
     phone       varchar(24),
     first_name  varchar(20),
     last_name   varchar(20),
-    status      serial not null,
+    status      integer not null default 1,
     profile_img varchar(256),
-    city        serial not null,
+    city        integer not null default 1,
     constraint users_pk
         primary key (id),
     constraint users_statuses_id_fk
@@ -60,8 +76,8 @@ create table users (
 );
 
 create table favorites (
-    user_id  serial not null,
-    event_id serial not null,
+    user_id  integer not null,
+    event_id integer not null,
     constraint favorites_pk
         primary key (user_id, event_id),
     constraint favorites_users_id_fk
@@ -71,8 +87,8 @@ create table favorites (
 );
 
 create table user_stack_links (
-    user_id  serial not null,
-    stack_id serial not null,
+    user_id  integer not null,
+    stack_id integer not null,
     constraint user_stack_links_pk
         primary key (user_id, stack_id),
     constraint user_stack_links_users_id_fk
@@ -82,8 +98,8 @@ create table user_stack_links (
 );
 
 create table event_category_links (
-    event_id    serial not null,
-    category_id serial not null,
+    event_id    integer not null,
+    category_id integer not null,
     constraint event_category_links_pk
         primary key (event_id, category_id),
     constraint event_category_links_events_id_fk
