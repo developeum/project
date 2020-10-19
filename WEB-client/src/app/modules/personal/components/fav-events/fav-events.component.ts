@@ -1,7 +1,7 @@
 import { EventFL } from './../../../../models/eventsFL';
 import { Observable } from 'rxjs';
 import { PersonalService } from './../../services/personal.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-fav-events',
@@ -22,7 +22,6 @@ export class FavEventsComponent implements OnInit {
   }
 
   loadMoreEvents(){
-    
   }
 
 }
