@@ -1,1 +1,11 @@
-<p>events-list works!</p>
+<div class="container">
+    <p class="title">Мероприятия</p>
+    <div class="event-list">
+        <ul class="list">
+            <li *ngFor = "let event of events" class="event">
+                <p>{{event.name}} {{event.type}}</p>
+            </li>
+        </ul>
+    </div>
+    <button class="btn">Смотреть больше</button>
+</div>
