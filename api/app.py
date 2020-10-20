@@ -1,15 +1,20 @@
+from os import urandom
+
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 
-from config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
-
-mask = 'postgresql://{user}:{password}@{host}:{port}/{db}'
-db_url = mask.format(user=DB_USER, password=DB_PASS,
-                     host=DB_HOST, port=DB_PORT,
-                     db=DB_NAME)
+from database import db, db_url
+from jwt_manager import jwt
+from users.routes import users_api
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
-db = SQLAlchemy(app)
+app.config['JWT_SECRET_KEY'] = urandom(32)
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = 7 * 86400
 
-from models import *
+db.init_app(app)
+jwt.init_app(app)
+
+app.register_blueprint(users_api, url_prefix='/api/user')
+
+if __name__ == '__main__':
+    app.run()
