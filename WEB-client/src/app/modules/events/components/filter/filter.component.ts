@@ -2,6 +2,7 @@ import { EventsService } from './../../servises/events.service';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import * as _ from "lodash";
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-filter',
@@ -18,9 +19,13 @@ export class FilterComponent implements OnInit {
 
   selectedTypes: [number];
   selectedCategories: [number];
-  selectedFormat: [string];
+  selectedPlaces: [number];
+
   types: any = [];
   categories: any = [];
+  places: any = [];
+  startsMin = new FormControl('');
+  startsMax = new FormControl('');
 
   constructor(private pageService: EventsService) { }
 
@@ -44,19 +49,34 @@ export class FilterComponent implements OnInit {
     })
   }
 
+  loadCities(){
+    this.pageService.getCities().subscribe(x => {
+      x.forEach(place => {
+        this.filElem.value = place.id;
+        this.filElem.name = place.name;
+        this.places.push(this.filElem);
+      })
+    })
+  }
+
   ngOnInit(): void {
     this.loadTypes();
     this.loadCateg();
+    this.loadCities();
     this.createFormInputs();
   }
 
   createFormInputs(){
     this.filterForm = new FormGroup({
+      // startsAtMin: this.createTimespaceMin(this.startsMin),
+      // startsAtMax: this.createTimespaceMax(this.startsMax),
       types: this.createTypes(this.types),
-      categories: this.createCategories(this.categories)
+      categories: this.createCategories(this.categories),
+      places: this.createPlaces(this.places),
     });
     this.getSelectedTypes();
     this.getSelectedCategories();
+    this.getSelectedPlaces();
   }
 
   createTypes(typesInputs){
@@ -71,6 +91,21 @@ export class FilterComponent implements OnInit {
       return new FormControl(category.selected || false);
     });
     return new FormArray(arr);
+  }
+
+  createPlaces(placesInputs){
+    const arr = placesInputs.map(place => {
+      return new FormControl(place.selected || false);
+    });
+    return new FormArray(arr);
+  }
+
+  createTimespaceMin(minInput){
+    return new FormControl(minInput || false)
+  }
+
+  createTimespaceMax(maxInput){
+    return new FormControl(maxInput || false)
   }
 
   getSelectedTypes(){
@@ -111,9 +146,26 @@ export class FilterComponent implements OnInit {
     )
   }
 
+  getSelectedPlaces(){
+    this.selectedPlaces = _.map(this.filterForm.controls.places['controls'], (place, i) => {
+      return place.value && this.places[i].value;
+    });
+    this.getSelectedPlacesName();
+  }
+
+  getSelectedPlacesName(){
+    this.selectedPlaces = _.filter(
+      this.selectedPlaces,
+      function(place) {
+        if(place != false) {
+          return place;
+        }
+      }
+    )
+  }
+
   onSubmit(){
-    this.getSelectedTypes();
-    console.log(this.selectedTypes)
+    
   }
 
 }

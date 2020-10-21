@@ -1,3 +1,4 @@
+import { City } from './../../../models/city';
 import { Stack } from './../../../models/stack';
 import { Type } from './../../../models/types';
 import { Observable } from 'rxjs';
@@ -39,6 +40,12 @@ export class EventsService {
   getStack(): Observable<Stack[]>{
     return this.http
     .get<Stack[]>("http://localhost:8000/api/general/categories", this.httpOptions)
+    .pipe(retry(1))
+  }
+
+  getCities(): Observable<City[]>{
+    return this.http
+    .get<City[]>("http://localhost:8000/api/general/cities", this.httpOptions)
     .pipe(retry(1))
   }
 }

@@ -1,34 +1,12 @@
 <div class="container">
     <div class="filterContainer">
-        <!-- <p class="title">Дата проведения</p>
-        <p>От <input type="text"> до <input type="text"></p>
-        <p class="title">Тип мероприятия</p>
-        <div class="сheck">
-            <p><input type="checkbox"> Хакатон</p>
-            <p><input type="checkbox"> Вебинар</p>
-            <p><input type="checkbox"> Конференция</p>
-            <p><input type="checkbox"> Тренинг</p>
-            <p><input type="checkbox"> Курс</p>
-            <p><input type="checkbox"> Другое</p>
-        </div>
-        <p class="title">Сфера</p>
-        <div class="сheck">
-            <p><input type="checkbox"> WEB</p>
-            <p><input type="checkbox"> DS</p>
-            <p><input type="checkbox"> Gamedev</p>
-            <p><input type="checkbox"> UI/UX</p>
-            <p><input type="checkbox"> QA</p>
-            <p><input type="checkbox"> Devops</p>
-            <p><input type="checkbox"> Mobile</p>
-            <p><input type="checkbox"> другое</p>
-        </div>
-        <p class="title">Формат</p>
-        <div class="check">
-            <p><input type="checkbox"> Online</p>
-            <p><input type="checkbox"> Offline</p>
-        </div>
-        <button>Применить</button> -->
         <form [formGroup] = "filterForm" (ngSubmit) = "onSubmit()">
+            <div>
+                <label>Дата проведения</label>
+                <div>
+                    <p>От <input type="date" [formControl] = "startsMin"> до <input type="date" [formControl] = "startsMax"></p>
+                </div>
+            </div>
             <div>
                 <label>Типы</label>
                 <div class="flexContainer">
@@ -47,7 +25,16 @@
                     </div>
                 </div>
             </div>
+            <div>
+                <label>Города</label>
+                <div class="flexContainer">
+                    <div *ngFor = "let place of filterForm.get('places')['controls']; let i = index;">
+                        <input type="checkbox" [formControl] = "place">
+                        {{places[i].name}}
+                    </div>
+                </div>
+            </div>
         </form>
-        <button type="submit" (click) = "onSubmit()">Получить</button>
+        <button type="submit" (click) = "onSubmit()">Применить</button>
     </div>
 </div>
