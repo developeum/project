@@ -1,7 +1,7 @@
 from common.helpers import accepts_json
 from common.models import User, UserStack, db
 from flask import request
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, current_user, jwt_required
 
 from .helpers import (check_password, hash_password, is_email_correct,
                       is_email_registered)
@@ -61,3 +61,30 @@ def login_user():
         return INCORRECT_CREDENTIALS, 200
 
     return {'ok': True, 'token': create_access_token(user_to_check)}, 200
+
+@jwt_required
+@accepts_json(
+    old_password=(True, str),
+    email=(True, str),
+    password=(True, str)
+)
+def update_credentials():
+    body = request.get_json()
+    body['email'] = body['email'].lower()
+
+    if check_password(current_user, body['old_password']):
+        if current_user.email != body['email']:
+            if not is_email_correct(body['email']):
+                return INCORRECT_EMAIL_FORMAT, 200
+
+            if is_email_registered(body['email']):
+                return EMAIL_REGISTERED, 200
+
+        current_user.email = body['email']
+        current_user.password = hash_password(body['password'])
+
+        db.session.commit()
+
+        return {'ok': True}, 200
+    else:
+        return INCORRECT_CREDENTIALS, 200
