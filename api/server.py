@@ -2,9 +2,9 @@ from os import urandom
 
 from flask import Flask
 
-from database import db, db_url
-from jwt_manager import jwt
-from users.routes import users_api
+from common.database import db, db_url
+from common.jwt_manager import jwt
+from blueprints.users import users_api
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url

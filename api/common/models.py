@@ -1,4 +1,4 @@
-from database import db
+from .database import db
 
 class EventCategory(db.Model):
     __tablename__ = 'categories'
@@ -6,11 +6,17 @@ class EventCategory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     category = db.Column(db.String(64))
 
+    def as_json(self):
+        return {'id': self.id, 'name': self.category}
+
 class City(db.Model):
     __tablename__ = 'cities'
 
     id = db.Column(db.Integer, primary_key=True)
     city = db.Column(db.String(64))
+
+    def as_json(self):
+        return {'id': self.id, 'name': self.city}
 
 class UserStatus(db.Model):
     __tablename__ = 'statuses'
@@ -18,17 +24,26 @@ class UserStatus(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     status = db.Column(db.String(32))
 
+    def as_json(self):
+        return {'id': self.id, 'name': self.status}
+
 class UserStack(db.Model):
     __tablename__ = 'stacks'
 
     id = db.Column(db.Integer, primary_key=True)
     stack = db.Column(db.String(64))
 
+    def as_json(self):
+        return {'id': self.id, 'name': self.stack}
+
 class EventType(db.Model):
     __tablename__ = 'event_types'
 
     id = db.Column(db.Integer, primary_key=True)
     event_type = db.Column(db.String(32))
+
+    def as_json(self):
+        return {'id': self.id, 'name': self.event_type}
 
 favorites_table = db.Table('favorites',
     db.Column('user_id', db.Integer,
@@ -111,3 +126,17 @@ class User(db.Model):
     stack = db.relationship('UserStack',
                             secondary=user_stack_links_table,
                             lazy='subquery')
+
+    def as_json(self):
+        return {
+            'email': self.email,
+            'phone': self.phone,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'profile_img': self.profile_img,
+            'city': self.city.as_json(),
+            'status': self.status.as_json(),
+            'stack': [
+                stack.as_json() for stack in self.stack
+            ]
+        }
