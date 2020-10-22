@@ -4,7 +4,7 @@ import bcrypt
 from common.models import User
 
 def is_email_correct(email: str) -> bool:
-    email_regex = r'[a-z0-9\-.]+@[a-z0-9\-.]+\.[a-z]{2,4}'
+    email_regex = r'[a-z0-9\-.]+@([a-z0-9\-]+\.)+[a-z]{2,4}'
     return fullmatch(email_regex, email)
 
 def is_email_registered(email: str) -> bool:

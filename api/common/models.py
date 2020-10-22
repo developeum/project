@@ -1,4 +1,4 @@
-from .database import db
+from .database import db, association_proxy
 
 class EventCategory(db.Model):
     __tablename__ = 'categories'
@@ -45,6 +45,8 @@ class EventType(db.Model):
     def as_json(self):
         return {'id': self.id, 'name': self.event_type}
 
+"""
+# TODO: delete favorites_table
 favorites_table = db.Table('favorites',
     db.Column('user_id', db.Integer,
               db.ForeignKey('users.id'),
@@ -53,6 +55,27 @@ favorites_table = db.Table('favorites',
               db.ForeignKey('events.id'),
               primary_key=True)
 )
+"""
+
+class UserVisit(db.Model):
+    __tablename__ = 'user_visit_links'
+
+    visit_time = db.Column(db.DateTime)
+
+    user_id = db.Column(db.Integer,
+                        db.ForeignKey('users.id'),
+                        primary_key=True)
+    user = db.relationship('User')
+
+    event_id = db.Column(db.Integer,
+                         db.ForeignKey('events.id'),
+                         primary_key=True)
+    event = db.relationship('Event')
+
+    def __init__(self, event=None, user=None, visit_time=None):
+        self.event = event
+        self.user = user
+        self.visit_time = visit_time
 
 user_stack_links_table = db.Table('user_stack_links',
     db.Column('user_id', db.Integer,
@@ -98,6 +121,22 @@ class Event(db.Model):
                                  secondary=event_category_links_table,
                                  backref=db.backref('events', lazy=True))
 
+    def as_json(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'event_time': self.event_time.strftime('%Y-%m-%dT%H:%M:%S%z'),
+            'place': self.place,
+            'source_url': self.source_url,
+            'description': self.description,
+            'logo_path': self.logo_path,
+            'city': self.city.as_json(),
+            'event_type': self.event_type.as_json(),
+            'categories': [
+                category.as_json() for category in self.categories
+            ]
+        }
+
 class User(db.Model):
     __tablename__ = 'users'
 
@@ -119,9 +158,16 @@ class User(db.Model):
                           nullable=False, default=1)
     status = db.relationship('UserStatus')
 
+    """
+    # TODO: delete favorites relationship
     favorites = db.relationship('Event',
                                 secondary=favorites_table,
                                 lazy='subquery')
+    """
+    user_visit = db.relationship('UserVisit',
+                                 order_by='desc(UserVisit.visit_time)',
+                                 lazy='dynamic')
+    visited = association_proxy('user_visit', 'event')
 
     stack = db.relationship('UserStack',
                             secondary=user_stack_links_table,

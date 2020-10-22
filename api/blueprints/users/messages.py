@@ -13,5 +13,8 @@ INCORRECT_CITY_ID = {'ok': False,
 INCORRECT_STATUS_ID = {'ok': False,
                        'reason': 'Status with provided id doesn\'t exist'}
 
+INCORRECT_EVENT_ID = {'ok': False,
+                       'reason': 'Event with provided id doesn\'t exist'}
+
 INCORRECT_CREDENTIALS = {'ok': False,
                          'reason': 'Incorrect login or password'}
