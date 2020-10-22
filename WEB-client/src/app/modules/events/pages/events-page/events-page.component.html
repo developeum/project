@@ -1,5 +1,15 @@
 <app-header></app-header>
 <div class="container">
-    <app-events-list></app-events-list>
-    <app-filter></app-filter>
+    <div class="co">
+        <p class="title">Мероприятия</p>
+        <div class="event-list">
+            <ul class="list">
+                <li *ngFor = "let event of events" class="event">
+                    <p>{{event.name}} {{event.type}}</p>
+                </li>
+            </ul>
+        </div>
+        <button class="btn" (click) = "loadMore()">Смотреть больше</button>
+    </div>
+    <app-filter (setParams) = "setParams($event)"></app-filter>
 </div>

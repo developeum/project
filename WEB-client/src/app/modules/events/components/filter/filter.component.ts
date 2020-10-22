@@ -1,8 +1,8 @@
+import { Filter } from './../../../../models/filter';
 import { EventsService } from './../../servises/events.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import * as _ from "lodash";
-import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-filter',
@@ -10,6 +10,7 @@ import { stringify } from '@angular/compiler/src/util';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit {
+  filterParam: Filter;
   filterForm: FormGroup;
 
   filElem: {
@@ -26,6 +27,8 @@ export class FilterComponent implements OnInit {
   places: any = [];
   startsMin = new FormControl('');
   startsMax = new FormControl('');
+
+  @Output() setParams = new EventEmitter<Filter>();
 
   constructor(private pageService: EventsService) { }
 
@@ -113,7 +116,6 @@ export class FilterComponent implements OnInit {
       console.log(type.id);
       return type.value && this.types[i].value;
     });
-    console.log(this.selectedTypes)
     this.getSelectedTypesName();
   }
 
@@ -165,7 +167,18 @@ export class FilterComponent implements OnInit {
   }
 
   onSubmit(){
-    
+    this.getSelectedTypes();
+    this.getSelectedCategories();
+    this.getSelectedPlaces();
+    this.filterParam = new Filter;
+    this.filterParam.starts_at_min = this.startsMin.value;
+    this.filterParam.starts_at_max = this.startsMax.value;
+    this.filterParam.types = this.selectedTypes;
+    this.filterParam.categories = this.selectedCategories;
+    this.filterParam.cities = this.selectedPlaces;
+    this.setParams.emit(this.filterParam);
+    console.log(this.filterParam);
+    console.log(this.startsMax)
   }
 
 }
