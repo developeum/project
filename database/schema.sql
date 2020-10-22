@@ -75,6 +75,8 @@ create table users (
         foreign key (city) references cities
 );
 
+/*
+-- TODO: delete `favorites` table
 create table favorites (
     user_id  integer not null,
     event_id integer not null,
@@ -83,6 +85,19 @@ create table favorites (
     constraint favorites_users_id_fk
         foreign key (user_id) references users,
     constraint favorites_events_id_fk
+        foreign key (event_id) references events
+);
+*/
+
+create table user_visit_links (
+    user_id     integer not null,
+    event_id    integer not null,
+    visit_time  timestamp,
+    constraint visited_pk
+        primary key (user_id, event_id),
+    constraint visited_users_id_fk
+        foreign key (user_id) references users,
+    constraint visited_events_id_fk
         foreign key (event_id) references events
 );
 
