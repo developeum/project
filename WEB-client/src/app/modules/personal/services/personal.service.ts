@@ -11,9 +11,9 @@ import { Injectable } from '@angular/core';
 })
 export class PersonalService {
   httpOptions = {
-    headers: new HttpHeaders({
-      "Content-Type": "application/json; charset=utf-8"
-    })
+    headers:{
+      Authorization: "Bearer" + localStorage.getItem("currentUser")
+    }
   }
 
   constructor(private http:HttpClient) { }
@@ -30,7 +30,7 @@ export class PersonalService {
     .pipe(retry(1))
   }
 
-  getPicBase64(id: string){
+  getPicBase64(){
     return this.http
     .get<Base64>("http://localhost:8000/api/user/me/avatar", this.httpOptions)
     .pipe(retry(1))
