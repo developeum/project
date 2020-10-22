@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { EventFL } from 'src/app/models/eventsFL';
 import { Filter } from 'src/app/models/filter';
@@ -10,7 +11,7 @@ import { EventsService } from '../../servises/events.service';
 })
 export class EventsPageComponent implements OnInit {
 
-  params: any;
+  params: Filter;
   num: number = 0;
   userId: string;
   events: EventFL[];
@@ -20,27 +21,26 @@ export class EventsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.params = new Filter;
+    this.loadEvents();
   }
 
-  loadRandEvents(){
-    this.pageService.getEvents().subscribe(x => {
-      this.events = x;
-    })
-  }
-
-  loadRecEvents(){
-    this.pageService.getRec(this.userId).subscribe(x => {
-      this.events = x;
+  loadEvents(){
+    this.pageService.getEvents(this.params.types, this.params.categories, this.params.cities, this.params.starts_at_min, this.params.starts_at_max).subscribe(x => {
+      x.forEach(event => {
+        this.events.push(event);
+      })
     })
   }
 
   setParams(params: Filter){
     this.params = params;
     console.log(this.params);
+    this.loadEvents();
   }
 
   loadMore(){
-
+    this.loadEvents();
   }
 
 }

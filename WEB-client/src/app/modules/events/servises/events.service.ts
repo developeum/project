@@ -6,29 +6,38 @@ import { EventFL } from './../../../models/eventsFL';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { retry } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import * as jwt_decode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
+  userId: number;
+
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json; charset=utf-8"
     })
   }
 
-  constructor(private http: HttpClient) { }
-
-  getEvents(): Observable<EventFL[]>{
-    return this.http
-    .get<EventFL[]>("http://localhost:8000/api/events", this.httpOptions)
-    .pipe(retry(1))
+  constructor(private http: HttpClient) { 
+    
   }
 
-  getRec(id: string): Observable<EventFL[]>{
-    return this.http
-    .get<EventFL[]>("http://localhost:8000/api/events/recomended", this.httpOptions)
-    .pipe(retry(1))
+  getEvents(type: [number], stack: [number], city: [number], starts_at_min: string, starts_at_max: string): Observable<EventFL[]>{
+    if (localStorage.getItem("currentUser") != null) {
+      return this.http
+        .get<EventFL[]>("http://localhost:8000/api/events", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("currentUser")
+          }
+        })
+        .pipe(retry(1))
+    } else {
+      return this.http
+        .get<EventFL[]>("http://localhost:8000/api/events", this.httpOptions)
+        .pipe(retry(1))
+    }
   }
 
   getTypes(): Observable<Type[]>{
