@@ -10,6 +10,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['JWT_SECRET_KEY'] = urandom(32)
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = 7 * 86400
+app.config['JWT_HEADER_NAME'] = 'X-Session-Token'
+app.config['JWT_HEADER_TYPE'] = ''
 
 db.init_app(app)
 jwt.init_app(app)
