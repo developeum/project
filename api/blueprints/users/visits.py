@@ -46,6 +46,13 @@ def get_visited_pages():
     return {
         'ok': True,
         'events': [
-            event.as_json() for event in visited
+            {
+                'id': event.id,
+                'name': event.name,
+                'type': {
+                    'id': event.event_type.id,
+                    'name': event.event_type.event_type
+                }
+            } for event in visited
         ]
     }, 200

@@ -2,6 +2,7 @@ from re import fullmatch
 
 import bcrypt
 from common.models import User
+from werkzeug.utils import secure_filename
 
 def is_email_correct(email: str) -> bool:
     email_regex = r'[a-z0-9\-.]+@([a-z0-9\-]+\.)+[a-z]{2,4}'
@@ -15,3 +16,11 @@ def hash_password(password: str) -> str:
 
 def check_password(user: User, password: str) -> bool:
     return bcrypt.checkpw(password.encode(), user.password.encode())
+
+def get_file_extension(filename: str) -> str:
+    filename = secure_filename(filename)
+
+    if '.' not in filename:
+        return ''
+
+    return filename.rsplit('.', 1)[1].lower()
