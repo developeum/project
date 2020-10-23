@@ -77,21 +77,29 @@ class UserVisit(db.Model):
         self.user = user
         self.visit_time = visit_time
 
+class EventCategoryLink(db.Model):
+    __tablename__ = 'event_category_links'
+
+    event_id = db.Column(db.Integer,
+                         db.ForeignKey('events.id'),
+                         primary_key=True)
+    event = db.relationship('Event')
+
+    category_id = db.Column(db.Integer,
+                            db.ForeignKey('categories.id'),
+                            primary_key=True)
+    category = db.relationship('EventCategory')
+
+    def __init__(self, category=None, event=None):
+        self.category = category
+        self.event = event
+
 user_stack_links_table = db.Table('user_stack_links',
     db.Column('user_id', db.Integer,
               db.ForeignKey('users.id'),
               primary_key=True),
     db.Column('stack_id', db.Integer,
               db.ForeignKey('stacks.id'),
-              primary_key=True)
-)
-
-event_category_links_table = db.Table('event_category_links',
-    db.Column('event_id', db.Integer,
-              db.ForeignKey('events.id'),
-              primary_key=True),
-    db.Column('category_id', db.Integer,
-              db.ForeignKey('categories.id'),
               primary_key=True)
 )
 
@@ -116,10 +124,9 @@ class Event(db.Model):
                               nullable=False, default=1)
     event_type = db.relationship('EventType', backref='events')
 
-    categories = db.relationship('EventCategory',
-                                 lazy='subquery',
-                                 secondary=event_category_links_table,
-                                 backref=db.backref('events', lazy=True))
+    event_category_links = db.relationship('EventCategoryLink',
+                                           lazy='dynamic')
+    categories = association_proxy('event_category_links', 'category')
 
     def as_json(self):
         return {
