@@ -3,35 +3,40 @@
         <div class="imgContainer">
             <img class="userImg" src="base64Img" alt="">
         </div>
-        <div class="textContainer" [ngClass] = "{invisible: visibility}">
-            <p>{{userInfo.first_name}} {{userInfo.last_name}} <button (click) = "changeVisibility()">Изменить</button></p>
-            <br>
-            <p>{{userInfo.status.name}}</p>
-            <p>{{userInfo.email}}</p>
-            <p>{{userInfo.phone}}</p>
-            <p>{{userInfo.city.name}}</p>
-            <button click = "logout()">Выйти</button>
+        <div class="textContainer" >
+            <div class="text" *ngIf = "!visibility">
+                <p>{{userInfo.first_name}} {{userInfo.last_name}} <button (click) = "changeVisibility()">Изменить</button></p>
+                <br>
+                <p>{{userInfo.status.name}}</p>
+                <p>{{userInfo.email}}</p>
+                <p>{{userInfo.phone}}</p>
+                <p>{{userInfo.city.name}}</p>
+                <button click = "logout()">Выйти</button>
+            </div>  
+            <div class="formContainer" *ngIf = "visibility">
+                <form [formGroup] = "userInfoForm">
+                    <div class="formGroup">
+                        <p class="name">Имя</p>
+                        <input type="text" formControlName = "firstName">
+                    </div>
+                    <div class="formGroup">
+                        <p class="name">Фамилия</p>
+                        <input type="text" formControlName = "lastName">
+                    </div>
+                    <div class="formGroup">
+                        <p class="name">Телефонный номер</p>
+                        <input type="text" formControlName = "phone">
+                    </div>
+                    <select formControlName = "status" name="select" id="">
+                        <option *ngFor = "let status of statuses, let i = index" value="stack">{{status.name}}</option>
+                    </select>
+                    <select formControlName = "stack" name="select" id="">
+                        <option *ngFor = "let stack of stacks, let i = index" value="stack">{{stack.name}}</option>
+                    </select>
+                    <button type="submit" (click) = "onSubmit()">Применить</button>
+                </form>
+            </div>     
         </div>
-        <div class="formContainer" [ngClass] = "{visible: invisibility}">
-            <form [formGroup] = "userInfoForm">
-                <div class="formGroup">
-                    <p class="name">Имя</p>
-                    <input type="text" formControlName = "firstName">
-                </div>
-                <div class="formGroup">
-                    <p class="name">Фамилия</p>
-                    <input type="text" formControlName = "lastName">
-                </div>
-                <div class="formGroup">
-                    <p class="name">Почта</p>
-                    <input type="email" formControlName = "email">
-                </div>
-                <div class="formGroup">
-                    <p class="name">Телефонный номер</p>
-                    <input type="text" formControlName = "phone">
-                </div>
-                <button type="submit" (click) = "changeVisibility()">Применить</button>
-            </form>
-        </div>
+        
     </div>
 </div>

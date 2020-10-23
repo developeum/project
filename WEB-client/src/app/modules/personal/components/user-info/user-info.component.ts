@@ -13,12 +13,27 @@ export class UserInfoComponent implements OnInit {
   userInfoForm: FormGroup;
   currentUserId: string;
   base64Img: string;
+  stacks: any;
   
   userInfo$: Observable<User>;
   userInfo = new User;
 
   visibility: boolean = false;
-  invisibility: boolean = true;
+
+  statuses: any = [
+    {
+      id: 1,
+      name: "student",
+    },
+    {
+      id: 2,
+      name: "worker",
+    },
+    {
+      id: 3,
+      name: "other"
+    }
+  ]
 
   constructor(private pageService: PersonalService, private formBuilder: FormBuilder) { 
     
@@ -27,11 +42,13 @@ export class UserInfoComponent implements OnInit {
   ngOnInit(): void {
     this.loadUserInfo();
     this.loadUserImg();
+    this.loadStacks();
     this.userInfoForm = this.formBuilder.group({
-      email: [this.userInfo.email, Validators.required],
       phone: [this.userInfo.phone, Validators.required],
       firstName: [this.userInfo.first_name, Validators.required],
       lastName: [this.userInfo.last_name, Validators.required],
+      stack: [this.userInfo.stack[0].name, Validators.required],
+      status: [this.userInfo.status.name, Validators.required],
     })
   }
 
@@ -50,14 +67,28 @@ export class UserInfoComponent implements OnInit {
     })
   }
 
+  loadStacks(){
+    this.pageService.getStacks().subscribe(x => {
+      this.stacks = x;
+    })
+  }
+
   logout(){
     
   }
 
   changeVisibility(){
     this.visibility = !this.visibility;
-    this.invisibility = !this.invisibility;
     console.log(this.visibility);
+  }
+
+  onSubmit(){
+    this.pageService.postInfo(this.userInfo)
+    .subscribe(() => {
+      console.log("userInfoPushed");
+      this.loadUserInfo()
+      this.visibility = !this.visibility;
+    })
   }
 
 }
