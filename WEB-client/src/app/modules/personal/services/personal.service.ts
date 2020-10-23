@@ -50,7 +50,8 @@ export class PersonalService {
       status: info.status,
       city: info.city,
       stack: info.stack
-    })
+    }, 
+    this.httpOptionsUser)
   }
 
   getImg(imageUrl: string): Observable<Blob>{
