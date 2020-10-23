@@ -31,15 +31,8 @@ def add_visited_page():
 
 @jwt_required
 def get_visited_pages():
-    skip = request.args.get('skip', '0')
-    limit = request.args.get('limit', '20')
-
-    if not skip.isdigit():
-        return {'ok': False, 'reason': 'skip parameter isn\'t integer'}, 200
-    if not limit.isdigit():
-        return {'ok': False, 'reason': 'limit parameter isn\'t integer'}, 200
-
-    skip, limit = int(skip), int(limit)
+    skip = request.args.get('skip', 0, type=int)
+    limit = request.args.get('limit', 20, type=int)
 
     visited = current_user.visited[skip:skip+limit]
 

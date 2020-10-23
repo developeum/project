@@ -8,15 +8,8 @@ general_api = Blueprint('general_api', __name__)
 
 @general_api.route('/cities')
 def get_city_list():
-    skip = request.args.get('skip', '0')
-    limit = request.args.get('limit', '10')
-
-    if not skip.isdigit():
-        return {'ok': False, 'reason': 'skip parameter isn\'t integer'}, 200
-    if not limit.isdigit():
-        return {'ok': False, 'reason': 'limit parameter isn\'t integer'}, 200
-
-    skip, limit = int(skip), int(limit)
+    skip = request.args.get('skip', 0, type=int)
+    limit = request.args.get('limit', 10, type=int)
 
     cities = City.query.offset(skip).limit(limit).all()
 
