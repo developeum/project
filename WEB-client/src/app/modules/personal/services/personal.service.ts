@@ -1,4 +1,3 @@
-import { Base64 } from './../../../models/Base64';
 import { EventFL } from './../../../models/eventsFL';
 import { User } from './../../../models/user';
 import { Observable } from 'rxjs';
@@ -36,12 +35,6 @@ export class PersonalService {
     .pipe(retry(1))
   }
 
-  getPicBase64(){
-    return this.http
-    .get<Base64>("http://localhost:8000/api/user/me/avatar", this.httpOptionsUser)
-    .pipe(retry(1))
-  }
-
   getStacks(){
     return this.http
     .get("http://localhost:8000/api/general/stacks", this.httpOptionsDefault)
@@ -58,6 +51,9 @@ export class PersonalService {
       city: info.city,
       stack: info.stack
     })
-    
+  }
+
+  getImg(imageUrl: string): Observable<Blob>{
+    return this.http.get(imageUrl, {responseType: 'blob'})
   }
 }

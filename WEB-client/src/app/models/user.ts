@@ -7,6 +7,7 @@ export class User{
         id: number;
         name: string;
     };
+    profile_img: string;
     city: {
         id: number;
         name: string;

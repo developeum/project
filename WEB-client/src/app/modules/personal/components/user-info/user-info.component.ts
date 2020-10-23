@@ -10,9 +10,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-info.component.scss']
 })
 export class UserInfoComponent implements OnInit {
+  imageToShow: any;
   userInfoForm: FormGroup;
   currentUserId: string;
-  base64Img: string;
   stacks: any;
   
   userInfo$: Observable<User>;
@@ -41,7 +41,6 @@ export class UserInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUserInfo();
-    this.loadUserImg();
     this.loadStacks();
     this.userInfoForm = this.formBuilder.group({
       phone: [this.userInfo.phone, Validators.required],
@@ -58,13 +57,7 @@ export class UserInfoComponent implements OnInit {
 
   processUserInfo(data: User){
     this.userInfo = data;
-  }
-
-  loadUserImg(){
-    this.pageService.getPicBase64().subscribe(x => {
-      this.base64Img = x.base64;
-      console.log(this.base64Img)
-    })
+    this.loadImg(data.profile_img);
   }
 
   loadStacks(){
@@ -89,6 +82,25 @@ export class UserInfoComponent implements OnInit {
       this.loadUserInfo()
       this.visibility = !this.visibility;
     })
+  }
+
+  createImgFromBlob(image: Blob){
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.imageToShow = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image)
+    }
+  }
+
+  loadImg(url: string){
+    this.pageService.getImg(url).subscribe(data => {
+      this.createImgFromBlob(data);
+    }, error => {
+      console.log(error);
+    });
   }
 
 }
