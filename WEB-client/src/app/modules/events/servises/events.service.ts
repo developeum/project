@@ -3,7 +3,7 @@ import { Stack } from './../../../models/stack';
 import { Type } from './../../../models/types';
 import { Observable } from 'rxjs';
 import { EventFL } from './../../../models/eventsFL';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { retry } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import * as jwt_decode from "jwt-decode";
@@ -20,22 +20,37 @@ export class EventsService {
     })
   }
 
+  
+
   constructor(private http: HttpClient) { 
     
   }
 
-  getEvents(type: [number], stack: [number], city: [number], starts_at_min: string, starts_at_max: string): Observable<EventFL[]>{
+  getEvents(type: [number], stack: [number], city: [number], starts_at_min: string, starts_at_max: string){
     if (localStorage.getItem("currentUser") != null) {
+      let headers = new HttpHeaders();
+      headers.append('Authorization', 'Bearer' + localStorage.getItem('currentUser'))
+      let httpParams = new HttpParams()
+      .set('types', type.toString())
+      .set('categories', stack.toString())
+      .set('cities', city.toString())
+      .set('starts_at_min', starts_at_min)
+      .set('starts_at_max', starts_at_max)
+      let options = {headers, httpParams}
       return this.http
-        .get<EventFL[]>("http://localhost:8000/api/events", {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("currentUser")
-          }
-        })
+        .get<EventFL[]>("http://localhost:8000/api/events", options)
         .pipe(retry(1))
     } else {
+      let headers = new HttpHeaders({"Content-Type": "application/json; charset=utf-8"})
+      let httpParams = new HttpParams()
+      .set('types', type.toString())
+      .set('categories', stack.toString())
+      .set('cities', city.toString())
+      .set('starts_at_min', starts_at_min)
+      .set('starts_at_max', starts_at_max);
+      let options = {headers, httpParams}
       return this.http
-        .get<EventFL[]>("http://localhost:8000/api/events", this.httpOptions)
+        .get<EventFL[]>("http://localhost:8000/api/events", options)
         .pipe(retry(1))
     }
   }
