@@ -24,14 +24,15 @@ export class AuthService {
     
 
     return this.http
-      .post<string>("http://localhost:8000/api/identity/login", {
-        username,
-        password
+      .post<string>("http://localhost:8000/api/user/login", {
+        email: username,
+        password: password
       })
       .subscribe((token) => {
         console.log(token);
-
+        localStorage.removeItem("currentUser")
         localStorage.setItem("currentUser", token);
+        console.log(localStorage.getItem("currentUser"))
       })
   }
 
@@ -39,7 +40,7 @@ export class AuthService {
     console.log("signing up")
 
     return this.http
-    .post<string>("http://localhost:8000/api/identity/register",{
+    .post<string>("http://localhost:8000/api/user/register",{
       username,
       password,
       firstName,

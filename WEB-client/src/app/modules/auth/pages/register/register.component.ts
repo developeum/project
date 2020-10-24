@@ -43,9 +43,7 @@ export class RegisterComponent implements OnInit {
   loadStacks(){
     this.authService.getStacks()
     .subscribe(x => {
-      x.forEach(stack => {
-        this.stacks.push(stack)
-      })
+      this.stacks = x;
     })
   }
 

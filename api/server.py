@@ -22,5 +22,12 @@ app.register_blueprint(users_api, url_prefix='/api/user')
 app.register_blueprint(general_api, url_prefix='/api/general')
 app.register_blueprint(events_api, url_prefix='/api/events')
 
+@app.after_request
+def after_request_func(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Request-Headers'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = '*'
+    return response
+
 if __name__ == '__main__':
-    app.run()
+    app.run(port=8000)

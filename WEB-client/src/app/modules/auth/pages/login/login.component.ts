@@ -40,9 +40,7 @@ export class LoginComponent implements OnInit {
       console.log("form is incorrect")
       return;
     }
-
-    console.log(this.form.username, this.form.password)
-
+    console.log(this.form.username.value, this.form.password.value)
     this.authService.login( this.form.username.value, this.form.password.value )
     this.router.navigate(['/'])
   }
