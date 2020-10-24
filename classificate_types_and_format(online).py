@@ -1,4 +1,4 @@
-def classificate_types_and_format(csv_in):
+def classificate_types_and_format(csv_in, csv_out):
     import pandas
     import numpy as np
     pandas.options.mode.chained_assignment = None
@@ -32,9 +32,9 @@ def classificate_types_and_format(csv_in):
                     events_df['type'][i] = types[j]
     events_df['type'] = events_df['type'].fillna(types[-1])
 
-    csv_out = 'events18102020_withtypes.csv'
     events_df.to_csv(csv_out, index=False, index_label=False)
 
 
 csv_in = 'events18102020.csv'
-classificate_types_and_format(csv_in)
+csv_out = 'events18102020_withtypes.csv'
+classificate_types_and_format(csv_in, csv_out)
