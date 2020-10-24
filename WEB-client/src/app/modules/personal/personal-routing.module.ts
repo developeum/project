@@ -6,9 +6,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'id',
         component: PersonalMainComponent,
-        
+    },
+    {
+        path: '',
+        redirectTo: 'id',
+        pathMatch: 'full'
     }
 ];
 
