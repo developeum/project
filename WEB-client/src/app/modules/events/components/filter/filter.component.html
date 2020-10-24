@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="filterContainer">
+        <form [formGroup] = "filterForm" (ngSubmit) = "onSubmit()">
+            <div>
+                <label>Дата проведения</label>
+                <div>
+                    <p>От <input type="date" [formControl] = "startsMin"> до <input type="date" [formControl] = "startsMax"></p>
+                </div>
+            </div>
+            <div>
+                <label>Типы</label>
+                <div class="flexContainer">
+                    <div *ngFor = "let type of filterForm.get('types')['controls']; let i = index;">
+                        <input type="checkbox" [formControl] = "type">
+                        {{types[i].name}}
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label>Категории</label>
+                <div class="flexContainer">
+                    <div *ngFor = "let category of filterForm.get('categories')['controls']; let i = index;">
+                        <input type="checkbox" [formControl] = "category">
+                        {{categories[i].name}}
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label>Города</label>
+                <div class="flexContainer">
+                    <div *ngFor = "let place of filterForm.get('places')['controls']; let i = index;">
+                        <input type="checkbox" [formControl] = "place">
+                        {{places[i].name}}
+                    </div>
+                </div>
+            </div>
+        </form>
+        <button type="submit" (click) = "onSubmit()">Применить</button>
+    </div>
+</div>

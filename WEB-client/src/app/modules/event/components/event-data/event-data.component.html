@@ -1,0 +1,25 @@
+<div class="mainContainer">
+    <div class="imgContainer">
+        <img [src]="imgToShow" alt="">
+    </div>
+    <div class="container">
+        <div class="dataContainer">
+            <div class="timePlace">
+                <div class="time">
+                    <p>Время</p>
+                    <p>{{currentEvent.event_time}}</p>
+                </div>
+                <div class="place">
+                    <p>Место</p>
+                    <p>{{currentEvent.city.name}}</p>
+                </div>
+            </div> 
+            <div class="description">
+                <p>Описание</p>
+                <p>{{currentEvent.description}}</p>
+            </div>
+        </div>
+        <a href="{{currentEvent.source_url}}" target="_blank" (click) = "onClick()">Перейти на сайт мероприятия</a>
+    </div>
+</div>
+
