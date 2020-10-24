@@ -19,8 +19,8 @@ def classificate_types_and_format(csv_in, csv_out):
     online = ['Без города', 'без города', 'online', 'онлайн', 'Online', 'Онлайн']
 
     for i in range(len(events_df)):
-        descr = events_df['description'][i]
-        name = events_df['name'][i]
+        descr = events_df['normalized_description'][i]
+        name = events_df['normalized_name'][i]
         city = events_df['city'][i]
         if pandas.isna(city) or any(word in city for word in online):
             events_df['city'][i] = 'online'

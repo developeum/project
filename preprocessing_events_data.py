@@ -30,7 +30,7 @@ def preprocess_events_data(csv_in, csv_out):
     stopwords.extend(
         ['что', 'это', 'весь', 'этот', 'привет', 'так', 'вот', 'как', 'ссылка', 'регистрация', 'приглашать', 'еще',
          'год', 'спикер', 'вопрос', 'тема', 'наш', 'свой', 'время', 'который', 'выступить', 'встреча', 'мочь',
-         'jenkins', 'masked', 'ваш', 'epam', 'место', 'spb'])
+         'jenkins', 'masked', 'ваш', 'epam', 'место', 'spb', 'новый', 'александр'])
 
     descr_array = []
     names_array = []
@@ -60,4 +60,5 @@ def preprocess_events_data(csv_in, csv_out):
 
 csv_in = 'meetup_tech_18102020_tz_fixed.csv'
 csv_out = 'events18102020.csv'
+
 preprocess_events_data(csv_in, csv_out)
