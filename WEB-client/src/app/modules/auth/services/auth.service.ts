@@ -1,13 +1,21 @@
+import { retry } from 'rxjs/operators';
+import { Stack } from './../../../models/stack';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private isLoggedIn: BehaviorSubject<boolean>;
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json; charset=utf-8"
+    })
+  };
 
   constructor(private readonly http: HttpClient, private router: Router) { }
 
@@ -27,13 +35,16 @@ export class AuthService {
       })
   }
 
-  register(username: string, password: string){
+  register(username: string, password: string, firstName: string, lastName: string, stack: Stack[]){
     console.log("signing up")
 
     return this.http
     .post<string>("http://localhost:8000/api/identity/register",{
       username,
-      password
+      password,
+      firstName,
+      lastName,
+      stack
     })
     .subscribe((token) => {
       console.log(token);
@@ -50,6 +61,12 @@ export class AuthService {
 
   public get userIsLoggedIn(): boolean {
     return this.isLoggedIn.value;
+  }
+
+  getStacks(): Observable<Stack[]>{
+    return this.http
+    .get <Stack[]>('http://localhost:8000/api/general/stacks', this.httpOptions)
+    .pipe(retry(1))
   }
 
   
