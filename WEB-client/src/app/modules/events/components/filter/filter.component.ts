@@ -13,10 +13,10 @@ export class FilterComponent implements OnInit {
   filterParam: Filter;
   filterForm: FormGroup;
 
-  filElem: {
-    name: string,
-    value: number,
-  };
+  
+    name = '';
+    value: number = 0
+  
 
   selectedTypes: [number];
   selectedCategories: [number];
@@ -35,9 +35,13 @@ export class FilterComponent implements OnInit {
   loadTypes(){
     this.pageService.getTypes().subscribe(x => {
       x.forEach(type => {
-        this.filElem.value = type.id;
-        this.filElem.name = type.name;
-        this.types.push(this.filElem);
+        this.value = type.id;
+        this.name = type.name;
+        let filElem = {
+          value: this.value,
+          name: this.name
+        }
+        this.types.push(filElem);
       });
     })
   }
@@ -45,9 +49,13 @@ export class FilterComponent implements OnInit {
   loadCateg(){
     this.pageService.getStack().subscribe(x => {
       x.forEach(category => {
-        this.filElem.value = category.id;
-        this.filElem.name = category.name;
-        this.categories.push(this.filElem);
+        this.value = category.id;
+        this.name = category.name;
+        let filElem = {
+          value: this.value,
+          name: this.name
+        }
+        this.categories.push(filElem);
       })
     })
   }
@@ -55,9 +63,14 @@ export class FilterComponent implements OnInit {
   loadCities(){
     this.pageService.getCities().subscribe(x => {
       x.forEach(place => {
-        this.filElem.value = place.id;
-        this.filElem.name = place.name;
-        this.places.push(this.filElem);
+        this.value = place.id;
+        this.name = place.name;
+        let filElem = {
+          value: this.value,
+          name: this.name
+        }
+        this.places.push(filElem);
+        console.log(this.places)
       })
     })
   }
