@@ -55,6 +55,12 @@ export class EventsService {
     }
   }
 
+  getClearEvents(): Observable<EventFL[]>{
+    return this.http
+    .get<EventFL[]>('http://localhost:8000/api/events', this.httpOptions)
+    .pipe(retry(1))
+  }
+
   getTypes(): Observable<Type[]>{
     return this.http
     .get<Type[]>("http://localhost:8000/api/general/event_types", this.httpOptions)

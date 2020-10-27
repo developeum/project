@@ -11,10 +11,10 @@ import { EventsService } from '../../servises/events.service';
 })
 export class EventsPageComponent implements OnInit {
 
-  params: Filter;
+  params: Filter = null;
   num: number = 0;
   userId: string;
-  events: EventFL[];
+  events: EventFL[] = [];
 
   constructor(private pageService: EventsService) {
     
@@ -22,7 +22,7 @@ export class EventsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.params = new Filter;
-    this.loadEvents();
+    this.loadClearEvents();
   }
 
   loadEvents(){
@@ -31,6 +31,15 @@ export class EventsPageComponent implements OnInit {
         this.events.push(event);
       })
     })
+  }
+
+  loadClearEvents(){
+    this.pageService.getClearEvents()
+    .subscribe(x => {
+      this.events = x;
+      console.log(x)
+    })
+
   }
 
   setParams(params: Filter){

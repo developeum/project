@@ -42,6 +42,7 @@ export class FilterComponent implements OnInit {
           name: this.name
         }
         this.types.push(filElem);
+        console.log(this.types)
       });
     })
   }
@@ -56,6 +57,7 @@ export class FilterComponent implements OnInit {
           name: this.name
         }
         this.categories.push(filElem);
+        console.log(this.categories)
       })
     })
   }
