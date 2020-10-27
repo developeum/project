@@ -3,6 +3,7 @@ from common.models import (
     UserStack, UserStatus
 )
 from flask import Blueprint, request
+from flask import jsonify
 
 general_api = Blueprint('general_api', __name__)
 
@@ -13,12 +14,9 @@ def get_city_list():
 
     cities = City.query.offset(skip).limit(limit).all()
 
-    return {
-        'ok': True,
-        'statuses': [
-            city.as_json() for city in cities
-        ]
-    }, 200
+    return jsonify([
+        city.as_json() for city in cities
+    ]), 200
 
 @general_api.route('/statuses')
 def get_status_list():
@@ -35,12 +33,9 @@ def get_status_list():
 def get_stack_list():
     stacks = UserStack.query.all()
 
-    return {
-        'ok': True,
-        'stacks': [
-            stack.as_json() for stack in stacks
-        ]
-    }, 200
+    return jsonify([
+        stack.as_json() for stack in stacks
+    ]), 200
 
 @general_api.route('/categories')
 def get_category_list():
