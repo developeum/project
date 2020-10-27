@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from common.models import Event, EventCategoryLink
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 
 from .helpers import project
 
@@ -79,9 +79,6 @@ def get_event_list():
 
     fields = request.args.get('fields', 'id,name,event_type,event_time').split(',')
 
-    return {
-        'ok': True,
-        'events': [
-            project(event.as_json(), fields) for event in events
-        ]
-    }, 200
+    return jsonify([
+        project(event.as_json(), fields) for event in events
+    ]), 200
