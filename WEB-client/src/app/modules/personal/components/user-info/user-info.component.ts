@@ -4,6 +4,10 @@ import { User } from './../../../../models/user';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
+class ImageSnippet {
+  constructor(public src: string, public file: File) {}
+}
+
 @Component({
   selector: 'app-user-info',
   templateUrl: './user-info.component.html',
@@ -14,6 +18,8 @@ export class UserInfoComponent implements OnInit {
   userInfoForm: FormGroup;
   currentUserId: string;
   stacks: any;
+
+  selectedFile: ImageSnippet;
   
   userInfo$: Observable<User>;
   userInfo = new User;
@@ -42,22 +48,28 @@ export class UserInfoComponent implements OnInit {
   ngOnInit(): void {
     this.loadUserInfo();
     this.loadStacks();
-    this.userInfoForm = this.formBuilder.group({
-      phone: [this.userInfo.phone, Validators.required],
-      firstName: [this.userInfo.first_name, Validators.required],
-      lastName: [this.userInfo.last_name, Validators.required],
-      stack: [this.userInfo.stack[0].name, Validators.required],
-      status: [this.userInfo.status.name, Validators.required],
-    })
+    
   }
 
   loadUserInfo(){
     this.pageService.getUserInfo().subscribe(x => this.processUserInfo(x))
+    console.log(this.userInfo)
   }
 
-  processUserInfo(data: User){
+  processUserInfo(data: any){
+    console.log(data)
     this.userInfo = data;
-    this.loadImg(data.profile_img);
+    console.log(this.userInfo)
+    // this.userInfoForm = this.formBuilder.group({
+    //   phone: [this.userInfo.phone, Validators.required],
+    //   firstName: [this.userInfo.first_name, Validators.required],
+    //   lastName: [this.userInfo.last_name, Validators.required],
+    //   stack: [this.userInfo.stack[0].name, Validators.required],
+    //   status: [this.userInfo.status.name, Validators.required],
+    // });
+    if(data.profile_img != null){
+      this.loadImg(data.profile_img);
+    }
   }
 
   loadStacks(){
@@ -101,6 +113,29 @@ export class UserInfoComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+
+  processFile(imageInput: any){
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+
+      this.pageService.uploadImage(this.selectedFile.file).subscribe(
+        (res) => {
+          console.log(res);
+          console.log("successfully upload");
+          this.imageToShow = this.selectedFile.src
+        },
+        (err) => {
+          console.log(err);
+          console.log("error")
+        })
+    });
+
+    reader.readAsDataURL(file);
   }
 
 }

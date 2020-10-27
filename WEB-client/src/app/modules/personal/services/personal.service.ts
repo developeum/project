@@ -9,9 +9,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PersonalService {
+  getToken(){
+    return localStorage.getItem('currentUser')
+  }
+
   httpOptionsUser = {
     headers:{
-      Authorization: "Bearer" + localStorage.getItem("currentUser")
+      "Content-Type": "multipart/form-data",
+      "X-Session-Token": `${this.getToken}`
     }
   };
 
@@ -21,9 +26,16 @@ export class PersonalService {
     })
   };
 
+  httpPhotoOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "multipart/form-data"
+    })
+  }
+
   constructor(private http:HttpClient) { }
 
   getUserInfo(): Observable<User>{
+    console.log('getting')
     return this.http
     .get<User>("http://localhost:8000/api/user/me", this.httpOptionsUser)
     .pipe(retry(1))
@@ -56,5 +68,14 @@ export class PersonalService {
 
   getImg(imageUrl: string): Observable<Blob>{
     return this.http.get(imageUrl, {responseType: 'blob'})
+  }
+
+  uploadImage(image: File){
+    const formData = new FormData();
+
+    formData.append('image', image);
+
+    return this.http
+    .post('http://localhost:8000/api/user/me/avatar', {avatar: formData}, this.httpOptionsUser)
   }
 }

@@ -1,7 +1,16 @@
 <div class="container">
     <div class="infoContainer">
-        <div class="imgContainer">
+        <div *ngIf="imageToShow" class="imgContainer">
             <img class="userImg" src="imageToShow" alt="">
+        </div>
+        <div class="changeImgContainer">
+            <label class="image-upload-container btn btn-bwm">
+                <span>Select Image</span>
+                <input #imageInput
+                    type="file"
+                    accept="image/*"
+                    (change)="processFile(imageInput)">
+            </label>
         </div>
         <div class="textContainer" >
             <div class="text" *ngIf = "!visibility">

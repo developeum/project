@@ -44,6 +44,7 @@ export class RegisterComponent implements OnInit {
     this.authService.getStacks()
     .subscribe(x => {
       this.stacks = x;
+      console.log(this.stacks)
     })
   }
 
@@ -55,7 +56,8 @@ export class RegisterComponent implements OnInit {
 
     console.log(this.form.username, this.form.password)
     let stacks = [];
-    stacks.push(this.stacks[this.form.stack.value])
+    stacks.push(this.form.stack.value)
+    console.log(this.form.stack.value)
     this.authService.register( this.form.username.value, this.form.password.value, this.form.firstName.value, this.form.lastName.value, stacks )
     this.router.navigate(['/'])
   }

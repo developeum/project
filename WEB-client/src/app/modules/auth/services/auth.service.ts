@@ -14,8 +14,15 @@ export class AuthService {
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json; charset=utf-8"
-    })
+    }),
   };
+
+  httpPostOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json; charset=utf-8"
+    }),
+    responseType: 'text'
+  }
 
   constructor(private readonly http: HttpClient, private router: Router) { }
 
@@ -24,10 +31,10 @@ export class AuthService {
     
 
     return this.http
-      .post<string>("http://localhost:8000/api/user/login", {
+      .post("http://localhost:8000/api/user/login", {
         email: username,
         password: password
-      })
+      }, {responseType: 'text'})
       .subscribe((token) => {
         console.log(token);
         localStorage.removeItem("currentUser")
@@ -36,20 +43,20 @@ export class AuthService {
       })
   }
 
-  register(username: string, password: string, firstName: string, lastName: string, stack: Stack[]){
+  register(username: string, password: string, firstName: string, lastName: string, stack: any){
     console.log("signing up")
 
     return this.http
-    .post<string>("http://localhost:8000/api/user/register",{
-      username,
-      password,
-      firstName,
-      lastName,
-      stack
-    })
+    .post("http://localhost:8000/api/user/register",{
+      email: username,
+      password: password,
+      first_name: firstName,
+      last_name: lastName,
+      stack: stack
+    }, {responseType: 'text'})
     .subscribe((token) => {
       console.log(token);
-
+      localStorage.removeItem("currentUser")
       localStorage.setItem("currentUser", token)
     })
   }
