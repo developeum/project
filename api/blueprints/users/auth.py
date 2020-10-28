@@ -65,23 +65,26 @@ def login_user():
 @jwt_required
 @accepts_json(
     old_password=(True, str),
-    email=(True, str),
-    password=(True, str)
+    email=(False, str),
+    password=(False, str)
 )
 def update_credentials():
     body = request.get_json()
     body['email'] = body['email'].lower()
 
     if check_password(current_user, body['old_password']):
-        if current_user.email != body['email']:
-            if not is_email_correct(body['email']):
-                return INCORRECT_EMAIL_FORMAT, 200
+        if 'email' in body:
+            if current_user.email != body['email']:
+                if not is_email_correct(body['email']):
+                    return INCORRECT_EMAIL_FORMAT, 200
 
-            if is_email_registered(body['email']):
-                return EMAIL_REGISTERED, 200
+                if is_email_registered(body['email']):
+                    return EMAIL_REGISTERED, 200
 
-        current_user.email = body['email']
-        current_user.password = hash_password(body['password'])
+                current_user.email = body['email']
+
+        if 'password' in body and body['password'] != '':
+            current_user.password = hash_password(body['password'])
 
         db.session.commit()
 

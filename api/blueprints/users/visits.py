@@ -2,7 +2,7 @@ from datetime import datetime
 
 from common.helpers import accepts_json
 from common.models import Event, UserVisit, db
-from flask import request
+from flask import request, jsonify
 from flask_jwt_extended import current_user, jwt_required
 
 from .messages import *
@@ -36,16 +36,13 @@ def get_visited_pages():
 
     visited = current_user.visited[skip:skip+limit]
 
-    return {
-        'ok': True,
-        'events': [
-            {
-                'id': event.id,
-                'name': event.name,
-                'type': {
-                    'id': event.event_type.id,
-                    'name': event.event_type.event_type
-                }
-            } for event in visited
-        ]
-    }, 200
+    return jsonify([
+        {
+            'id': event.id,
+            'name': event.name,
+            'type': {
+                'id': event.event_type.id,
+                'name': event.event_type.event_type
+            }
+        } for event in visited
+    ]), 200
