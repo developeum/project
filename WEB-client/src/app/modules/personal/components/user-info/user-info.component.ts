@@ -60,13 +60,13 @@ export class UserInfoComponent implements OnInit {
     console.log(data)
     this.userInfo = data;
     console.log(this.userInfo)
-    // this.userInfoForm = this.formBuilder.group({
-    //   phone: [this.userInfo.phone, Validators.required],
-    //   firstName: [this.userInfo.first_name, Validators.required],
-    //   lastName: [this.userInfo.last_name, Validators.required],
-    //   stack: [this.userInfo.stack[0].name, Validators.required],
-    //   status: [this.userInfo.status.name, Validators.required],
-    // });
+    this.userInfoForm = this.formBuilder.group({
+      phone: [this.userInfo.phone, Validators.required],
+      firstName: [this.userInfo.first_name, Validators.required],
+      lastName: [this.userInfo.last_name, Validators.required],
+      stack: [this.userInfo.stack[0].name, Validators.required],
+      status: [this.userInfo.status.name, Validators.required],
+    });
     if(data.profile_img != null){
       this.loadImg(data.profile_img);
     }
@@ -76,6 +76,10 @@ export class UserInfoComponent implements OnInit {
     this.pageService.getStacks().subscribe(x => {
       this.stacks = x;
     })
+  }
+
+  get form(){
+    return this.userInfoForm.controls;
   }
 
   logout(){
@@ -88,7 +92,7 @@ export class UserInfoComponent implements OnInit {
   }
 
   onSubmit(){
-    this.pageService.postInfo(this.userInfo)
+    this.pageService.postInfo(this.form.phone.value, this.form.firstName.value, this.form.lastName.value, this.form.status, "hello", this.form.stack, )
     .subscribe(() => {
       console.log("userInfoPushed");
       this.loadUserInfo()
