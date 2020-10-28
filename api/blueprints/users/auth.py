@@ -41,7 +41,7 @@ def register_user():
     db.session.add(new_user)
     db.session.commit()
 
-    return {'ok': True, 'token': create_access_token(new_user)}, 200
+    return create_access_token(new_user), 200
 
 @accepts_json(
     email=(True, str),
@@ -60,7 +60,7 @@ def login_user():
     if not valid:
         return INCORRECT_CREDENTIALS, 200
 
-    return {'ok': True, 'token': create_access_token(user_to_check)}, 200
+    return create_access_token(user_to_check), 200
 
 @jwt_required
 @accepts_json(
