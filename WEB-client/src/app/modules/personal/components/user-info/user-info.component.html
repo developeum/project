@@ -14,12 +14,15 @@
         </div>
         <div class="textContainer" >
             <div class="text" *ngIf = "!visibility">
-                <p>{{userInfo.first_name}} {{userInfo.last_name}} <button (click) = "changeVisibility()">Изменить</button></p>
-                <br>
-                <p>{{userInfo.status.name}}</p>
-                <p>{{userInfo.email}}</p>
-                <p>{{userInfo.phone}}</p>
-                <p>{{userInfo.city.name}}</p>
+                <div class="infoContainer" *ngIf = "userInfo$ | async as user">
+                    <p *ngIf = "userInfo">{{user.first_name}} {{user.last_name}} <button (click) = "changeVisibility()">Изменить</button></p>
+                    <br>
+                    <p *ngIf = "userInfo">{{user.status.name}}</p>
+                    <p *ngIf = "userInfo">{{user.email}}</p>
+                    <p *ngIf = "userInfo">{{user.phone}}</p>
+                    <p *ngIf = "userInfo">{{user.city.name}}</p>
+                </div>
+                
                 <button click = "logout()">Выйти</button>
             </div>  
             <div class="formContainer" *ngIf = "visibility">

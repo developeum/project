@@ -16,7 +16,7 @@ export class PersonalService {
   httpOptionsUser = {
     headers:{
       "Content-Type": "multipart/form-data",
-      "X-Session-Token": `${this.getToken}`
+      "X-Session-Token": `${localStorage.getItem("currentUser")}`
     }
   };
 

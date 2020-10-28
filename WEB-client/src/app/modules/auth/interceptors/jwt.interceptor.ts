@@ -21,13 +21,13 @@ import {
     ): Observable<HttpEvent<any>> {
       // add authorization header with jwt token if available
       
-      if (this.authenticationService.userIsLoggedIn) {
-        request = request.clone({
-          setHeaders: {
-            Authorization: `Bearer ${localStorage.getItem("currentUser")}`
-          }
-        });
-      }
+      
+      request = request.clone({
+        setHeaders: {
+          'X-Session-Token': `${localStorage.getItem("currentUser")}`
+        }
+      });
+      
   
       return next.handle(request);
     }

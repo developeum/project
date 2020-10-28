@@ -52,8 +52,8 @@ export class UserInfoComponent implements OnInit {
   }
 
   loadUserInfo(){
+    this.userInfo$ = this.pageService.getUserInfo();
     this.pageService.getUserInfo().subscribe(x => this.processUserInfo(x))
-    console.log(this.userInfo)
   }
 
   processUserInfo(data: any){
