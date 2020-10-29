@@ -1,6 +1,8 @@
+import { Observable } from 'rxjs';
 import { Event } from './../../../../models/event';
 import { EventService } from './../../services/event.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-event-data',
@@ -9,22 +11,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventDataComponent implements OnInit {
 
+  eventData$: Observable<Event>
   imgToShow: any;
   isImageLoading: boolean = false;
   eventId: number;
-  currentEvent: Event;
+  currentEvent: any;
 
-  constructor(private pageService: EventService) { }
+  constructor(private pageService: EventService, private route: ActivatedRoute) { 
+    this.route.params.subscribe(params => {
+      this.eventId = params["id"];
+      
+    })
+  }
 
   ngOnInit(): void {
     this.loadEventInfo();
   }
 
   loadEventInfo(){
+    this.eventData$ = this.pageService.getEventData(this.eventId)
     this.pageService.getEventData(this.eventId)
     .subscribe(x => {
       this.currentEvent = x;
-      this.loadImg(x.logo_path);
+      console.log(this.currentEvent)
+      this.loadImg(this.currentEvent.event.logo_path);
     })
   }
 

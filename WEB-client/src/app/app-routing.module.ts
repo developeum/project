@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('../app/modules/events/events.module').then(m => m.EventsModule)
   },
   {
-    path: 'event',
+    path: 'event/:id',
     loadChildren: () => import('../app/modules/event/event.module').then(m => m.EventModule)
   },
   {

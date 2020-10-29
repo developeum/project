@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { EventFL } from './../../../../models/eventsFL';
 import { Observable } from 'rxjs';
 import { PersonalService } from './../../services/personal.service';
@@ -11,7 +12,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class FavEventsComponent implements OnInit {
   favEvents$: Observable<EventFL[]>;
 
-  constructor(private pageService: PersonalService) { }
+  constructor(private pageService: PersonalService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadFavEvents();
@@ -22,6 +23,10 @@ export class FavEventsComponent implements OnInit {
   }
 
   loadMoreEvents(){
+  }
+
+  navToEvent(id: any){
+    this.router.navigateByUrl('/event/' + id)
   }
 
 }
