@@ -26,10 +26,10 @@ export class EventsPageComponent implements OnInit {
   }
 
   loadEvents(){
+    this.events = [];
     this.pageService.getEvents(this.params.types, this.params.categories, this.params.cities, this.params.starts_at_min, this.params.starts_at_max).subscribe(x => {
-      x.forEach(event => {
-        this.events.push(event);
-      })
+      this.events = x;
+      console.log(x)
     })
   }
 

@@ -21,33 +21,40 @@ export class EventsService {
   }
 
   
+  
 
   constructor(private http: HttpClient) { 
     
   }
 
-  getEvents(type: [number], stack: [number], city: [number], starts_at_min: string, starts_at_max: string){
+  getEvents(type?: [number], stack?: [number], city?: [number], starts_at_min?: string, starts_at_max?: string){
     if (localStorage.getItem("currentUser") != null) {
-      let headers = new HttpHeaders();
-      headers.append('Authorization', 'Bearer' + localStorage.getItem('currentUser'))
-      let httpParams = new HttpParams()
-      .set('types', type.toString())
-      .set('categories', stack.toString())
-      .set('cities', city.toString())
-      .set('starts_at_min', starts_at_min)
-      .set('starts_at_max', starts_at_max)
-      let options = {headers, httpParams}
+      let httpOptionsUser = {
+        headers:{
+          "Content-Type": "application/json; charset=utf-8",
+          "X-Session-Token": `${localStorage.getItem("currentUser")}`
+        },
+        params:{
+          'type': type.toString(),
+          'category': stack.toString(),
+          'city': city.toString(),
+          'starts_at_min': starts_at_min,
+          'starts_at_max': starts_at_max
+        }
+      };
       return this.http
-        .get<EventFL[]>("http://localhost:8000/api/events", options)
+        .get<EventFL[]>("http://localhost:8000/api/events", httpOptionsUser)
         .pipe(retry(1))
     } else {
+      console.log("byt")
       let headers = new HttpHeaders({"Content-Type": "application/json; charset=utf-8"})
       let httpParams = new HttpParams()
-      .set('types', type.toString())
+      .set('type', type.toString())
       .set('categories', stack.toString())
       .set('cities', city.toString())
       .set('starts_at_min', starts_at_min)
       .set('starts_at_max', starts_at_max);
+      console.log(httpParams)
       let options = {headers, httpParams}
       return this.http
         .get<EventFL[]>("http://localhost:8000/api/events", options)

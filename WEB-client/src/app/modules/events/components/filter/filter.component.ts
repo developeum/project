@@ -1,7 +1,7 @@
 import { Filter } from './../../../../models/filter';
 import { EventsService } from './../../servises/events.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as _ from "lodash";
 
 @Component({
@@ -25,8 +25,8 @@ export class FilterComponent implements OnInit {
   types: any = [];
   categories: any = [];
   places: any = [];
-  startsMin = new FormControl('');
-  startsMax = new FormControl('');
+  startsMin: string = '';
+  startsMax: string = '';
 
   @Output() setParams = new EventEmitter<Filter>();
 
@@ -42,8 +42,9 @@ export class FilterComponent implements OnInit {
           name: this.name
         }
         this.types.push(filElem);
-        console.log(this.types)
       });
+      console.log(this.types);
+      this.createFormInputs()
     })
   }
 
@@ -57,8 +58,9 @@ export class FilterComponent implements OnInit {
           name: this.name
         }
         this.categories.push(filElem);
-        console.log(this.categories)
       })
+      console.log(this.categories);
+      this.createFormInputs()
     })
   }
 
@@ -72,8 +74,9 @@ export class FilterComponent implements OnInit {
           name: this.name
         }
         this.places.push(filElem);
-        console.log(this.places)
       })
+      console.log(this.places);
+      this.createFormInputs()
     })
   }
 
@@ -81,20 +84,21 @@ export class FilterComponent implements OnInit {
     this.loadTypes();
     this.loadCateg();
     this.loadCities();
-    this.createFormInputs();
   }
 
   createFormInputs(){
-    this.filterForm = new FormGroup({
-      // startsAtMin: this.createTimespaceMin(this.startsMin),
-      // startsAtMax: this.createTimespaceMax(this.startsMax),
-      types: this.createTypes(this.types),
-      categories: this.createCategories(this.categories),
-      places: this.createPlaces(this.places),
-    });
-    this.getSelectedTypes();
-    this.getSelectedCategories();
-    this.getSelectedPlaces();
+    if(this.types != [] && this.categories != [] && this.places != []){
+      this.filterForm = new FormGroup({
+        // startsAtMin: this.createTimespaceMin(this.startsMin),
+        // startsAtMax: this.createTimespaceMax(this.startsMax),
+        types: this.createTypes(this.types),
+        categories: this.createCategories(this.categories),
+        places: this.createPlaces(this.places),
+      });
+      this.getSelectedTypes();
+      this.getSelectedCategories();
+      this.getSelectedPlaces();
+    }
   }
 
   createTypes(typesInputs){
@@ -185,9 +189,14 @@ export class FilterComponent implements OnInit {
     this.getSelectedTypes();
     this.getSelectedCategories();
     this.getSelectedPlaces();
+    console.log(this.selectedTypes);
+    console.log(this.selectedCategories);
+    console.log(this.selectedPlaces);
+    console.log(this.startsMin);
+    console.log(this.startsMax)
     this.filterParam = new Filter;
-    this.filterParam.starts_at_min = this.startsMin.value;
-    this.filterParam.starts_at_max = this.startsMax.value;
+    this.filterParam.starts_at_min = this.startsMin;
+    this.filterParam.starts_at_max = this.startsMax;
     this.filterParam.types = this.selectedTypes;
     this.filterParam.categories = this.selectedCategories;
     this.filterParam.cities = this.selectedPlaces;
