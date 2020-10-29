@@ -42,7 +42,7 @@ def update_profile_info():
 
             current_user.status = new_status
         elif field == 'city':
-            new_city = City.query.filter_by(id=body['status']).first()
+            new_city = City.query.filter_by(id=body['city']).first()
 
             if new_city is None:
                 return INCORRECT_CITY_ID, 200
