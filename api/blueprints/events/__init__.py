@@ -43,7 +43,7 @@ def get_event_list():
             Event.name.ilike('%{}%'.format(name))
         )
 
-    if starts_at_min is not None:
+    if starts_at_min is not None and starts_at_min != '':
         try:
             starts_at_min = datetime.strptime(starts_at_min, date_format)
             events_query = events_query.filter(
@@ -53,7 +53,7 @@ def get_event_list():
             return {'ok': False,
                     'reason': 'Incorrect starts_at_min parameter'}
 
-    if starts_at_max is not None:
+    if starts_at_max is not None and starts_at_max != '':
         try:
             starts_at_max = datetime.strptime(starts_at_max, date_format)
             events_query = events_query.filter(
