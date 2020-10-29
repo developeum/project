@@ -1,0 +1,5 @@
+crawlers/app/config.py
+api/config.py
+api/static/
+.DS_Store
+*__pycache__*
