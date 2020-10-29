@@ -3,7 +3,7 @@ from datetime import datetime
 from common.models import Event, EventCategoryLink
 from flask import Blueprint, request, jsonify
 
-from .helpers import project
+from .helpers import project, parse_int_array
 
 events_api = Blueprint('events_api', __name__)
 
@@ -25,9 +25,9 @@ def get_event_list():
     skip = request.args.get('skip', 0, type=int)
     limit = request.args.get('limit', 20, type=int)
 
-    types = request.args.getlist('type', type=int)
-    categories = request.args.getlist('category', type=int)
-    cities = request.args.getlist('city', type=int)
+    types = parse_int_array(request.args.get('type', ''))
+    categories = parse_int_array(request.args.get('category', ''))
+    cities = parse_int_array(request.args.get('city', ''))
 
     starts_at_min = request.args.get('starts_at_min')
     starts_at_max = request.args.get('starts_at_max')
