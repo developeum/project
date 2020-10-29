@@ -1,7 +1,7 @@
 <div class="container">
     <div class="infoContainer">
         <div *ngIf="imageToShow" class="imgContainer">
-            <img class="userImg" src="imageToShow" alt="">
+            <img class="userImg" [src]="imageToShow" alt="">
         </div>
         <div class="changeImgContainer">
             <label class="image-upload-container btn btn-bwm">

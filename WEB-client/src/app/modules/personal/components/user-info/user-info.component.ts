@@ -118,9 +118,12 @@ export class UserInfoComponent implements OnInit {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       this.imageToShow = reader.result;
+      console.log(this.imageToShow)
     }, false);
 
     if (image) {
+      console.log("made")
+
       reader.readAsDataURL(image)
     }
   }
@@ -130,6 +133,7 @@ export class UserInfoComponent implements OnInit {
       this.createImgFromBlob(data);
     }, error => {
       console.log(error);
+      console.log("error")
     });
   }
 

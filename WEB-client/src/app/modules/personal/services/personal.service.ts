@@ -86,7 +86,7 @@ export class PersonalService {
   }
 
   getImg(imageUrl: string): Observable<Blob>{
-    return this.http.get(imageUrl, {responseType: 'blob'})
+    return this.http.get('http://localhost:8000' + imageUrl, {responseType: 'blob'})
   }
 
   uploadImage(image: File){
