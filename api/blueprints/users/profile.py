@@ -49,6 +49,8 @@ def update_profile_info():
 
             current_user.city = new_city
         elif field == 'stack':
+            current_user.stack = []
+
             for stack_id in body['stack']:
                 stack = UserStack.query.filter_by(id=stack_id).first()
 
