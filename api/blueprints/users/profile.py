@@ -35,14 +35,14 @@ def update_profile_info():
             continue
 
         if field == 'status':
-            new_status = UserStatus.query.filter_by(id=body['status'])
+            new_status = UserStatus.query.filter_by(id=body['status']).first()
 
             if new_status is None:
                 return INCORRECT_STATUS_ID, 200
 
             current_user.status = new_status
         elif field == 'city':
-            new_city = City.query.filter_by(id=body['status'])
+            new_city = City.query.filter_by(id=body['status']).first()
 
             if new_city is None:
                 return INCORRECT_CITY_ID, 200
