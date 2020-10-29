@@ -1,3 +1,4 @@
+import { City } from './../../../../models/city';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PersonalService } from './../../services/personal.service';
 import { User } from './../../../../models/user';
@@ -18,6 +19,8 @@ export class UserInfoComponent implements OnInit {
   userInfoForm: FormGroup;
   currentUserId: string;
   stacks: any;
+  cities: any;
+  
 
   selectedFile: ImageSnippet;
   
@@ -48,7 +51,7 @@ export class UserInfoComponent implements OnInit {
   ngOnInit(): void {
     this.loadUserInfo();
     this.loadStacks();
-    
+    this.loadCities();
   }
 
   loadUserInfo(){
@@ -64,8 +67,9 @@ export class UserInfoComponent implements OnInit {
       phone: [this.userInfo.phone, Validators.required],
       firstName: [this.userInfo.first_name, Validators.required],
       lastName: [this.userInfo.last_name, Validators.required],
-      stack: [this.userInfo.stack[0].name, Validators.required],
-      status: [this.userInfo.status.name, Validators.required],
+      stack: [this.userInfo.stack[0].id, Validators.required],
+      status: [this.userInfo.status.id, Validators.required],
+      city: [this.userInfo.city.id, Validators.required],
     });
     if(data.profile_img != null){
       this.loadImg(data.profile_img);
@@ -75,6 +79,12 @@ export class UserInfoComponent implements OnInit {
   loadStacks(){
     this.pageService.getStacks().subscribe(x => {
       this.stacks = x;
+    })
+  }
+
+  loadCities(){
+    this.pageService.getCities().subscribe(x => {
+      this.cities = x;
     })
   }
 
@@ -92,9 +102,13 @@ export class UserInfoComponent implements OnInit {
   }
 
   onSubmit(){
-    this.pageService.postInfo(this.form.phone.value, this.form.firstName.value, this.form.lastName.value, this.form.status, "hello", this.form.stack, )
+    let currentStack = [];
+    currentStack.push(this.form.stack.value)
+    console.log("begin")
+    this.pageService.postInfo(this.form.phone.value, this.form.firstName.value, this.form.lastName.value, this.form.status.value, this.form.city.value, currentStack)
     .subscribe(() => {
       console.log("userInfoPushed");
+      console.log(this.form.phone.value, this.form.firstName.value, this.form.lastName.value, this.form.status.value, this.form.city.value, this.form.stack.value)
       this.loadUserInfo()
       this.visibility = !this.visibility;
     })
@@ -139,7 +153,13 @@ export class UserInfoComponent implements OnInit {
         })
     });
 
+    
+
     reader.readAsDataURL(file);
+  }
+
+  changeEmail(){
+
   }
 
 }

@@ -13,9 +13,16 @@ export class PersonalService {
     return localStorage.getItem('currentUser')
   }
 
-  httpOptionsUser = {
+  httpOptionsUserImg = {
     headers:{
       "Content-Type": "multipart/form-data",
+      "X-Session-Token": `${localStorage.getItem("currentUser")}`
+    }
+  };
+
+  httpOptionsUser = {
+    headers:{
+      "Content-Type": "application/json; charset=utf-8",
       "X-Session-Token": `${localStorage.getItem("currentUser")}`
     }
   };
@@ -35,7 +42,6 @@ export class PersonalService {
   constructor(private http:HttpClient) { }
 
   getUserInfo(): Observable<User>{
-    console.log('getting')
     return this.http
     .get<User>("http://localhost:8000/api/user/me", this.httpOptionsUser)
     .pipe(retry(1))
@@ -50,6 +56,13 @@ export class PersonalService {
   getStacks(){
     return this.http
     .get("http://localhost:8000/api/general/stacks", this.httpOptionsDefault)
+    .pipe(retry(1))
+  }
+
+  getCities(){
+    console.log('getting')
+    return this.http
+    .get("http://localhost:8000/api/general/cities", this.httpOptionsDefault)
     .pipe(retry(1))
   }
 
@@ -76,6 +89,6 @@ export class PersonalService {
     formData.append('image', image);
 
     return this.http
-    .post('http://localhost:8000/api/user/me/avatar', {avatar: formData}, this.httpOptionsUser)
+    .post('http://localhost:8000/api/user/me/avatar', {avatar: formData}, this.httpOptionsUserImg)
   }
 }

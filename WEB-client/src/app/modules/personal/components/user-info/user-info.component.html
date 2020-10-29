@@ -21,6 +21,7 @@
                     <p *ngIf = "userInfo">{{user.email}}</p>
                     <p *ngIf = "userInfo">{{user.phone}}</p>
                     <p *ngIf = "userInfo">{{user.city.name}}</p>
+                    <p *ngIf = "userInfo">{{user.stack[0].name}}</p>
                 </div>
             </div>  
             <div class="formContainer" *ngIf = "visibility">
@@ -37,11 +38,14 @@
                         <p class="name">Телефонный номер</p>
                         <input type="text" formControlName = "phone">
                     </div>
-                    <select formControlName = "status" name="select" id="">
-                        <option *ngFor = "let status of statuses, let i = index" value="status.id">{{status.name}}</option>
+                    <select formControlName = "status" name="select" >
+                        <option *ngFor = "let status of statuses, let i = index" [ngValue]="status.id">{{status.name}}</option>
                     </select>
-                    <select formControlName = "stack" name="select" id="">
-                        <option *ngFor = "let stack of stacks, let i = index" value="stack.id">{{stack.name}}</option>
+                    <select formControlName = "stack" name="select" >
+                        <option *ngFor = "let stack of stacks, let i = index" [ngValue]="stack.id">{{stack.name}}</option>
+                    </select>
+                    <select formControlName = "city" name="select">
+                        <option *ngFor = "let city of cities, let i = index" [ngValue] = "city.id">{{city.name}}</option>
                     </select>
                     <button type="submit" (click) = "onSubmit()">Применить</button>
                 </form>
@@ -49,6 +53,6 @@
         </div>
                 
         <button click = "logout()">Выйти</button>
-        
+        <button click = "changeEmail()">Изменить логин</button>
     </div>
 </div>
