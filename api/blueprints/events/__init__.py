@@ -29,21 +29,21 @@ def get_event_list():
     categories = parse_int_array(request.args.get('category', ''))
     cities = parse_int_array(request.args.get('city', ''))
 
-    starts_at_min = request.args.get('starts_at_min')
-    starts_at_max = request.args.get('starts_at_max')
+    starts_at_min = request.args.get('starts_at_min', '')
+    starts_at_max = request.args.get('starts_at_max', '')
 
-    name = request.args.get('name')
+    name = request.args.get('name', '')
 
     events_query = Event.query
 
     date_format = '%Y-%m-%d'
 
-    if name is not None:
+    if name != '':
         events_query = events_query.filter(
             Event.name.ilike('%{}%'.format(name))
         )
 
-    if starts_at_min is not None and starts_at_min != '':
+    if starts_at_min != '':
         try:
             starts_at_min = datetime.strptime(starts_at_min, date_format)
             events_query = events_query.filter(
@@ -53,7 +53,7 @@ def get_event_list():
             return {'ok': False,
                     'reason': 'Incorrect starts_at_min parameter'}
 
-    if starts_at_max is not None and starts_at_max != '':
+    if starts_at_max != '':
         try:
             starts_at_max = datetime.strptime(starts_at_max, date_format)
             events_query = events_query.filter(
