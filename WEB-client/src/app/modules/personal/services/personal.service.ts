@@ -20,6 +20,12 @@ export class PersonalService {
     }
   };
 
+  httpOptionsI = {
+    headers: {
+      "X-Session-Token": `${localStorage.getItem("currentUser")}`
+    }
+  }
+
   httpOptionsUser = {
     headers:{
       "Content-Type": "application/json; charset=utf-8",
@@ -86,9 +92,9 @@ export class PersonalService {
   uploadImage(image: File){
     const formData = new FormData();
 
-    formData.append('image', image);
+    formData.append('avatar', image, image.name);
 
     return this.http
-    .post('http://localhost:8000/api/user/me/avatar', {avatar: formData}, this.httpOptionsUserImg)
+    .post('http://localhost:8000/api/user/me/avatar', formData, this.httpOptionsI)
   }
 }
