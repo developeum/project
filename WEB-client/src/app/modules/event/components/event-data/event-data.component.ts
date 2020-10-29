@@ -41,6 +41,7 @@ export class EventDataComponent implements OnInit {
   onClick(){
     if(localStorage.getItem("currentUser") != null){
       this.pageService.postToVisited(this.eventId)
+      console.log(this.currentEvent.id)
     }
   }
 

@@ -10,13 +10,14 @@ import { Injectable } from '@angular/core';
 export class EventService {
   httpOptions = {
     headers: new HttpHeaders({
+      
       "Content-Type": "application/json; charset=utf-8"
     })
   };
 
   httpUserOptions = {
     headers: {
-      Authentication: "Bearer" + localStorage.getItem("currentUser")
+      "X-Session-Token": `${localStorage.getItem('currentUser')}`,
     }
   }
 
@@ -31,11 +32,14 @@ export class EventService {
   postToVisited(data: number){
     return this.http
     .post("http://localhost:8000/api/user/me/visited", {
-      id: data
+      event_id: Number(data)
     },
     this.httpUserOptions
     )
     .pipe(retry(1))
+    .subscribe(x => {
+      console.log(x)
+    })
   }
 
   getEventImg(imageUrl: string): Observable<Blob>{
