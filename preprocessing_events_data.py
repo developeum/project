@@ -5,10 +5,19 @@ def preprocess_events_data(csv_in, csv_out):
     import nltk
     from nltk.corpus import stopwords
     nltk.download("stopwords")
+    from langdetect import detect
 
     events_df = pandas.read_csv(csv_in)
     events_df['normalized_name'] = events_df['name']
     events_df['normalized_description'] = events_df['description']
+
+    idxs = []
+    for i in range(len(events_df)):
+        descr = events_df['description'][i]
+        name = events_df['name'][i]
+        if (detect(name) != 'ru' and detect(name) != 'en') or (detect(descr) != 'ru' and detect(descr) != 'en'):
+            idxs.append(i)
+    events_df = events_df.drop(idxs)
 
     events_df['normalized_description'] = events_df['normalized_description'].replace(r'https?:\/\/[^\s]+', '', regex=True)
     events_df['normalized_description'] = events_df['normalized_description'].str.lower()
@@ -61,11 +70,6 @@ def preprocess_events_data(csv_in, csv_out):
 
     events_df['normalized_name'] = names_array
     events_df['normalized_description'] = descr_array
-    events_df = events_df[['name', 'normalized_name', 'event_time', 'description', 'normalized_description', 'city', 'category']]
+    events_df = events_df[['name', 'normalized_name', 'event_type', 'event_time', 'description', 'normalized_description', 'city', 'categories']]
 
     events_df.to_csv(csv_out, index=False, index_label=False)
-
-
-csv_in = 'meetup_tech_18102020_tz_fixed.csv'
-csv_out = 'events18102020.csv'
-preprocess_events_data(csv_in, csv_out)
