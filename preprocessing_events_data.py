@@ -18,6 +18,7 @@ def preprocess_events_data(csv_in, csv_out):
         if (detect(name) != 'ru' and detect(name) != 'en') or (detect(descr) != 'ru' and detect(descr) != 'en'):
             idxs.append(i)
     events_df = events_df.drop(idxs)
+    events_df = events_df.reindex(range(0, len(events_df)))
 
     events_df['normalized_description'] = events_df['normalized_description'].replace(r'https?:\/\/[^\s]+', '', regex=True)
     events_df['normalized_description'] = events_df['normalized_description'].str.lower()

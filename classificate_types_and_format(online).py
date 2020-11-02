@@ -22,15 +22,17 @@ def classificate_types_and_format(csv_in, csv_out):
     for i in range(len(events_df)):
         descr = events_df['normalized_description'][i]
         name = events_df['normalized_name'][i]
-        type = events_df['event_type'][i]
+        ev_type = events_df['event_type'][i]
         city = events_df['city'][i]
         if pandas.isna(city) or any(word in city for word in online):
             events_df['city'][i] = 'online'
         for j in range(len(keywords)):
-            if any(word in type for word in keywords[j]):
-                events_df['event_type'][i] = types[j]
-            elif any(word in name for word in keywords[j]):
-                events_df['event_type'][i] = types[j]
+            if not pandas.isna(ev_type):
+                if any(word in ev_type for word in keywords[j]):
+                    events_df['event_type'][i] = types[j]
+            elif not pandas.isna(name):
+                if any(word in name for word in keywords[j]):
+                    events_df['event_type'][i] = types[j]
             elif not pandas.isna(descr):
                 if any(word in descr for word in keywords[j]):
                     events_df['event_type'][i] = types[j]
