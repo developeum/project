@@ -1,15 +1,21 @@
-$primaryColor: #3C3C9A;
-$backgroundColor: #FAFAFA;
-$primaryTextColor: #2C2C2C;
-$secondaryTextColor: #FFF;
+$primaryBackground: #f2f2f2;
+$secondaryBackground: #ddd;
+$primary: #7dbcbb;
+$textBlack: #2f2f2f;
+$textWhite: #fff;
 
 $containerWidth: 100%;
+
+@font-face{
+    font-family: gotham;
+    src: url(../../../../../node_modules/gotham-fonts/fonts/GothamRounded-Medium.ttf)
+}
 
 .containerHeader{
     width: 100vw;
     margin-top: 0;
     height: 10vh;
-    background-color: $backgroundColor;
+    background-color: $primaryBackground;
 
     display: flex;
     align-items: center; 
@@ -22,16 +28,8 @@ $containerWidth: 100%;
     font-size: 2vh;
 }
 
-.Hey{
-    color: $primaryColor;
-}
-
-.work{
-    color: $primaryTextColor;
-}
-
 .text{
-    color: $primaryTextColor;
+    color: $textBlack;
     margin: 1vw;
 }
 
@@ -42,7 +40,7 @@ $containerWidth: 100%;
     width: $containerWidth/2;
     height: 3vh;
     font-size: 2vh;
-    background-color: $backgroundColor;
+    background-color: $primaryBackground;
     
     
 }
@@ -57,8 +55,125 @@ $containerWidth: 100%;
 }
 
 .img{
-    width: 10vw;
-    height: 15vh;
+    width: 50px;
+    height: 50px;
     background-image: url(../../../imges/logo.svg) ;
     background-size: 100%;
 }
+
+.userImg{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+
+a{
+    text-decoration: none;
+    font-family: gotham;
+}
+
+@media screen and(max-width: 420px) {
+    .containerHeader{
+        position: fixed;
+        bottom: 0;
+        justify-content: space-evenly;
+    }
+
+    .img{
+        outline: none;
+        width: 50px;
+        height: 50px;
+        background-image: url(../../../imges/icons/icons8-home-96.png);
+        background-size: 100%;
+    }
+
+    .inputContainer{
+        display: none;
+    }
+
+    .mobileSearch{
+        outline: none;
+        width: 50px;
+        height: 50px;
+        background-image: url(../../../imges/icons/icons8-search-96.png);
+        background-size: 100%;
+    }
+
+    .text{
+        display: none;
+    }
+
+    .events{
+        outline: none;
+        width: 50px;
+        height: 50px;
+        background-image: url(../../../imges/icons/events.png);
+        background-size: 100%;
+    }
+
+    .userImg{
+        display: none;
+    }
+
+    .userMobile{
+        outline: none;
+        margin-left: -10%;
+        width: 50px;
+        height: 50px;
+        background-image: url(../../../imges/icons/user.png);
+        background-size: 100%;
+    }
+}
+@media screen and(max-width: 380px) {
+    .containerHeader{
+        position: fixed;
+        bottom: 0;
+        justify-content: space-evenly;
+    }
+
+    .img{
+        outline: none;
+        width: 40px;
+        height: 40px;
+        background-image: url(../../../imges/icons/icons8-home-96.png);
+        background-size: 100%;
+    }
+
+    .inputContainer{
+        display: none;
+    }
+
+    .mobileSearch{
+        outline: none;
+        width: 40px;
+        height: 40px;
+        background-image: url(../../../imges/icons/icons8-search-96.png);
+        background-size: 100%;
+    }
+
+    .text{
+        display: none;
+    }
+
+    .events{
+        outline: none;
+        width: 40px;
+        height: 40px;
+        background-image: url(../../../imges/icons/events.png);
+        background-size: 100%;
+    }
+
+    .userImg{
+        display: none;
+    }
+
+    .userMobile{
+        outline: none;
+        margin-left: -10%;
+        width: 40px;
+        height: 40px;
+        background-image: url(../../../imges/icons/user.png);
+        background-size: 100%;
+    }
+}
+

@@ -4,9 +4,12 @@
     </div>
     <div class="inputContainer">
         <input type="text" class="search input search-input" placeholder = "search by name"/>
-    </div>               
-    <a routerLink = "/auth" class = "text">SignIn</a>
-    <a routerLink = "/auth/register" class = "text">SignUp</a>    
+    </div> 
+    <div class="mobileSearch"></div>              
+    <a *ngIf = "!userIsLoggedIn" routerLink = "/auth" class = "text">SignIn</a>
+    <a *ngIf = "!userIsLoggedIn" routerLink = "/auth/register" class = "text">SignUp</a>
+    <div class="events" routerLink = "/events"></div>    
     <a routerLink = "/events" class="text">мероприятия</a>
-    <a routerLink = "/user" class="text">user</a>
+    <a *ngIf = "userIsLoggedIn" routerLink = "/user" class="user"><img [src]="imageToShow" class="userImg"></a>
+    <div class="userMobile" routerLink = "/user"> </div>
 </div>
