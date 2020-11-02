@@ -25,7 +25,7 @@ def Final_function(csv_in, csv_out):
         if (detect(name) != 'ru' and detect(name) != 'en') or (detect(descr) != 'ru' and detect(descr) != 'en'):
             idxs.append(i)
     events_df = events_df.drop(idxs)
-    events_df = events_df.reindex(range(0, len(events_df)))
+    events_df.index = range(len(events_df))
 
     events_df['normalized_description'] = events_df['normalized_description'].replace(r'https?:\/\/[^\s]+', '',
                                                                                       regex=True)
@@ -83,7 +83,7 @@ def Final_function(csv_in, csv_out):
     events_df = events_df[
         ['name', 'normalized_name', 'event_type', 'event_time', 'description', 'normalized_description', 'city',
          'categories']]
-    
+
     # the second function
 
     hackathon = ['hackathon', 'хакатон', 'Конкурс']
