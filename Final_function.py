@@ -223,6 +223,8 @@ def Final_function(csv_in, csv_out):
     new_class = pd.DataFrame(class1, columns=['class'])
     final_df = temp_df.join(new_class, how='inner')
     final_df = final_df.drop(['class_tmp'], axis=1)
+    final_df = final_df.drop(['normalized_name'],axis=1)
+    final_df = final_df.drop(['normalized_description'],axis=1)
 
     final_df.to_csv(csv_out, index=False, index_label=False)
 
