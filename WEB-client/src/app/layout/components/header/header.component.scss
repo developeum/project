@@ -74,9 +74,11 @@ a{
 
 @media screen and(max-width: 420px) {
     .containerHeader{
+        width: 100vw;
         position: fixed;
         bottom: 0;
         justify-content: space-evenly;
+        z-index: 1000;
     }
 
     .img{

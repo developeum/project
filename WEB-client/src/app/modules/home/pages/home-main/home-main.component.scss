@@ -65,6 +65,7 @@ $textWhite: #fff;
     padding-left: 15px;
     font-family: gothamLight;
     outline: none;
+    cursor: pointer;
 }
 
 .arrow{
@@ -116,7 +117,120 @@ $textWhite: #fff;
     color: $primary;
 }
 
+.hasAccount{
+    font-size: 1.1em;
+    color: $primary;
+    margin-top: 1vh;
+    margin-left: 4.5vw;
+    outline: none;
+    cursor: pointer;
+}
+
 .category{
     font-family: gotham;
     font-size: 1.3em;
+}
+
+@media screen and(max-width: 420px) {
+    .firstContainer{
+        align-items: center;
+        flex-direction: column-reverse;
+        height: 85%;
+        
+    }
+
+    .mobileLogo{
+        width: 50vw;
+        height: 12vh;
+        background-image: url(../../../../imges/logo/лого2.svg);
+        background-size: 100%;
+        margin-left: 25vw;
+        margin-top: 1vh;
+    }
+
+    .img{
+        background-image: url(../../../../imges/photos/headphones-mobile.jpg);
+        width: 90%;
+        height: 35vh;
+        margin-left: 0;
+        margin-top: 1vh;
+        margin-bottom: 0;
+        z-index: 0;
+    }
+    
+    .firstText{
+        width: 90%;
+        margin-top: -2.2vh;
+        z-index: 99999;
+        margin-left: 5vw;
+    }
+
+    .title{
+        font-size: 2.5em;
+    }
+
+    .text{
+        margin-top: 1vh;
+        font-size: 1.1em;
+        font-family: gothamLight;
+    }
+
+    .regButton{
+        margin-top: 0;
+        width: 90%;
+    }
+
+    .arrow{
+        width: 20vw;
+        height: 6vh;
+        margin-top: -1.5vh;
+        margin-left: 15vw;
+    }
+    
+    .hasAccount{
+        font-size: 1.5em;
+        color: $primary;
+        margin-left: 18vw;
+        margin-top: 3vh;
+    }
+
+    .secondContainer{
+        width: 100%;
+        height: 100vh;
+        margin-top: 5vh;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 5vh;
+    }
+
+    .secondImg{
+        background-image: url(../../../../imges/photos/confirence-mobile.jpg);
+        width: 90%;
+        height: 40vh;
+        background-size: 100%;
+        margin: 0;
+        margin-top: 2vh;
+    }
+
+    .secondText{
+        width: 90%;
+        margin-top: 10vh;
+    }
+
+    .smallTitle{
+        margin: 0;
+        font-size: 2em;
+    }
+
+    .categories{
+        margin: 0;
+        margin-top: -10vh;
+    }
+
+    .category{
+        margin: 1.5vw;
+    }
+    
+
+
 }
