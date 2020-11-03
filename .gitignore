@@ -1,5 +1,5 @@
 crawlers/app/config.py
-api/config.py
-api/static/
+api/app/config.py
+api/app/static/
 .DS_Store
 *__pycache__*
