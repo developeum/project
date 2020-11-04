@@ -1,0 +1,25 @@
+.dataContainer{
+    display: flex;
+    flex-direction: column;
+
+    width: 55vw;
+    height: 60vh;
+    background-color: antiquewhite;
+    border-radius: 1vh;
+}
+
+.timePlace{
+    display: flex;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn{
+    width: 15vw;
+    height: 5vh;
+    border-radius: 1vh;
+}

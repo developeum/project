@@ -14,7 +14,11 @@ services:
       - database.env
     depends_on:
       - postgres
+  nginx:
+    build: frontend/
+    volumes:
+      - images_volume:/var/www/html/static/:ro
     ports:
-      - 2020:8000
+      - 2020:80
 volumes:
   images_volume: {}

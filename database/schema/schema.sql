@@ -5,16 +5,12 @@ create table cities (
         primary key (id)
 );
 
-insert into cities (city) values ('Не указан');
-
 create table statuses (
     id     serial not null,
     status varchar(32),
     constraint statuses_pk
         primary key (id)
 );
-
-insert into statuses (status) values ('Не указан');
 
 create table stacks (
     id    serial not null,
@@ -36,8 +32,6 @@ create table event_types (
     constraint event_types_pk
         primary key (id)
 );
-
-insert into event_types (event_type) values ('Не указан');
 
 create table events (
     id          serial not null,
@@ -75,20 +69,6 @@ create table users (
         foreign key (city) references cities
 );
 
-/*
--- TODO: delete `favorites` table
-create table favorites (
-    user_id  integer not null,
-    event_id integer not null,
-    constraint favorites_pk
-        primary key (user_id, event_id),
-    constraint favorites_users_id_fk
-        foreign key (user_id) references users,
-    constraint favorites_events_id_fk
-        foreign key (event_id) references events
-);
-*/
-
 create table user_visit_links (
     user_id     integer not null,
     event_id    integer not null,
@@ -122,3 +102,42 @@ create table event_category_links (
     constraint event_category_links_categories_id_fk
         foreign key (category_id) references categories
 );
+
+insert into cities (city) values
+    ('Не указан'),
+    ('Москва'),
+    ('Санкт-Петербург');
+
+insert into statuses (status) values
+    ('Не указан'),
+    ('Студент'),
+    ('Трудоустроен');
+
+-- TODO: merge stacks and categories
+insert into stacks (stack) values
+    ('Веб-разработка'),
+    ('Мобильная разработка'),
+    ('Data Science'),
+    ('QA'),
+    ('DevOps'),
+    ('Бизнес'),
+    ('Прочее');
+
+insert into categories (category) values
+    ('Веб-разработка'),
+    ('Мобильная разработка'),
+    ('Data Science'),
+    ('QA'),
+    ('DevOps'),
+    ('Бизнес'),
+    ('Прочее');
+
+insert into event_types (event_type) values
+    ('Прочее'),
+    ('Хакатон'),
+    ('Вебинар'),
+    ('Конференция'),
+    ('Тренинг'),
+    ('Курс'),
+    ('Митап'),
+    ('Олимпиада');
