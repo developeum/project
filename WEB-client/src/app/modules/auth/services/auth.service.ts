@@ -35,12 +35,8 @@ export class AuthService {
         email: username,
         password: password
       }, {responseType: 'text'})
-      .subscribe((token) => {
-        console.log(token);
-        localStorage.removeItem("currentUser")
-        localStorage.setItem("currentUser", token);
-        console.log(localStorage.getItem("currentUser"))
-      })
+      
+      
   }
 
   register(username: string, password: string, firstName: string, lastName: string, stack: any){

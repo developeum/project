@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  error: boolean = false;
+  errorType: boolean = false; //errorType = false - тип ошибки(некорректные данные)
 
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
 
@@ -18,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username: [ "", Validators.required ],
+      username: [ "", [ Validators.required, Validators.email ] ],
       password: [ "", Validators.required ]
     });
   }
@@ -35,14 +37,36 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  fixForm(){
+    // if( this.loginForm.invalid ){
+    //   this.error = true;
+    //   return;
+    // }
+    this.error = false;
+    this.errorType = false;
+    console.log("form changed")
+  }
+
   onSubmit(){
     if (this.loginForm.invalid){
-      console.log("form is incorrect")
+      console.log("form is incorrect");
+      this.error = true;
+      this.errorType = false;
       return;
     }
+
     console.log(this.form.username.value, this.form.password.value)
     this.authService.login( this.form.username.value, this.form.password.value )
-    this.router.navigate(['/'])
+    .subscribe((token) => {
+      localStorage.removeItem("currentUser")
+      localStorage.setItem("currentUser", token);
+      this.router.navigate(['/'])
+    },
+    (err) => {
+      this.error = true;
+      this.errorType = true;
+    })
+    
   }
 
 }

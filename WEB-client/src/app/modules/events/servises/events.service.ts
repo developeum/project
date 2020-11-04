@@ -6,7 +6,6 @@ import { EventFL } from './../../../models/eventsFL';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { retry } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import * as jwt_decode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
