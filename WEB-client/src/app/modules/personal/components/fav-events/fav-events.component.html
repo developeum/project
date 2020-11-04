@@ -2,7 +2,8 @@
     <p class="title">Избранное</p>
     <div *ngIf="favEvents$ | async as events" class="favContainer">
         <div *ngFor="let event of events" class="eventContainer" (click) = "navToEvent(event.id)">
-            <p>{{ event.name }} {{event.type}}</p>
+            <p class="name">{{ event.name }}</p>
+            <p class="type">{{event.type.name}}</p>
         </div>
     </div>
     

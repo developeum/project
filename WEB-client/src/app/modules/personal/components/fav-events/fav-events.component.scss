@@ -1,13 +1,27 @@
+$primaryBackground: #f2f2f2;
+$secondaryBackground: #ddd;
+$primary: #7dbcbb;
+$textBlack: #2f2f2f;
+$textWhite: #fff;
+$containerColor: #fcfcfc;
+
 .container{
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .eventContainer{
-    background-color: lavender;
-    height: 7vh;
+    background-color: $containerColor;
+    height: 8vh;
     width: 50vw;
     border-radius: 1vh;
+    border: 1px solid $textBlack;
+    margin-bottom: 2vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
 }
 
 .title{
@@ -20,4 +34,17 @@
     width: 15vw;
     border: none;
     border-radius: 1vh;
+    background-color: $primary;
+    color: $textWhite;
+    outline: none;
+    cursor: pointer;
+}
+
+.name{
+    margin-left: 2vw;
+}
+
+.type{
+    position: absolute;
+    right: 2vw;
 }

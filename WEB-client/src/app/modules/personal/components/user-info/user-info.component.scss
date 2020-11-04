@@ -68,6 +68,7 @@ $containerColor: #fcfcfc;
     background-size: 100%;
     border: none;
     outline: none;
+    cursor: pointer;
 }
 
 .status{
@@ -86,6 +87,7 @@ hr{
     background-color: $primary;
     border: none;
     color: $textWhite;
+    cursor: pointer;
 }
 
 .FIO{
