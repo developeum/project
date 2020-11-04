@@ -50,11 +50,7 @@ export class AuthService {
       last_name: lastName,
       stack: stack
     }, {responseType: 'text'})
-    .subscribe((token) => {
-      console.log(token);
-      localStorage.removeItem("currentUser")
-      localStorage.setItem("currentUser", token)
-    })
+    
   }
 
   logout(){

@@ -1,7 +1,9 @@
-$primaryColor: #3C3C9A;
-$backgroundColor: #FAFAFA;
-$primaryTextColor: #2C2C2C;
-$secondaryTextColor: #FFF;
+$primaryBackground: #f2f2f2;
+$secondaryBackground: #ddd;
+$primary: #7dbcbb;
+$textBlack: #2f2f2f;
+$textWhite: #fff;
+$errorColor: #C31F1F;
 
 $testBackColor: rgb(233, 233, 233);
 
@@ -16,16 +18,16 @@ $containerWidth: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    // background: url(../../../../imges/auth.jpg);
-    // -moz-background-size: 100%; /* Firefox 3.6+ */
-    // -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
-    // -o-background-size: 100%; /* Opera 9.6+ */
-    // background-size: 100%; /* Современные браузеры */
+    background: url(../../../../imges/photos/auth.jpeg);
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
 }
 
 .loginContainer{
     height: $containerWidth;
-    background-color: $testBackColor;
+    background-color: $primaryBackground;
     border-radius: 1vh;
     width: 28vw;
     height: 80vh;
@@ -35,7 +37,7 @@ $containerWidth: 100%;
 
 .imgContainer{
     width: $containerWidth/2;
-    background-color: $backgroundColor;
+    background-color: $primaryBackground;
     height: $containerWidth;
 }
 
@@ -66,7 +68,7 @@ form{
     width: $containerWidth;
     height: 4vh;
     font-size: 2vh;
-    background-color: $backgroundColor;
+    background-color: white;
 }
 
 .inputVisible{
@@ -95,11 +97,35 @@ form{
 }
 
 .formGroup{
-    margin-bottom: 1.5vh;
+    margin-bottom: 0.5vh;
 }
 
 .inputDescription{
     margin-left: 1vw;
+}
+
+.errorMessageContainer{
+    border: 1px solid white;
+    background-color: $errorColor;
+    text-align: center;
+    color: $textWhite;
+    border-radius: 1vh;
+}
+
+.errorInput{
+    outline: none;
+    margin-top: -1vh;
+    border: 1px solid $errorColor;
+    border-radius: 1vh;
+    width: $containerWidth;
+    height: 4vh;
+    font-size: 2vh;
+    background-color: $primaryBackground;
+}
+
+.errorText{
+    margin-left: 1vw;
+    color: $errorColor;
 }
 
 @media screen and (max-width: 1385px) {
@@ -143,8 +169,8 @@ form{
     }
 
     .signUp{
-        margin-top:6vh;
-        margin-bottom: 2vh;
+        margin-top:2vh;
+        margin-bottom: 0;
         font-size: 5vh;
     }
 
@@ -155,7 +181,7 @@ form{
     .subButton{
         width: 100%;
         height: 6vh;
-        margin-top: 13vh;
+        margin-top: 2vh;
         font-size: 2vh;
     }
 

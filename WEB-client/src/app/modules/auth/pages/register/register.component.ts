@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  error: boolean = false;
+  errorType: boolean = false;
   registerForm: FormGroup;
   stacks: Stack[] = [];
 
@@ -20,7 +22,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.loadStacks();
     this.registerForm = this.formBuilder.group({
-      username: ["", Validators.required],
+      username: ["", [Validators.required, Validators.email]],
       password: ["", Validators.required],
       firstName: ["", Validators.required],
       lastName: ["", Validators.required],
@@ -48,9 +50,21 @@ export class RegisterComponent implements OnInit {
     })
   }
 
+  fixForm(){
+    // if( this.loginForm.invalid ){
+    //   this.error = true;
+    //   return;
+    // }
+    this.error = false;
+    this.errorType = false;
+    console.log("form changed")
+  }
+
   onSubmit(){
     if (this.registerForm.invalid){
-      console.log("form is invalid");
+      console.log("form is incorrect");
+      this.error = true;
+      this.errorType = false;
       return;
     }
 
@@ -59,7 +73,17 @@ export class RegisterComponent implements OnInit {
     stacks.push(this.form.stack.value)
     console.log(this.form.stack.value)
     this.authService.register( this.form.username.value, this.form.password.value, this.form.firstName.value, this.form.lastName.value, stacks )
-    this.router.navigate(['/'])
+    .subscribe((token) => {
+      console.log(token);
+      localStorage.removeItem("currentUser")
+      localStorage.setItem("currentUser", token)
+      this.router.navigate(['/'])
+    },
+    (error) => {
+      this.error = true;
+      this.error = true;
+    })
+    
   }
 
 }
