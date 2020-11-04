@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:latest
+    env_file:
+      - database.env
+    volumes:
+      - ./database/schema/:/docker-entrypoint-initdb.d/
+  api:
+    build: api/
+    volumes:
+      - images_volume:/static/
+    env_file:
+      - database.env
+    depends_on:
+      - postgres
+    ports:
+      - 2020:8000
+volumes:
+  images_volume: {}
