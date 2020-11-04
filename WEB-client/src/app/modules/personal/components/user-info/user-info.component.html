@@ -2,16 +2,14 @@
     <div class="infoContainer">
         <div *ngIf="imageToShow" class="imgContainer">
             <label class="image-upload-container btn btn-bwm">
-                <img class="userImg" [src]="imageToShow" alt="">
-                
+                <img class="userImg" [src]="imageToShow" alt=""> 
             </label>
             <input #imageInput
                     type="file"
                     accept="image/*"
                     (change)="processFile(imageInput)">
-        </div>
-        
-        <div class="textContainer" >
+        </div> 
+        <div class="textContainer" [ngClass] = "{'changeContainer': changeMod}">
             <div class="text" *ngIf = "!visibility">
                 <div class="infoContainer" *ngIf = "userInfo$ | async as user">
                     <p class="FIO" *ngIf = "userInfo">{{user.first_name}} {{user.last_name}} <button class="changeBtn" (click) = "changeVisibility()"></button></p>
@@ -39,12 +37,15 @@
                         <p class="name">Телефонный номер</p>
                         <input class="infoChange" type="text" formControlName = "phone">
                     </div>
+                    <p class="name">Статус</p>
                     <select formControlName = "status" name="select" >
                         <option *ngFor = "let status of statuses, let i = index" [ngValue]="status.id">{{status.name}}</option>
                     </select>
+                    <p class="name">Стэк</p>
                     <select formControlName = "stack" name="select" >
                         <option *ngFor = "let stack of stacks, let i = index" [ngValue]="stack.id">{{stack.name}}</option>
                     </select>
+                    <p class="name">Город</p>
                     <select formControlName = "city" name="select">
                         <option *ngFor = "let city of cities, let i = index" [ngValue] = "city.id">{{city.name}}</option>
                     </select>

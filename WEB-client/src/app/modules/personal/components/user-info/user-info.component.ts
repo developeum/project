@@ -16,6 +16,7 @@ class ImageSnippet {
   styleUrls: ['./user-info.component.scss']
 })
 export class UserInfoComponent implements OnInit {
+  changeMod: boolean = false;
   imageToShow: any;
   userInfoForm: FormGroup;
   currentUserId: string;
@@ -102,6 +103,7 @@ export class UserInfoComponent implements OnInit {
   changeVisibility(){
     this.visibility = !this.visibility;
     console.log(this.visibility);
+    this.changeMod = true;
   }
 
   onSubmit(){
@@ -114,6 +116,7 @@ export class UserInfoComponent implements OnInit {
       console.log(this.form.phone.value, this.form.firstName.value, this.form.lastName.value, this.form.status.value, this.form.city.value, this.form.stack.value)
       this.loadUserInfo()
       this.visibility = !this.visibility;
+      this.changeMod = false;
     })
   }
 

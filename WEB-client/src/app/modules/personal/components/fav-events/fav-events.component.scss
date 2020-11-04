@@ -48,3 +48,10 @@ $containerColor: #fcfcfc;
     position: absolute;
     right: 2vw;
 }
+
+@media screen and(max-width: 420px) {
+    .eventContainer{
+        width: 90vw;
+        height: 10vh;
+    }
+}
