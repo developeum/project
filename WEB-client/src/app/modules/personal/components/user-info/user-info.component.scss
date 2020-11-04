@@ -1,9 +1,19 @@
+$primaryBackground: #f2f2f2;
+$secondaryBackground: #ddd;
+$primary: #7dbcbb;
+$textBlack: #2f2f2f;
+$textWhite: #fff;
+$containerColor: #fcfcfc;
+
 .container{
     display: flex;
 }
 
 .infoContainer{
-    width: 15vw;
+    width: 17vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .imgContainer{
@@ -20,15 +30,17 @@
 
 .userImg{
     display: block;
-    width:100%;
+    width:300px;
+    height: 300px;
 }
 
 .textContainer{
     width: 100%;
-    height: 40vh;
-    background-color: rgb(219, 219, 219);
-
+    height: 43vh;
+    background-color: $containerColor;
+    border: 1px solid $textBlack;
     border-radius: 1vh;
+    
 }
 
 .invisible{
@@ -36,5 +48,90 @@
 }
 
 .visible{
+    display: none;
+}
+
+.text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.changeBtn{
+    position: absolute;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    background-image: url(../../../../imges/icons/icons8-settings-128.png);
+    background-size: 100%;
+    border: none;
+    outline: none;
+}
+
+.status{
+    margin-top: 0;
+}
+
+hr{
+    margin-top: 0;
+    margin-bottom: 2vh;
+}
+
+.logOutBtn{
+    width: 50%;
+    height: 2.5rem;
+    border-radius: 1vh;
+    background-color: $primary;
+    border: none;
+    color: $textWhite;
+}
+
+.FIO{
+    font-size: 2em;
+    margin-bottom: 0;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+select{
+    margin-top: 1vh;
+    width: 80%;
+    height: 3vh;
+    border-radius: 1vh;
+}
+
+.infoChange{
+    width: 80%;
+    height: 3vh;
+    border-radius: 1vh;
+    border: 1px solid $textBlack;
+}
+
+.formGroup{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subChanges{
+    width: 40%;
+    height: 2.5rem;
+    border: none;
+    background-color: $primary;
+    border-radius: 1vh;
+    color: $textWhite;
+    margin-top: 1vh;
+    outline: none;
+}
+
+.image-upload-container > input{
     display: none;
 }

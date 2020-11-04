@@ -1,42 +1,43 @@
 <div class="container">
     <div class="infoContainer">
         <div *ngIf="imageToShow" class="imgContainer">
-            <img class="userImg" [src]="imageToShow" alt="">
-        </div>
-        <div class="changeImgContainer">
             <label class="image-upload-container btn btn-bwm">
-                <span>Select Image</span>
-                <input #imageInput
+                <img class="userImg" [src]="imageToShow" alt="">
+                
+            </label>
+            <input #imageInput
                     type="file"
                     accept="image/*"
                     (change)="processFile(imageInput)">
-            </label>
         </div>
+        
         <div class="textContainer" >
             <div class="text" *ngIf = "!visibility">
                 <div class="infoContainer" *ngIf = "userInfo$ | async as user">
-                    <p *ngIf = "userInfo">{{user.first_name}} {{user.last_name}} <button (click) = "changeVisibility()">Изменить</button></p>
+                    <p class="FIO" *ngIf = "userInfo">{{user.first_name}} {{user.last_name}} <button class="changeBtn" (click) = "changeVisibility()"></button></p>
                     <br>
-                    <p *ngIf = "userInfo">{{user.status.name}}</p>
-                    <p *ngIf = "userInfo">{{user.email}}</p>
-                    <p *ngIf = "userInfo">{{user.phone}}</p>
-                    <p *ngIf = "userInfo">{{user.city.name}}</p>
-                    <p *ngIf = "userInfo">{{user.stack[0].name}}</p>
+                    <p class="status" *ngIf = "userInfo">{{user.status.name}}</p>
+                    <p class="status" *ngIf = "userInfo">{{user.stack[0].name}}</p>
+                    <hr width="80%" size="1px"/>
+                    <p class="status" *ngIf = "userInfo">{{user.email}}</p>
+                    <p class="status" *ngIf = "userInfo">{{user.phone}}</p>
+                    <p class="status" *ngIf = "userInfo">{{user.city.name}}</p>
                 </div>
+                <button class="logOutBtn" (click) = "logout()">Выйти</button>
             </div>  
             <div class="formContainer" *ngIf = "visibility">
-                <form [formGroup] = "userInfoForm">
+                <form class="form" [formGroup] = "userInfoForm">
                     <div class="formGroup">
                         <p class="name">Имя</p>
-                        <input type="text" formControlName = "firstName">
+                        <input class="infoChange" type="text" formControlName = "firstName">
                     </div>
                     <div class="formGroup">
                         <p class="name">Фамилия</p>
-                        <input type="text" formControlName = "lastName">
+                        <input class="infoChange" type="text" formControlName = "lastName">
                     </div>
                     <div class="formGroup">
                         <p class="name">Телефонный номер</p>
-                        <input type="text" formControlName = "phone">
+                        <input class="infoChange" type="text" formControlName = "phone">
                     </div>
                     <select formControlName = "status" name="select" >
                         <option *ngFor = "let status of statuses, let i = index" [ngValue]="status.id">{{status.name}}</option>
@@ -47,11 +48,11 @@
                     <select formControlName = "city" name="select">
                         <option *ngFor = "let city of cities, let i = index" [ngValue] = "city.id">{{city.name}}</option>
                     </select>
-                    <button type="submit" (click) = "onSubmit()">Применить</button>
+                    <button class="subChanges" type="submit" (click) = "onSubmit()">Применить</button>
                 </form>
             </div>     
         </div>
                 
-        <button click = "logout()">Выйти</button>
+        
     </div>
 </div>

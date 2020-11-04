@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { City } from './../../../../models/city';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PersonalService } from './../../services/personal.service';
@@ -44,7 +45,7 @@ export class UserInfoComponent implements OnInit {
     }
   ]
 
-  constructor(private pageService: PersonalService, private formBuilder: FormBuilder) { 
+  constructor(private pageService: PersonalService, private formBuilder: FormBuilder, private router: Router) { 
     
   }
 
@@ -93,7 +94,9 @@ export class UserInfoComponent implements OnInit {
   }
 
   logout(){
-    
+    localStorage.removeItem('currentUser')
+    this.router.navigateByUrl('/');
+    console.log('error')
   }
 
   changeVisibility(){
