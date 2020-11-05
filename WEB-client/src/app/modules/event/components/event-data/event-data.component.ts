@@ -15,7 +15,7 @@ export class EventDataComponent implements OnInit {
   imgToShow: any;
   isImageLoading: boolean = false;
   eventId: number;
-  currentEvent: any;
+  currentEvent: Event;
 
   constructor(private pageService: EventService, private route: ActivatedRoute) { 
     this.route.params.subscribe(params => {
@@ -31,10 +31,10 @@ export class EventDataComponent implements OnInit {
   loadEventInfo(){
     this.eventData$ = this.pageService.getEventData(this.eventId)
     this.pageService.getEventData(this.eventId)
-    .subscribe(x => {
-      this.currentEvent = x;
+    .subscribe((event) => {
+      this.currentEvent = event;
       console.log(this.currentEvent)
-      this.loadImg(this.currentEvent.event.logo_path);
+      this.loadImg(this.currentEvent.logo_path);
     })
   }
 

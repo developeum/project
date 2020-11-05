@@ -1,21 +1,37 @@
+$primaryBackground: #f2f2f2;
+$secondaryBackground: #ddd;
+$primary: #7dbcbb;
+$textBlack: #2f2f2f;
+$textWhite: #fff;
+$containerColor: #fcfcfc;
+
+.mainContainer{
+    margin-top: 4vh;
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .dataContainer{
     display: flex;
     flex-direction: column;
 
     width: 55vw;
     height: 60vh;
-    background-color: antiquewhite;
+    background-color: $containerColor;
     border-radius: 1vh;
+    box-shadow: 0 0 4px 2px $secondaryBackground;
 }
 
 .timePlace{
     display: flex;
+    margin-top: 1vh;
 }
 
 .container{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: 4vw;
 }
 
 .btn{
@@ -23,3 +39,69 @@
     height: 5vh;
     border-radius: 1vh;
 }
+
+.time{
+    margin-left: 2vw;
+}
+
+.place{
+    margin-left: 4vw;
+}
+
+.description{
+    margin-left: 2vw;
+}
+
+.eventImg{
+    width: 300px;
+    height: 300px;
+    border-radius: 1vh;
+}
+
+.linkContainer{
+    margin-top: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    height: 5vh;
+    background-color: $primary;
+    box-shadow: 0 0 4px 2px $secondaryBackground;
+    border-radius: 1vh;
+}
+
+.link{
+    color: $textWhite;
+    text-decoration: none;
+}
+
+@media screen and(max-width: 420px) {
+    .mainContainer{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .eventImg{
+        width: 250px;
+        height: 250px;
+    }
+
+    .dataContainer{
+        width: 100%;
+    }
+
+    .container{
+        width: 90vw;
+        margin-left: 0;
+        margin-top: 3vh;
+        margin-bottom: 15vh;
+    }
+    
+    .linkContainer{
+        width: 80vw;
+        height: 5vh;
+    }
+    
+}
+
