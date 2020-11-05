@@ -1,6 +1,6 @@
-crawlers/app/config.py
-api/app/config.py
-api/app/static/
+backend/crawlers/app/config.py
+backend/api/app/config.py
+backend/api/app/static/
 .DS_Store
 .vscode
 *__pycache__*

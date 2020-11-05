@@ -3,19 +3,19 @@ services:
   postgres:
     image: postgres:latest
     env_file:
-      - database.env
+      - ./environment/database.env
     volumes:
-      - ./database/schema/:/docker-entrypoint-initdb.d/
+      - ./backend/database/schema/:/docker-entrypoint-initdb.d/
   api:
-    build: api/
+    build: ./backend/api/
     volumes:
       - images_volume:/static/
     env_file:
-      - database.env
+      - ./environment/database.env
     depends_on:
       - postgres
   nginx:
-    build: frontend/
+    build: ./frontend/
     volumes:
       - images_volume:/var/www/html/static/:ro
     ports:
