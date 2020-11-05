@@ -1,3 +1,10 @@
+$primaryBackground: #f2f2f2;
+$secondaryBackground: #ddd;
+$primary: #7dbcbb;
+$textBlack: #2f2f2f;
+$textWhite: #fff;
+$containerColor: #fcfcfc;
+
 .container{
     display: flex;
     flex-direction: row;
@@ -11,6 +18,7 @@
 .list{
     list-style: none;
     padding: 0;
+    
 }
 
 .event{
@@ -19,11 +27,29 @@
     padding: 7px 20px;
     margin-bottom:10px;
     border-radius: 5px;
-    box-shadow: 2px -2px 5px 0 rgba(0,0,0,.1),
-     -2px -2px 5px 0 rgba(0,0,0,.1),
-     2px 2px 5px 0 rgba(0,0,0,.1),
-     -2px 2px 5px 0 rgba(0,0,0,.1);
-     font-size: 20px;
-     letter-spacing: 2px;
-     transition: 0.3s all linear;
+    // border: 1px solid $textBlack;
+    font-size: 20px;
+    letter-spacing: 2px;
+    transition: 0.3s all linear;
+    background-color: $containerColor;
+    box-shadow: 0 0 4px 2px $secondaryBackground;
+     
 }
+
+.co{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn{
+    background-color: $primary;
+    border: none;
+    border-radius: 1vh;
+    width: 12vw;
+    height: 5vh;
+    color: $textWhite;
+    font-size: 1.1rem;
+    box-shadow: 0 0 4px 2px $secondaryBackground;
+}
+

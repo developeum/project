@@ -6,8 +6,8 @@
         <input type="text" class="search input search-input" placeholder = "search by name"/>
     </div> 
     <div class="mobileSearch"></div>              
-    <a *ngIf = "!userIsLoggedIn" routerLink = "/auth" class = "text">SignIn</a>
-    <a *ngIf = "!userIsLoggedIn" routerLink = "/auth/register" class = "text">SignUp</a>
+    <a *ngIf = "!userIsLoggedIn" routerLink = "/auth" class = "text">Вход</a>
+    <a *ngIf = "!userIsLoggedIn" routerLink = "/auth/register" class = "text">Регистрация</a>
     <div class="events" routerLink = "/events"></div>    
     <a routerLink = "/events" class="text">мероприятия</a>
     <a *ngIf = "userIsLoggedIn" routerLink = "/user" class="user"><img [src]="imageToShow" class="userImg"></a>

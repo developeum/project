@@ -1,7 +1,47 @@
+$primaryBackground: #f2f2f2;
+$secondaryBackground: #ddd;
+$primary: #7dbcbb;
+$textBlack: #2f2f2f;
+$textWhite: #fff;
+$containerColor: #fcfcfc;
+
 .filterContainer{
     width: 20vw;
     height: 70vh;
-    background-color: khaki;
+    background-color: $containerColor;
     border-radius: 1vh;
     overflow: scroll;
+    // border: 1px solid $textBlack;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    padding: 2vh;
+    box-shadow: 0 0 4px 2px $secondaryBackground;
+}
+
+.dateInput{
+    border-radius: 1vh;
+    border: 1px solid $textBlack;
+    width: 8.5rem;
+}
+
+.btn{
+    background-color: $primary;
+    border: none;
+    border-radius: 1vh;
+    height: 4vh;
+    width: 8vw;
+    color: $textWhite;
+    font-size: 1.05rem;
+    box-shadow: 0 0 4px 2px $secondaryBackground;
+}
+
+.btnContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.check{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }

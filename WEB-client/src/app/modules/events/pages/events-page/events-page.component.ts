@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 
 import { Component, OnInit } from '@angular/core';
 import { EventFL } from 'src/app/models/eventsFL';
@@ -16,7 +17,7 @@ export class EventsPageComponent implements OnInit {
   userId: string;
   events: EventFL[] = [];
 
-  constructor(private pageService: EventsService) {
+  constructor(private pageService: EventsService, private router: Router) {
     
   }
 
@@ -31,6 +32,7 @@ export class EventsPageComponent implements OnInit {
       this.events = x;
       console.log(x)
     })
+    .unsubscribe()
   }
 
   loadClearEvents(){
@@ -40,6 +42,10 @@ export class EventsPageComponent implements OnInit {
       console.log(x)
     })
 
+  }
+
+  navToEvent(id){
+    this.router.navigateByUrl('/event/' + id)
   }
 
   setParams(params: Filter){
