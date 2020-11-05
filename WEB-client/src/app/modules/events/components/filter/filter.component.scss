@@ -45,3 +45,38 @@ $containerColor: #fcfcfc;
     margin-top: 1vh;
     margin-bottom: 1vh;
 }
+
+@media screen and(max-width: 420px) {
+    .container{
+        display: flex;
+        justify-content: center;
+    }
+
+    .filterContainer{
+        border-radius: 0;
+        width: 92vw;
+        height: 75vh;
+        box-shadow: none;
+    }
+
+    .btn{
+        width: 70vw;
+        height: 5vh;
+    }
+
+    .btnContainer{
+        margin-top: 4vh;
+    }
+
+    .check{
+        margin-top:2vh
+    }
+
+    // .title{
+    //     margin-top: 4vh;
+    // }
+
+    .formGroup{
+        margin-top: 2vh;
+    }
+}

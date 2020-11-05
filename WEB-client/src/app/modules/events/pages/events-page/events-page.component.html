@@ -1,15 +1,18 @@
 <app-header></app-header>
 <div class="container">
     <div class="co">
-        <p class="title">Мероприятия</p>
-        <div class="event-list">
+        <div class="titleContainer">
+            <p class="title">Мероприятия</p>
+            <div (click) = "changeFilterState()" [ngClass] = "{'filterIconChanged': filterState}" class="filterIcon"></div>
+        </div>
+        <div [ngClass] = "{'listOff': filterState}" class="event-list">
             <ul class="list">
                 <li *ngFor = "let event of events" class="event" (click) = "navToEvent(event.id)">
                     <p>{{event.name}} {{event.event_time}} {{event.type}}</p>
                 </li>
             </ul>
         </div>
-        <button class="btn" (click) = "loadMore()">Смотреть больше</button>
+        <button [ngClass] = "{'listOff': filterState}" class="btn" (click) = "loadMore()">Смотреть больше</button>
     </div>
-    <app-filter (setParams) = "setParams($event)"></app-filter>
+    <app-filter class="filter" [ngClass] = "{'filterOn': filterState}" (setParams) = "setParams($event)"></app-filter>
 </div>

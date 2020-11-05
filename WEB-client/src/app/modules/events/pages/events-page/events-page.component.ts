@@ -16,6 +16,7 @@ export class EventsPageComponent implements OnInit {
   num: number = 0;
   userId: string;
   events: EventFL[] = [];
+  filterState: boolean = false;
 
   constructor(private pageService: EventsService, private router: Router) {
     
@@ -52,10 +53,14 @@ export class EventsPageComponent implements OnInit {
     this.params = params;
     console.log(this.params);
     this.loadEvents();
+    this.filterState = !this.filterState
   }
 
   loadMore(){
     this.loadEvents();
   }
 
+  changeFilterState(){
+    this.filterState = !this.filterState;
+  }
 }

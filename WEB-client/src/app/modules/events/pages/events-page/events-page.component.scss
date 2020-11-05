@@ -53,3 +53,66 @@ $containerColor: #fcfcfc;
     box-shadow: 0 0 4px 2px $secondaryBackground;
 }
 
+.filterIcon{
+    display: none;
+}
+
+@media screen and(max-width: 420px) {
+    .container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .filter{
+        display: none;
+    }
+
+    .event{
+        width: 80vw;
+        height: 13vh;
+        margin-top: 0;
+        margin-bottom: 2vh;
+    }
+
+    .btn{
+        width: 70vw;
+        height: 6vh;
+    }
+
+    .filterIcon{
+        display: block;
+        background-image: url(../../../../imges/icons/filterOn.png);
+        background-size: 100%;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        right: 0;
+    }
+
+    .filterIconChanged{
+        display: block;
+        background-image: url(../../../../imges/icons/filterOff.png);
+        background-size: 100%;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        right: 0;
+    }
+
+    .titleContainer{
+        display: flex;
+        position: relative;
+        width: 85vw; 
+        align-items: center;
+        justify-content: center;       
+    }
+
+    .filterOn{
+        display: block;
+    }
+
+    .listOff{
+        display: none;
+    }
+}
+

@@ -7,8 +7,8 @@
             </div>
         </div>
         <form [formGroup] = "filterForm" (ngSubmit) = "onSubmit()">
-            <div>
-                <label>Типы</label>
+            <div class="formGroup">
+                <label class="title">Типы</label>
                 <div class="flexContainer">
                     <div *ngFor = "let type of filterForm?.get('types')['controls']; let i = index;">
                         <input class="check" type="checkbox" [formControl] = "type">
@@ -16,8 +16,8 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <label>Категории</label>
+            <div class="formGroup">
+                <label class="title">Категории</label>
                 <div class="flexContainer">
                     <div *ngFor = "let category of filterForm?.get('categories')['controls']; let i = index;">
                         <input class="check" type="checkbox" [formControl] = "category">
@@ -25,8 +25,8 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <label>Города</label>
+            <div class="formGroup">
+                <label class="title">Города</label>
                 <div class="flexContainer">
                     <div *ngFor = "let place of filterForm?.get('places')['controls']; let i = index;">
                         <input class="check" type="checkbox" [formControl] = "place">
