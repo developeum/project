@@ -78,7 +78,7 @@ create table user_stack_links (
     user_id     integer not null,
     category_id integer not null,
     constraint user_stack_links_pk
-        primary key (user_id, stack_id),
+        primary key (user_id, category_id),
     constraint user_stack_links_users_id_fk
         foreign key (user_id) references users,
     constraint user_stack_links_categories_id_fk
