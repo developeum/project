@@ -33,7 +33,14 @@ $containerColor: #fcfcfc;
     transition: 0.3s all linear;
     background-color: $containerColor;
     box-shadow: 0 0 4px 2px $secondaryBackground;
-     
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.eventTime{
+    position: absolute;
+    right: 2vw;
 }
 
 .co{

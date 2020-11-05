@@ -40,6 +40,11 @@ export class EventsPageComponent implements OnInit {
     this.pageService.getClearEvents()
     .subscribe(x => {
       this.events = x;
+      this.events.forEach(event => {
+        let dateTime = event.event_time.split('T');
+        let russianDate = dateTime[0].split('-')
+        event.event_time = russianDate[2] + '.' + russianDate[1] + '.' + russianDate[0];
+      })
       console.log(x)
     })
 
