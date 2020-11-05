@@ -4,8 +4,8 @@ INCORRECT_EMAIL_FORMAT = {'ok': False,
 EMAIL_REGISTERED = {'ok': False,
                     'reason': 'Email is already registered'}
 
-INCORRECT_STACK_ID = {'ok': False,
-                      'reason': 'Stack with provided id doesn\'t exist'}
+INCORRECT_CATEGORY_ID = {'ok': False,
+                         'reason': 'Category with provided id doesn\'t exist'}
 
 INCORRECT_CITY_ID = {'ok': False,
                      'reason': 'City with provided id doesn\'t exist'}

@@ -2,7 +2,7 @@ from datetime import datetime
 
 from common.helpers import accepts_json
 from common.models import Event, UserVisit, db
-from flask import request, jsonify
+from flask import jsonify, request
 from flask_jwt_extended import current_user, jwt_required
 
 from .messages import *

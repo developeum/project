@@ -1,9 +1,9 @@
 from datetime import datetime
 
 from common.models import Event, EventCategoryLink
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, jsonify, request
 
-from .helpers import project, parse_int_array
+from .helpers import parse_int_array, project
 
 events_api = Blueprint('events_api', __name__)
 

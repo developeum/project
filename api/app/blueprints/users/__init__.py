@@ -1,9 +1,9 @@
 from flask import Blueprint
 
 from .auth import login_user, register_user, update_credentials
+from .avatar import get_avatar_path, upload_avatar
 from .profile import get_profile_info, update_profile_info
 from .visits import add_visited_page, get_visited_pages
-from .avatar import upload_avatar, get_avatar_path
 
 users_api = Blueprint('users_api', __name__)
 

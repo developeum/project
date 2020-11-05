@@ -1,8 +1,5 @@
-from common.models import (
-    City, EventCategory, EventType,
-    UserStack, UserStatus
-)
-from flask import Blueprint, request, jsonify
+from common.models import City, EventCategory, EventType, UserStatus
+from flask import Blueprint, jsonify, request
 
 general_api = Blueprint('general_api', __name__)
 
@@ -23,14 +20,6 @@ def get_status_list():
 
     return jsonify([
         status.as_json() for status in statuses
-    ]), 200
-
-@general_api.route('/stacks')
-def get_stack_list():
-    stacks = UserStack.query.all()
-
-    return jsonify([
-        stack.as_json() for stack in stacks
     ]), 200
 
 @general_api.route('/categories')

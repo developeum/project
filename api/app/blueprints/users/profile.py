@@ -1,5 +1,5 @@
 from common.helpers import accepts_json
-from common.models import City, UserStack, UserStatus, db
+from common.models import City, EventCategory, UserStatus, db
 from flask import request
 from flask_jwt_extended import current_user, jwt_required
 
@@ -51,13 +51,14 @@ def update_profile_info():
         elif field == 'stack':
             current_user.stack = []
 
-            for stack_id in body['stack']:
-                stack = UserStack.query.filter_by(id=stack_id).first()
+            for category_id in body['stack']:
+                category = (EventCategory.query.filter_by(id=category_id)
+                                               .first())
 
-                if stack is None:
-                    return INCORRECT_STACK_ID, 200
+                if category is None:
+                    return INCORRECT_CATEGORY_ID, 200
 
-                current_user.stack.append(stack)
+                current_user.stack.append(category)
         else:
             setattr(current_user, field, body[field])
 

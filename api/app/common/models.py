@@ -27,15 +27,6 @@ class UserStatus(db.Model):
     def as_json(self):
         return {'id': self.id, 'name': self.status}
 
-class UserStack(db.Model):
-    __tablename__ = 'stacks'
-
-    id = db.Column(db.Integer, primary_key=True)
-    stack = db.Column(db.String(64))
-
-    def as_json(self):
-        return {'id': self.id, 'name': self.stack}
-
 class EventType(db.Model):
     __tablename__ = 'event_types'
 
@@ -44,18 +35,6 @@ class EventType(db.Model):
 
     def as_json(self):
         return {'id': self.id, 'name': self.event_type}
-
-"""
-# TODO: delete favorites_table
-favorites_table = db.Table('favorites',
-    db.Column('user_id', db.Integer,
-              db.ForeignKey('users.id'),
-              primary_key=True),
-    db.Column('event_id', db.Integer,
-              db.ForeignKey('events.id'),
-              primary_key=True)
-)
-"""
 
 class UserVisit(db.Model):
     __tablename__ = 'user_visit_links'
@@ -98,8 +77,8 @@ user_stack_links_table = db.Table('user_stack_links',
     db.Column('user_id', db.Integer,
               db.ForeignKey('users.id'),
               primary_key=True),
-    db.Column('stack_id', db.Integer,
-              db.ForeignKey('stacks.id'),
+    db.Column('category_id', db.Integer,
+              db.ForeignKey('categories.id'),
               primary_key=True)
 )
 
@@ -165,18 +144,12 @@ class User(db.Model):
                           nullable=False, default=1)
     status = db.relationship('UserStatus')
 
-    """
-    # TODO: delete favorites relationship
-    favorites = db.relationship('Event',
-                                secondary=favorites_table,
-                                lazy='subquery')
-    """
     user_visit = db.relationship('UserVisit',
                                  order_by='desc(UserVisit.visit_time)',
                                  lazy='dynamic')
     visited = association_proxy('user_visit', 'event')
 
-    stack = db.relationship('UserStack',
+    stack = db.relationship('EventCategory',
                             secondary=user_stack_links_table,
                             lazy='subquery')
 
@@ -190,6 +163,6 @@ class User(db.Model):
             'city': self.city.as_json(),
             'status': self.status.as_json(),
             'stack': [
-                stack.as_json() for stack in self.stack
+                category.as_json() for category in self.stack
             ]
         }

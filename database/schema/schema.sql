@@ -113,16 +113,6 @@ insert into statuses (status) values
     ('Студент'),
     ('Трудоустроен');
 
--- TODO: merge stacks and categories
-insert into stacks (stack) values
-    ('Веб-разработка'),
-    ('Мобильная разработка'),
-    ('Data Science'),
-    ('QA'),
-    ('DevOps'),
-    ('Бизнес'),
-    ('Прочее');
-
 insert into categories (category) values
     ('Веб-разработка'),
     ('Мобильная разработка'),

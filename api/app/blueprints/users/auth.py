@@ -1,5 +1,5 @@
 from common.helpers import accepts_json
-from common.models import User, UserStack, db
+from common.models import EventCategory, User, db
 from flask import request
 from flask_jwt_extended import create_access_token, current_user, jwt_required
 
@@ -30,13 +30,13 @@ def register_user():
                     first_name=body['first_name'],
                     last_name=body['last_name'])
 
-    for stack_id in body['stack']:
-        stack = UserStack.query.filter_by(id=stack_id).first()
+    for category_id in body['stack']:
+        category = EventCategory.query.filter_by(id=category_id).first()
 
-        if stack is None:
-            return INCORRECT_STACK_ID, 200
+        if category is None:
+            return INCORRECT_CATEGORY_ID, 200
 
-        new_user.stack.append(stack)
+        new_user.stack.append(category)
 
     db.session.add(new_user)
     db.session.commit()
