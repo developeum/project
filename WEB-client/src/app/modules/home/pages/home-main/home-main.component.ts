@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-main.component.scss']
 })
 export class HomeMainComponent implements OnInit {
+  visibility: boolean = true;
 
   constructor(private router: Router) { }
 
@@ -18,4 +19,8 @@ export class HomeMainComponent implements OnInit {
     console.log("button clicked")
   }
 
+  onChanged(event: any){
+    this.visibility = event;
+    console.log(this.visibility)
+  }
 }

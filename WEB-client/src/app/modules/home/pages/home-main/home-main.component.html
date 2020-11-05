@@ -1,5 +1,6 @@
-<app-header class="header"></app-header>
-<div class="container">
+<div class="mainContainer">
+    <app-header (onChanged) = "onChanged($event)" class="header"></app-header>
+<div *ngIf = "visibility" class="container">
     <div class="mobileLogo"></div>
     <div class="firstContainer">
         <div class="firstText">
@@ -26,3 +27,5 @@
         </div>
     </div>
 </div>
+</div>
+

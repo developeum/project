@@ -6,7 +6,7 @@
         <div class="inputContainer">
             <input (keyup) = "searchEvents($event)" type="text" class="search input search-input" placeholder = "search by name"/>
         </div> 
-        <div class="mobileSearch"></div>              
+        <div (click) = "changeSearchVisibility()" class="mobileSearch"></div>              
         <a *ngIf = "!userIsLoggedIn" routerLink = "/auth" class = "text">Вход</a>
         <a *ngIf = "!userIsLoggedIn" routerLink = "/auth/register" class = "text">Регистрация</a>
         <div class="events" routerLink = "/events"></div>    
@@ -20,5 +20,20 @@
             <p class="eTitle">{{event.name}}</p>
         </div>
     </div>
+    <div *ngIf = "searchVisibility" class="mobileSearchContainer">
+        <input (keyup) = "searchEvents($event)" type="text" class="mobileInput">
+        <div *ngIf = "events$ | async as events" class="mobileEvents">
+            <div *ngFor = "let event of events" (click) = "navToEvent(event.id)" class="event">
+                <p class="eTitle">{{event.name}}</p>
+            </div>
+        </div>
+        <div *ngIf = "!events$" class="noMobileEvents">
+            <div class="sadPhoto"></div>
+            <p>Мероприятий не найдено</p>
+        </div>
+
+    </div>
 </div>
+
+
 

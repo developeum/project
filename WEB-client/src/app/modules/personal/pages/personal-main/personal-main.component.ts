@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./personal-main.component.scss']
 })
 export class PersonalMainComponent implements OnInit {
+  visibility:boolean = true;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onChanged(event: any){
+    this.visibility = event;
+    console.log(this.visibility)
+  }
 }

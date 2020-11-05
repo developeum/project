@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { EventFL } from './../../../models/eventsFL';
 import { HeaderService } from './../../service/header.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +14,13 @@ export class HeaderComponent implements OnInit {
   userIsLoggedIn: boolean = false;
   events$: Observable<EventFL[]>;
   searchParam: string = '';
+  searchVisibility: boolean = false;
+
+  @Output() onChanged = new EventEmitter<boolean>()
+
+  change(){
+    this.onChanged.emit(!this.searchVisibility)
+  }
 
   constructor(private headerService: HeaderService, private router: Router) { 
     if(localStorage.getItem('currentUser') != null){
@@ -59,8 +66,18 @@ export class HeaderComponent implements OnInit {
   }
 
   searchEvents(event: any){
-    console.log(event.target.value);
-    this.loadSearchinEvents(event.target.value)
+    if( event.target.value != ''){
+      console.log(event.target.value);
+      this.loadSearchinEvents(event.target.value)
+    } else {
+      this.events$ = null
+    }
+    
+  }
+
+  changeSearchVisibility(){
+    this.searchVisibility = !this.searchVisibility;
+    this.change()
   }
 
 }

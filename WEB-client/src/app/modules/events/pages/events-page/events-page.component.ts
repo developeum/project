@@ -17,6 +17,7 @@ export class EventsPageComponent implements OnInit {
   userId: string;
   events: EventFL[] = [];
   filterState: boolean = false;
+  visibility: boolean = true;
 
   constructor(private pageService: EventsService, private router: Router) {
     
@@ -63,6 +64,11 @@ export class EventsPageComponent implements OnInit {
 
   loadMore(){
     this.loadEvents();
+  }
+
+  onChanged(event: any){
+    this.visibility = event;
+    console.log(this.visibility)
   }
 
   changeFilterState(){

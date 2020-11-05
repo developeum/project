@@ -19,6 +19,11 @@ $textWhite: #fff;
     src: url(../../../../../../node_modules/gotham-fonts/fonts/GothamRounded-Medium.ttf);
 }
 
+.header{
+    position: absolute;
+    z-index: 5;
+}
+
 .container{
     z-index: 1;
     position: absolute;
@@ -137,12 +142,19 @@ $textWhite: #fff;
     font-size: 1.3em;
 }
 
-.header{
-    position: absolute;
-    z-index: 5;
-}
+
 
 @media screen and(max-width: 420px) {
+    .mainContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container{
+        margin-top: 0;
+    }
+
     .firstContainer{
         align-items: center;
         flex-direction: column-reverse;

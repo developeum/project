@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./event-page.component.scss']
 })
 export class EventPageComponent implements OnInit {
+  visibility: boolean = true;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onChanged(event: any){
+    this.visibility = event;
+    console.log(this.visibility)
   }
 
 }

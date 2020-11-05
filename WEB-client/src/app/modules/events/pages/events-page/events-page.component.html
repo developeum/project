@@ -1,5 +1,5 @@
-<app-header></app-header>
-<div class="container">
+<app-header (onChanged) = "onChanged($event)"></app-header>
+<div *ngIf = "visibility" class="container">
     <div class="co">
         <div class="titleContainer">
             <p class="title">Мероприятия</p>
