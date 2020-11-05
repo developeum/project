@@ -12,13 +12,6 @@ create table statuses (
         primary key (id)
 );
 
-create table stacks (
-    id    serial not null,
-    stack varchar(64),
-    constraint stacks_pk
-        primary key (id)
-);
-
 create table categories (
     id       serial not null,
     category varchar(64),
@@ -82,14 +75,14 @@ create table user_visit_links (
 );
 
 create table user_stack_links (
-    user_id  integer not null,
-    stack_id integer not null,
+    user_id     integer not null,
+    category_id integer not null,
     constraint user_stack_links_pk
         primary key (user_id, stack_id),
     constraint user_stack_links_users_id_fk
         foreign key (user_id) references users,
-    constraint user_stack_links_stacks_id_fk
-        foreign key (stack_id) references stacks
+    constraint user_stack_links_categories_id_fk
+        foreign key (category_id) references categories
 );
 
 create table event_category_links (
