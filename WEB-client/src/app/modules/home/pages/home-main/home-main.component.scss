@@ -19,6 +19,12 @@ $textWhite: #fff;
     src: url(../../../../../../node_modules/gotham-fonts/fonts/GothamRounded-Medium.ttf);
 }
 
+.container{
+    z-index: 1;
+    position: absolute;
+    margin-top: 10vh;
+}
+
 .firstText{
     margin-top: 15vh;
     width: 40vw;
@@ -129,6 +135,11 @@ $textWhite: #fff;
 .category{
     font-family: gotham;
     font-size: 1.3em;
+}
+
+.header{
+    position: absolute;
+    z-index: 5;
 }
 
 @media screen and(max-width: 420px) {

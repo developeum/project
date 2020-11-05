@@ -3,12 +3,19 @@ $secondaryBackground: #ddd;
 $primary: #7dbcbb;
 $textBlack: #2f2f2f;
 $textWhite: #fff;
+$containerColor: #fcfcfc;
 
 $containerWidth: 100%;
 
 @font-face{
     font-family: gotham;
     src: url(../../../../../node_modules/gotham-fonts/fonts/GothamRounded-Medium.ttf)
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .containerHeader{
@@ -52,6 +59,9 @@ $containerWidth: 100%;
 
 .inputContainer{
     width: $containerWidth/1.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .img{
@@ -70,6 +80,36 @@ $containerWidth: 100%;
 a{
     text-decoration: none;
     font-family: gotham;
+}
+
+.searchResultContainer{
+    width: 40vw;
+    height: 50vh;
+    background-color: $primaryBackground;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 5px 10px 7px #666666;
+    border-radius: 0 0 1vh 1vh;
+}
+
+.event{
+    width: 100%;
+    background-color: $textWhite;
+    height: 5vh;
+    margin-bottom: 0;
+    border-top: 1px solid $textBlack;
+    border-bottom: 1px solid $textBlack;
+}
+
+.eventsTitle{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+.eTitle{
+    margin-left: 2vw;
 }
 
 @media screen and(max-width: 420px) {

@@ -1,3 +1,4 @@
+import { EventFL } from './../../models/eventsFL';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -23,5 +24,18 @@ export class HeaderService {
   getImg(url: string): Observable<Blob>{
     return this.http
     .get('http://localhost:8000' + url, {responseType: 'blob'})
+  }
+
+  getSerchingEvents(input: string){
+    let httpOptionsDefault = {
+      headers:{
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      params:{
+        'name': input
+      }
+    }
+    return this.http
+    .get<EventFL[]>('http://localhost:8000/api/events', httpOptionsDefault)
   }
 }

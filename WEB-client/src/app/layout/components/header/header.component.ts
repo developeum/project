@@ -1,3 +1,6 @@
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { EventFL } from './../../../models/eventsFL';
 import { HeaderService } from './../../service/header.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,8 +12,10 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   imageToShow: any
   userIsLoggedIn: boolean = false;
+  events$: Observable<EventFL[]>;
+  searchParam: string = '';
 
-  constructor(private headerService: HeaderService) { 
+  constructor(private headerService: HeaderService, private router: Router) { 
     if(localStorage.getItem('currentUser') != null){
       this.userIsLoggedIn = true;
       this.headerService.getUserImgUrl().subscribe(x => {
@@ -42,7 +47,20 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  loadSearchinEvents(name: string){
+    this.events$ = this.headerService.getSerchingEvents(name)
+  }
+
   ngOnInit(): void {
+  }
+
+  navToEvent(id){
+    this.router.navigateByUrl('/event/' + id)
+  }
+
+  searchEvents(event: any){
+    console.log(event.target.value);
+    this.loadSearchinEvents(event.target.value)
   }
 
 }
