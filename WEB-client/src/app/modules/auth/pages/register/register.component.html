@@ -22,7 +22,7 @@
                     <p [ngClass] = "{'errorText': error}" class="inputDescription">Фамилия</p>
                     <input [ngClass] = "{'errorInput': error}" formControlName = "lastName" class="input" type="text" placeholder="" />
                 </div>
-                <select formControlName = "stack" name="select" id="">
+                <select class="select" formControlName = "stack" name="select" id="">
                     <option *ngFor = "let stack of stacks" value="stack.id">{{stack.name}}</option>
                 </select>  
                 <div *ngIf = "error" class="errorMessageContainer">

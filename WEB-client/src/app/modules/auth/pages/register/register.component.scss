@@ -77,7 +77,20 @@ form{
     right: 10px;
     z-index: 9;
     width: 1vw;
-    background-color: black;
+    background: url(../../../../imges/icons/icons8-closed-eye-50.png);
+    border: none;
+    background-size: 100%;
+}
+
+.inputVisible:hover{
+    background: url(../../../../imges/icons/icons8-eye-50.png);
+    background-size: 100%;
+}
+
+.select{
+    height: 4vh;
+    border-radius: 1vh;
+    outline: none;
 }
 
 .subButton{
