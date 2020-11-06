@@ -7,12 +7,8 @@ $errorColor: #C31F1F;
 
 $containerWidth: 100%;
 
-@font-face{
-    font-family: gotham;
-    src: url(../../../../../../node_modules/gotham-fonts/fonts/GothamRounded-Bold.ttf);
-}
-
 .container{
+    font-family: 'gothamPro';
     margin: 0;
     width: $containerWidth;
     height: 100vh;
@@ -95,7 +91,6 @@ form{
 .signIn{
     margin-top: 15vh;
     font-size: 2.5em;
-    font-family: gotham;
 }
 
 .formGroup{

@@ -25,6 +25,19 @@ $containerColor: #fcfcfc;
     width: 8.5rem;
 }
 
+.date{
+    font-family: 'gothamPro';
+}
+
+.checkboxContainer{
+    display: flex;
+    align-items: center;
+}
+
+.checkName{
+    font-family: 'gothamPro';
+}
+
 .btn{
     background-color: $primary;
     border: none;
@@ -41,9 +54,8 @@ $containerColor: #fcfcfc;
     justify-content: center;
 }
 
-.check{
-    margin-top: 1vh;
-    margin-bottom: 1vh;
+.title{
+    font-family: 'gothamPro';
 }
 
 @media screen and(max-width: 420px) {

@@ -4,21 +4,6 @@ $primary: #7dbcbb;
 $textBlack: #2f2f2f;
 $textWhite: #fff;
 
-@font-face{
-    font-family: gothamBold;
-    src: url(../../../../../../node_modules/gotham-fonts/fonts/GothamRounded-Bold.ttf);
-}
-
-@font-face{
-    font-family: gothamLight;
-    src: url(../../../../../../node_modules/gotham-fonts/fonts/GothamRounded-Light.ttf);
-}
-
-@font-face{
-    font-family: gotham;
-    src: url(../../../../../../node_modules/gotham-fonts/fonts/GothamRounded-Medium.ttf);
-}
-
 .header{
     position: absolute;
     z-index: 5;
@@ -53,7 +38,8 @@ $textWhite: #fff;
 
 .title{
     font-size: 4em;
-    font-family: gothamBold;
+    font-family: 'gothamPro';
+    font-weight: bold;
     color: $textBlack;
     margin-bottom: 8vh;
 }
@@ -62,7 +48,7 @@ $textWhite: #fff;
     margin-top: 5vh;
     font-size: 1.5em;
     color: $primary;
-    font-family: gotham;
+    font-family: 'gothamPro';
 }
 
 .regButton{
@@ -74,17 +60,9 @@ $textWhite: #fff;
     border-radius: 1vh;
     padding: 5px;
     padding-left: 15px;
-    font-family: gothamLight;
+    font-family: 'gothamPro';
     outline: none;
     cursor: pointer;
-}
-
-.arrow{
-    margin-left: 10%;
-    height: 5vh;
-    width: 3vw;
-    background: url(../../../../imges/icons/icons8-right-arrow-96.png);
-    background-size: 100%;
 }
 
 .secondContainer{
@@ -118,18 +96,23 @@ $textWhite: #fff;
 .smallTitle{
     margin-top: 5vh;
     margin-bottom: 3vh;
-    font-family: gotham;
+    font-family: 'gothamPro';
     font-size: 3em;
 }
 
 .categories{
-    font-family: gotham;
+    font-family: 'gothamPro';
     font-size: 1.7em;
     color: $primary;
 }
 
+.regLink{
+    font-family: 'gothamPro';
+}
+
 .hasAccount{
     font-size: 1.1em;
+    font-family: 'gothamPro';
     color: $primary;
     margin-top: 1vh;
     margin-left: 4.5vw;
@@ -138,7 +121,7 @@ $textWhite: #fff;
 }
 
 .category{
-    font-family: gotham;
+    font-family: 'gothamPro';
     font-size: 1.3em;
 }
 
@@ -195,7 +178,7 @@ $textWhite: #fff;
     .text{
         margin-top: 1vh;
         font-size: 1.1em;
-        font-family: gothamLight;
+        font-family: 'gothamPro';
     }
 
     .regButton{

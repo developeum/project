@@ -13,6 +13,7 @@ $containerWidth: 100%;
 }
 
 .container{
+    font-family: "gothamPro";
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,6 +39,7 @@ $containerWidth: 100%;
 .text{
     color: $textBlack;
     margin: 1vw;
+    font-family: 'gothamPro';
 }
 
 .search{
@@ -48,7 +50,7 @@ $containerWidth: 100%;
     height: 3vh;
     font-size: 2vh;
     background-color: $primaryBackground;
-    
+    font-family: 'gothamPro';
     
 }
 
@@ -69,6 +71,8 @@ $containerWidth: 100%;
     height: 50px;
     background-image: url(../../../imges/logo/лого2.svg) ;
     background-size: 100%;
+    outline: none;
+    cursor: pointer;
 }
 
 .userImg{

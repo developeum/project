@@ -1,36 +1,36 @@
 <div class="container">
     <div class="filterContainer">
         <div>
-            <label>Дата проведения</label>
+            <label class="title">Дата проведения</label>
             <div>
-                <p>От <input class="dateInput" type="date" name="startsMin" [(ngModel)] = "startsMin"> до <input class="dateInput" type="date" name="startsMax" [(ngModel)] = "startsMax"></p>
+                <p class="date">От <input class="dateInput" type="date" name="startsMin" [(ngModel)] = "startsMin"> до <input class="dateInput" type="date" name="startsMax" [(ngModel)] = "startsMax"></p>
             </div>
         </div>
         <form [formGroup] = "filterForm" (ngSubmit) = "onSubmit()">
             <div class="formGroup">
                 <label class="title">Типы</label>
                 <div class="flexContainer">
-                    <div *ngFor = "let type of filterForm?.get('types')['controls']; let i = index;">
+                    <div *ngFor = "let type of filterForm?.get('types')['controls']; let i = index;" class="checkboxContainer">
                         <input class="check" type="checkbox" [formControl] = "type">
-                        {{types[i].name}}
+                        <p class="checkName">{{types[i].name}}</p>
                     </div>
                 </div>
             </div>
             <div class="formGroup">
                 <label class="title">Категории</label>
                 <div class="flexContainer">
-                    <div *ngFor = "let category of filterForm?.get('categories')['controls']; let i = index;">
+                    <div *ngFor = "let category of filterForm?.get('categories')['controls']; let i = index;" class="checkboxContainer">
                         <input class="check" type="checkbox" [formControl] = "category">
-                        {{categories[i].name}}
+                        <p class="checkName">{{categories[i].name}}</p>
                     </div>
                 </div>
             </div>
             <div class="formGroup">
                 <label class="title">Города</label>
                 <div class="flexContainer">
-                    <div *ngFor = "let place of filterForm?.get('places')['controls']; let i = index;">
+                    <div *ngFor = "let place of filterForm?.get('places')['controls']; let i = index;" class="checkboxContainer">
                         <input class="check" type="checkbox" [formControl] = "place">
-                        {{places[i].name}}
+                        <p class="checkName">{{places[i].name}}</p>
                     </div>
                 </div>
             </div>
