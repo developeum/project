@@ -1,4 +1,4 @@
-$primaryBackground: #f2f2f2;
+$primaryBackground: #e9e9e9;
 $secondaryBackground: #ddd;
 $primary: #7dbcbb;
 $textBlack: #2f2f2f;
@@ -88,7 +88,7 @@ a{
 
 .searchResultContainer{
     margin-top: -2vh;
-    margin-right: 4vw;
+    margin-right: 5.3vw;
     width: 35vw;
     height: 50vh;
     background-color: $primaryBackground;
@@ -96,18 +96,19 @@ a{
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 5px 40px 7px #9e9e9e;
+    box-shadow: 0 5px 40px 4px #9e9e9e;
     border-radius: 1vh;
 }
 
 .event{
     width: 100%;
-    background-color: $textWhite;
+    background-color: $primaryBackground;
     height: 7vh;
     margin-bottom: 0;
     border-bottom: 1px solid #dadada;
     display: flex;
     align-items: center;
+    
 }
 
 .event:hover{
@@ -215,9 +216,11 @@ a{
         width: 90vw;
         height: 15vh;
         margin-bottom: 1vh;
-        border: 1px solid $textBlack;
-        background-color: $containerColor;
+        border: none;
+        margin-bottom: 3vh;
+        background-color: $primaryBackground;
         border-radius: 1vh;
+        box-shadow: -6px -6px 16px 0 rgba(255,255,255,1), 6px 6px 16px 0 rgba(194, 189, 181, 0.51);
     }
 
     .events{

@@ -1,9 +1,10 @@
-$primaryBackground: #f2f2f2;
+$primaryBackground: #e9e9e9;
 $secondaryBackground: #ddd;
 $primary: #7dbcbb;
 $textBlack: #2f2f2f;
 $textWhite: #fff;
 $errorColor: #C31F1F;
+$containerColor: #fcfcfc;
 
 $containerWidth: 100%;
 
@@ -29,7 +30,7 @@ $containerWidth: 100%;
     width: 28vw;
     height: 60vh;
     display: flex;
-    opacity: 0.9;
+    opacity: 1;
 }
 
 .imgContainer{
@@ -65,7 +66,7 @@ form{
     width: $containerWidth;
     height: 4vh;
     font-size: 2vh;
-    background-color: $primaryBackground;
+    background-color: $containerColor;
 }
 
 .inputVisible{
@@ -84,8 +85,8 @@ form{
 }
 
 .subButton{
-    background-color: #7DBCBB;
-    color: white;
+    background: linear-gradient(to bottom right, #76b1b1, #8cd3d2);
+    color: $textWhite;
     margin-top: 2vh;
     outline: none;
     border: none;
@@ -93,6 +94,15 @@ form{
     height: 4vh;
     border-radius: 1vh;
     font-size: 1.5vh;
+    box-shadow: -6px -6px 16px 5px rgba(255,255,255,1), 6px 6px 16px 5px rgba(194, 189, 181, 0.51);
+    // inset -6px -6px 16px 0 rgba(255,255,255,1), inset 6px 6px 16px 0 rgba(194, 189, 181, 0.51);
+}
+
+.subButton:active{
+    box-shadow: inset -6px -6px 16px 0 rgba(255,255,255,1), inset 6px 6px 16px 0 rgba(194, 189, 181, 0.51);
+    background: $primaryBackground;
+    background-color: $primaryBackground;
+    color: $primary;
 }
 
 .signIn{

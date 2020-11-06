@@ -11,8 +11,8 @@
                 <label class="title">Типы</label>
                 <div class="flexContainer">
                     <div *ngFor = "let type of filterForm?.get('types')['controls']; let i = index;" class="checkboxContainer">
-                        <input class="check" type="checkbox" [formControl] = "type">
-                        <p class="checkName">{{types[i].name}}</p>
+                        <input class="check" type="checkbox" [formControl] = "type" id="type {{i}}">
+                        <label for="type {{i}}">{{types[i].name}}</label>
                     </div>
                 </div>
             </div>
@@ -20,8 +20,8 @@
                 <label class="title">Категории</label>
                 <div class="flexContainer">
                     <div *ngFor = "let category of filterForm?.get('categories')['controls']; let i = index;" class="checkboxContainer">
-                        <input class="check" type="checkbox" [formControl] = "category">
-                        <p class="checkName">{{categories[i].name}}</p>
+                        <input class="check" type="checkbox" [formControl] = "category" id="category {{i}}">
+                        <label for="category {{i}}">{{categories[i].name}}</label>
                     </div>
                 </div>
             </div>
@@ -29,8 +29,8 @@
                 <label class="title">Города</label>
                 <div class="flexContainer">
                     <div *ngFor = "let place of filterForm?.get('places')['controls']; let i = index;" class="checkboxContainer">
-                        <input class="check" type="checkbox" [formControl] = "place">
-                        <p class="checkName">{{places[i].name}}</p>
+                        <input class="check" type="checkbox" [formControl] = "place" id="place {{i}}">
+                        <label for="place {{i}}">{{places[i].name}}</label>
                     </div>
                 </div>
             </div>

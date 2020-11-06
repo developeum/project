@@ -94,7 +94,7 @@ form{
 }
 
 .subButton{
-    background-color: #7DBCBB;
+    background: linear-gradient(to bottom right, #76b1b1, #8cd3d2);
     color: white;
     margin-top: 2vh;
     outline: none;
@@ -103,6 +103,14 @@ form{
     height: 4vh;
     border-radius: 1vh;
     font-size: 1.5vh;
+    box-shadow: -6px -6px 16px 5px rgba(255,255,255,1), 6px 6px 16px 5px rgba(194, 189, 181, 0.51);
+}
+
+.subButton:active{
+    box-shadow: inset -6px -6px 16px 0 rgba(255,255,255,1), inset 6px 6px 16px 0 rgba(194, 189, 181, 0.51);
+    background: $primaryBackground;
+    background-color: $primaryBackground;
+    color: $primary;
 }
 
 .signUp{
@@ -140,6 +148,11 @@ form{
 .errorText{
     margin-left: 1vw;
     color: $errorColor;
+}
+
+.signIn{
+    color: $primary;
+    text-decoration: none;
 }
 
 @media screen and (max-width: 1385px) {
