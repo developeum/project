@@ -12,7 +12,10 @@ export class AuthGuard implements CanActivate {
     constructor(private router: Router){}
 
     canActivate(){
+        if(localStorage.getItem('currentUser') != null){
+            return true;
+        }
         
-        return true;
+        return this.router.createUrlTree(['/', {message: 'You are not authorized'}])
     }
 }
