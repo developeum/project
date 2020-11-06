@@ -1,4 +1,5 @@
-<app-header (onChanged) = "onChanged($event)"></app-header>
+<div class="mainContainer">
+    <app-header (onChanged) = "onChanged($event)" class="header"></app-header>
 <div *ngIf = "visibility" class="container">
     <div class="co">
         <div class="titleContainer">
@@ -17,3 +18,5 @@
     </div>
     <app-filter class="filter" [ngClass] = "{'filterOn': filterState}" (setParams) = "setParams($event)"></app-filter>
 </div>
+</div>
+

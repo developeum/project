@@ -15,7 +15,6 @@
         <div class="userMobile" routerLink = "/user"> </div>
     </div>
     <div *ngIf = "events$ | async as events" class="searchResultContainer">
-        <label class="eventsTitle">Мероприятия</label>
         <div *ngFor = "let event of events" (click) = "navToEvent(event.id)" class="event">
             <p class="eTitle">{{event.name}}</p>
         </div>

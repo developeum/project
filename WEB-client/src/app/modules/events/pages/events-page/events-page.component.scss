@@ -5,7 +5,19 @@ $textBlack: #2f2f2f;
 $textWhite: #fff;
 $containerColor: #fcfcfc;
 
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.header{
+    position: absolute;
+    z-index: 9;
+}
+
 .container{
+    margin-top: 13vh;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -65,7 +77,13 @@ $containerColor: #fcfcfc;
 }
 
 @media screen and(max-width: 420px) {
+    .mainContainer{
+        align-items: center;
+        
+    }
+
     .container{
+        margin-top: 0;
         display: flex;
         flex-direction: column;
     }
