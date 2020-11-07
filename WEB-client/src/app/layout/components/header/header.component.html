@@ -15,9 +15,11 @@
         <div class="userMobile" routerLink = "/user"> </div>
     </div>
     <div *ngIf = "events$ | async as events" class="searchResultContainer">
-        <div *ngFor = "let event of events" (click) = "navToEvent(event.id)" class="event">
-            <p class="eTitle">{{event.name}}</p>
-        </div>
+
+            <div *ngFor = "let event of events" (click) = "navToEvent(event.id)" class="event">
+                <p class="eTitle">{{event.name}}</p>
+            </div>
+
     </div>
     <div *ngIf = "searchVisibility" class="mobileSearchContainer">
         <input (keyup) = "searchEvents($event)" type="text" class="mobileInput">
@@ -26,7 +28,7 @@
                 <p class="eTitle">{{event.name}}</p>
             </div>
         </div>
-        <div *ngIf = "!events$" class="noMobileEvents">
+        <div *ngIf = "!events$ || noEvents" class="noMobileEvents">
             <div class="sadPhoto"></div>
             <p>Мероприятий не найдено</p>
         </div>

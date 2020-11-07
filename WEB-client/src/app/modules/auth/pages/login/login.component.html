@@ -11,7 +11,7 @@
                     <p [ngClass] = "{'errorText': error}" class="inputDescription">Пароль</p>
                     <div class="wrapInput">
                         <input #password formControlName = "password" (change) = "fixForm()" class="input" [ngClass] = "{'errorInput': error}" type="password" placeholder="password" />
-                        <input class="inputVisible" type="text" (mouseenter) = "changePassVisibility($event)" (mouseleave) = "changePassVisibility($event)" value="">
+                        <input disabled="disabled" class="inputVisible" type="text" (mouseenter) = "changePassVisibility($event)" (mouseleave) = "changePassVisibility($event)" value="">
                     </div>                    
                 </div>
                 <div *ngIf = "error" class="errorMessageContainer">

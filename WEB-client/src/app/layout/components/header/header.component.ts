@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { EventFL } from './../../../models/eventsFL';
 import { HeaderService } from './../../service/header.service';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   events$: Observable<EventFL[]>;
   searchParam: string = '';
   searchVisibility: boolean = false;
+  noEvents: boolean = false;
 
   @Output() onChanged = new EventEmitter<boolean>()
 
@@ -55,7 +56,14 @@ export class HeaderComponent implements OnInit {
   }
 
   loadSearchinEvents(name: string){
-    this.events$ = this.headerService.getSerchingEvents(name)
+    this.events$ = this.headerService.getSerchingEvents(name);
+    this.events$.subscribe(x => {
+      if(x.length == 0){
+        this.noEvents = true;
+      } else {
+        this.noEvents = false
+      }
+    })
   }
 
   ngOnInit(): void {
