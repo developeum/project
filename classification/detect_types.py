@@ -9,7 +9,7 @@ def Detect_type(csv_in, csv_out):
     webinar = ['webinar', 'вебинар', 'lecture', 'лекция', 'Вебинар', 'Лекция']
     conference = ['conference', 'конференция', 'Конференция']
     training = ['training', 'тренинг', 'семинар', 'workshop', 'мастер класс', 'воркшоп', 'Тренинг']
-    course = [r'\bcourse\b', r'\bкурс\b']
+    course = [r'\bcourse\b', r'\bкурс\b', ' курс ', ' course ']
     meetup = ['meetup', 'митап', 'Митап']
     olympiad = ['olympiad', 'олимпиада']
 
@@ -26,16 +26,21 @@ def Detect_type(csv_in, csv_out):
         city = events_df['city'][i]
         if pd.isna(city) or any(word in city for word in online):
             events_df['city'][i] = 'online'
+        is_defined = False
         for j in range(len(keywords)):
-            if not pd.isna(ev_type):
-                if any(word in ev_type for word in keywords[j]):
-                    events_df['event_type'][i] = types[j]
-            elif not pd.isna(name):
-                if any(word in name for word in keywords[j]):
-                    events_df['event_type'][i] = types[j]
-            elif not pd.isna(descr):
-                if any(word in descr for word in keywords[j]):
-                    events_df['event_type'][i] = types[j]
+            if not is_defined:
+                if not pd.isna(ev_type):
+                    if any(word in ev_type for word in keywords[j]):
+                        events_df['event_type'][i] = types[j]
+                        is_defined = True
+                if not pd.isna(name) and not is_defined:
+                    if any(word in name for word in keywords[j]):
+                        events_df['event_type'][i] = types[j]
+                        is_defined = True
+                if not pd.isna(descr) and not is_defined:
+                    if any(word in descr for word in keywords[j]):
+                        events_df['event_type'][i] = types[j]
+                        is_defined = True
     events_df['event_type'] = events_df['event_type'].fillna(types[-1])
 
     events_df.to_csv(csv_out, index=False, index_label=False)

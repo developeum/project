@@ -2,11 +2,11 @@ import pandas as pd
 import pymorphy2
 import numpy as np
 import nltk
-from nltk.corpus import stopwords
 nltk.download("stopwords")
 from langdetect import detect
 
 def Normalize(csv_in, csv_out):
+    from nltk.corpus import stopwords
     pd.options.mode.chained_assignment = None
 
     events_df = pd.read_csv(csv_in)
