@@ -22,22 +22,18 @@ def Normalize(csv_in, csv_out):
     events_df = events_df.drop(idxs)
     events_df.index = range(len(events_df))
 
-    events_df['normalized_description'] = events_df['normalized_description'].replace(r'https?:\/\/[^\s]+', '',
-                                                                                      regex=True)
-    events_df['normalized_description'] = events_df['normalized_description'].str.lower()
-    events_df['normalized_description'] = events_df['normalized_description'].replace('ё', 'е', regex=True)
-    events_df['normalized_description'] = events_df['normalized_description'].replace(
-        r'\w*январ\w*|\w*феврал\w*|\w*март\w*|\w*апрел\w*|\w*июн\w*|\w*июл\w*|\w*август\w*|\w*сентябр\w*|\w*октябр\w*|\w*ноябр\w*|\w*декабр\w*|\bма.\b',
-        ' ', regex=True)
-    events_df['normalized_description'] = events_df['normalized_description'].replace(r'[^а-яА-Яa-zA-Z]', ' ',
-                                                                                      regex=True)
+    reg_exp = [
+        [r'https?:\/\/[^\s]+', ''],
+        ['ё', 'е'],
+        [r'\w*январ\w*|\w*феврал\w*|\w*март\w*|\w*апрел\w*|\w*июн\w*|\w*июл\w*|\w*август\w*|\w*сентябр\w*|\w*октябр\w*|\w*ноябр\w*|\w*декабр\w*|\bма.\b', ' '],
+        [r'[^а-яА-Яa-zA-Z]', ' ']
+    ]
 
+    events_df['normalized_description'] = events_df['normalized_description'].str.lower()
     events_df['normalized_name'] = events_df['normalized_name'].str.lower()
-    events_df['normalized_name'] = events_df['normalized_name'].replace('ё', 'е', regex=True)
-    events_df['normalized_name'] = events_df['normalized_name'].replace(
-        r'\w*январ\w*|\w*феврал\w*|\w*март\w*|\w*апрел\w*|\w*июн\w*|\w*июл\w*|\w*август\w*|\w*сентябр\w*|\w*октябр\w*|\w*ноябр\w*|\w*декабр\w*|\bма.\b',
-        ' ', regex=True)
-    events_df['normalized_name'] = events_df['normalized_name'].replace(r'[^а-яА-Яa-zA-Z]', ' ', regex=True)
+    for i in range(len(reg_exp)):
+        events_df['normalized_description'] = events_df['normalized_description'].replace(reg_exp[i][0], reg_exp[i][1], regex=True)
+        events_df['normalized_name'] = events_df['normalized_name'].replace(reg_exp[i][0], reg_exp[i][1], regex=True)
 
     morph = pymorphy2.MorphAnalyzer()
     stopwords = stopwords.words("russian")
