@@ -6,7 +6,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 def Detect_class(csv_in, csv_out):
     
     pd.options.mode.chained_assignment = None
-
+    events_df = pd.read_csv(csv_in)
+                            
     clas = []
     ds = ['AI', 'Data Science', 'ai', 'data science', 'data engineering', 'data scientist', 'deep learning',
           'машинное обучение', 'нейросети']
@@ -17,28 +18,15 @@ def Detect_class(csv_in, csv_out):
     busorg = ['BA', 'Business', 'HR', 'Marketing', 'hr', 'project manager', 'менеджмент']
 
     possible_class = ['ds', 'mobile', 'qa', 'web', 'devops', 'busorg']
-
+    class_list = [ds, mobile, qa, web, devops, busorg]
+    
     categories = events_df['categories'].to_numpy().astype(str)
 
     for x in categories:
         count = []
-        mask = np.isin(x.split(','), ds)
-        count.append(np.count_nonzero(mask == bool("True")))
-
-        mask = np.isin(x.split(','), mobile)
-        count.append(np.count_nonzero(mask == bool("True")))
-
-        mask = np.isin(x.split(','), qa)
-        count.append(np.count_nonzero(mask == bool("True")))
-
-        mask = np.isin(x.split(','), web)
-        count.append(np.count_nonzero(mask == bool("True")))
-
-        mask = np.isin(x.split(','), devops)
-        count.append(np.count_nonzero(mask == bool("True")))
-
-        mask = np.isin(x.split(','), busorg)
-        count.append(np.count_nonzero(mask == bool("True")))
+        for i in range (len(class_list)):
+            mask = np.isin(x.split(','), class_list[i])
+            count.append(np.count_nonzero(mask == bool("True")))
 
         if np.count_nonzero(count) > 0:
             ind = np.argmax(count)
@@ -84,9 +72,7 @@ def Detect_class(csv_in, csv_out):
         else:
             proba = pickle_model.predict_proba(description[i])
             proba = proba * 100
-            print(proba)
             if max(proba[0] > 49.9):
-                print(np.argmax(proba[0]))
                 if np.argmax(proba[0]) == 0:
                     class1.append('busorg')
                 elif np.argmax(proba[0]) == 1:
