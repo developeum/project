@@ -185,6 +185,12 @@ export class FilterComponent implements OnInit {
     )
   }
 
+  throwDate(date: string[]){
+    this.startsMin = date[0];
+    this.startsMax = date[1];
+    console.log(this.startsMin)
+  }
+
   onSubmit(){
     this.getSelectedTypes();
     this.getSelectedCategories();
