@@ -34,7 +34,6 @@ export class EventsPageComponent implements OnInit {
       this.events = x;
       console.log(x)
     })
-    .unsubscribe()
   }
 
   loadClearEvents(){
