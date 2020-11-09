@@ -65,7 +65,7 @@ export class AuthService {
 
   getStacks(): Observable<Stack[]>{
     return this.http
-    .get <Stack[]>('http://localhost:8000/api/general/stacks', this.httpOptions)
+    .get <Stack[]>('http://localhost:8000/api/general/categories', this.httpOptions)
     .pipe(retry(1))
   }
 

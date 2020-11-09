@@ -61,7 +61,7 @@ export class PersonalService {
 
   getStacks(){
     return this.http
-    .get("http://localhost:8000/api/general/stacks", this.httpOptionsDefault)
+    .get("http://localhost:8000/api/general/categories", this.httpOptionsDefault)
     .pipe(retry(1))
   }
 
