@@ -71,7 +71,7 @@ def login_user():
 def update_credentials():
     body = request.get_json()
 
-    email = body.get('email', current_user.email)
+    email = body.get('email', current_user.email).lower()
     password = body.get('password', None)
 
     if check_password(current_user, body['old_password']):
