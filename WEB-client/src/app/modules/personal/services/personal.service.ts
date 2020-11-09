@@ -66,7 +66,6 @@ export class PersonalService {
   }
 
   getCities(){
-    console.log('getting')
     return this.http
     .get("http://localhost:8000/api/general/cities", this.httpOptionsDefault)
     .pipe(retry(1))
@@ -82,6 +81,25 @@ export class PersonalService {
       city: city,
       stack: stack
     }, 
+    this.httpOptionsUser)
+  }
+
+  postEmail(email: any, password: any){
+    return this.http
+    .post("http://localhost:8000/api/user/me/credentials",{
+      email: email,
+      old_password: password
+    },
+    this.httpOptionsUser)
+  }
+
+  postPassword(oldPass: any, newPass: any){
+    console.log('hi')
+    return this.http
+    .post("http://localhost:8000/api/user/me/credentials",{
+      old_password: oldPass,
+      password: newPass,
+    },
     this.httpOptionsUser)
   }
 

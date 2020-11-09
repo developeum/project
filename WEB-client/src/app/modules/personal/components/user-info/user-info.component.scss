@@ -5,6 +5,12 @@ $textBlack: #2f2f2f;
 $textWhite: #fff;
 $containerColor: #fcfcfc;
 
+.mainContainer{
+    display: flex;
+    width: 85vw;
+    justify-content: space-evenly;
+}
+
 .container{
     display: flex;
     font-family: 'gothamPro';
@@ -20,18 +26,20 @@ $containerColor: #fcfcfc;
 .imgContainer{
     margin-top: 3vh;
     margin-bottom: 3vh;
-    width: 100%; 
+    width: 300px; 
     height: 300px;
     overflow: hidden;
     background: #fff;
     border-radius: 100%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
+    box-shadow: -6px -6px 10px 5px rgba(255,255,255,1), 6px 6px 10px 5px rgba(177, 173, 166, 0.51);
 }
 
 .userImg{
+    cursor: pointer;
     display: block;
-    width:300px;
+    width: 300px;
     height: 300px;
 }
 
@@ -61,6 +69,11 @@ $containerColor: #fcfcfc;
 }
 
 .changeContainer{
+    width: 20vw;
+    background-color: $primaryBackground;
+    // border: 1px solid $textBlack;
+    border-radius: 1vh;
+    box-shadow: -6px -6px 10px 5px rgba(255,255,255,1), 6px 6px 10px 5px rgba(177, 173, 166, 0.51);
     height: 60vh;
 }
 
@@ -154,10 +167,31 @@ select{
     outline: none;
 }
 
-.image-upload-container > input{
+.imgContainer > input{
     display: none;
 }
 
+.changePassLoginContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.changeLoginContainer{
+    background-color: $primaryBackground;
+    width: 20vw;
+    height: 27vh;
+    border-radius: 1vh;
+    box-shadow: -6px -6px 10px 5px rgba(255,255,255,1), 6px 6px 10px 5px rgba(177, 173, 166, 0.51);
+}
+
+.changePassContainer{
+    background-color: $primaryBackground;
+    width: 20vw;
+    height: 27vh;
+    border-radius: 1vh;
+    box-shadow: -6px -6px 10px 5px rgba(255,255,255,1), 6px 6px 10px 5px rgba(177, 173, 166, 0.51);
+}
 @media screen and(max-width: 420px) {
     .infoContainer{
         width: 100%;

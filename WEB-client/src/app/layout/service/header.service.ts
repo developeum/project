@@ -1,3 +1,4 @@
+import { Avatar } from './../../models/avatar';
 import { EventFL } from './../../models/eventsFL';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -16,9 +17,9 @@ export class HeaderService {
 
   constructor(private http: HttpClient) { }
 
-  getUserImgUrl(): Observable<string>{
+  getUserImgUrl():Observable <Avatar> {
     return this.http
-    .get<string>('http://localhost:8000/api/user/me/avatar', this.httpOptionsI)
+    .get<Avatar>('http://localhost:8000/api/user/me/avatar', this.httpOptionsI)
   }
 
   getImg(url: string): Observable<Blob>{

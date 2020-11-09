@@ -30,7 +30,7 @@ export class EventsService {
     if (localStorage.getItem("currentUser") != null) {
       let httpOptionsUser = {
         headers:{
-          "Content-Type": "application/json; charset=utf-8",
+          "Content-Type": "application/json",
           "X-Session-Token": `${localStorage.getItem("currentUser")}`
         },
         params:{

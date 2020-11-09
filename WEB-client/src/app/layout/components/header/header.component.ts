@@ -24,10 +24,16 @@ export class HeaderComponent implements OnInit {
   }
 
   constructor(private headerService: HeaderService, private router: Router) { 
+    let reqInfo: {
+      avatar: string;
+      ok: boolean
+    } 
     if(localStorage.getItem('currentUser') != null){
       this.userIsLoggedIn = true;
       this.headerService.getUserImgUrl().subscribe(x => {
-        this.loadImg(x)
+        reqInfo = x;
+        // console.log(reqInfo.avatar)
+        this.loadImg(reqInfo.avatar)
       })
     }
   }
@@ -36,11 +42,11 @@ export class HeaderComponent implements OnInit {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       this.imageToShow = reader.result;
-      console.log(this.imageToShow)
+      // console.log(this.imageToShow)
     }, false);
 
     if (image) {
-      console.log("made")
+      // console.log("made")
 
       reader.readAsDataURL(image)
     }
@@ -75,7 +81,7 @@ export class HeaderComponent implements OnInit {
 
   searchEvents(event: any){
     if( event.target.value != ''){
-      console.log(event.target.value);
+      // console.log(event.target.value);
       this.loadSearchinEvents(event.target.value)
     } else {
       this.events$ = null
