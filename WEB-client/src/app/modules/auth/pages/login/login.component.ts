@@ -57,16 +57,15 @@ export class LoginComponent implements OnInit {
 
     console.log(this.form.username.value, this.form.password.value)
     this.authService.login( this.form.username.value, this.form.password.value )
-    .subscribe((token) => {
+    .subscribe(token => {
+      if(token.length <= 60){
+        this.error = true;
+        this.errorType = true;
+        return
+      }
       localStorage.removeItem("currentUser")
       localStorage.setItem("currentUser", token);
       this.router.navigate(['/'])
-    },
-    (ok) => {
-      if(ok == false){
-        this.error = true;
-        this.errorType = true;
-      }    
     })
     
   }
