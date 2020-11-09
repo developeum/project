@@ -29,10 +29,11 @@ export class EventService {
     .pipe(retry(1))
   }
 
-  postToVisited(data: number){
+  postToVisited(data: number, type: string){
     return this.http
     .post("http://localhost:8000/api/user/me/visited", {
-      event_id: Number(data)
+      event_id: Number(data),
+      type: type
     },
     this.httpUserOptions
     )

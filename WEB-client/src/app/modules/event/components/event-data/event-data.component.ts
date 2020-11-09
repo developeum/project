@@ -20,12 +20,17 @@ export class EventDataComponent implements OnInit {
   constructor(private pageService: EventService, private route: ActivatedRoute) { 
     this.route.params.subscribe(params => {
       this.eventId = params["id"];
+      setTimeout(this.internalVisited, 5000)
       
     })
   }
 
   ngOnInit(): void {
     this.loadEventInfo();
+  }
+
+  internalVisited(){
+    this.pageService.postToVisited(this.eventId, "internal")
   }
 
   loadEventInfo(){
@@ -40,7 +45,7 @@ export class EventDataComponent implements OnInit {
 
   onClick(){
     if(localStorage.getItem("currentUser") != null){
-      this.pageService.postToVisited(this.eventId)
+      this.pageService.postToVisited(this.eventId, "external")
       console.log(this.currentEvent.id)
     }
   }
