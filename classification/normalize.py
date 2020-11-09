@@ -5,11 +5,11 @@ import nltk
 nltk.download("stopwords")
 from langdetect import detect
 
-def Normalize(csv_in, csv_out):
+def Normalize(json_in, json_out):
     from nltk.corpus import stopwords
     pd.options.mode.chained_assignment = None
 
-    events_df = pd.read_csv(csv_in)
+    events_df = pd.read_json(json_in, lines=True)
     events_df['normalized_name'] = events_df['name']
     events_df['normalized_description'] = events_df['description']
 
@@ -75,4 +75,4 @@ def Normalize(csv_in, csv_out):
         ['name', 'normalized_name', 'event_type', 'event_time', 'description', 'normalized_description', 'city',
          'categories']]
 
-    events_df.to_csv(csv_out, index=False, index_label=False)
+    events_df.to_json(json_out, orient='records', lines=True)
