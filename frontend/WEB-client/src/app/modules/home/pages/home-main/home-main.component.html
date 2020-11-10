@@ -1,0 +1,32 @@
+<div class="mainContainer">
+    <app-header (onChanged) = "onChanged($event)" class="header"></app-header>
+<div *ngIf = "visibility" class="container">
+    <div class="mobileLogo"></div>
+    <div class="firstContainer">
+        <div class="firstText">
+            <label class="title">IT не обязательно искать, оно само вас найдёт</label>
+            <p class="text">Не тратьте силы на поиск, зарегистрируйтесь и посетите предложенные мероприятия</p>
+            <div class="enterContainer">
+                <div class="regButton" routerLink = "/auth/register">
+                    <p class="regLink">Зарегистрироваться</p>
+                </div>
+                <div class="hasAccount" routerLink = "/auth/">Уже есть аккаунт</div>
+            </div>
+        </div>
+        <div class="img"> </div>
+    </div>
+    <div class="secondContainer">
+        <div class="secondImg"></div>
+        <div class="secondText">
+            <label class="categories"> - Категории - </label>
+            <label class="smallTitle">Мы поможем с поиском <br/> если вам интересны</label>
+            <p class="category">- Хакатоны</p>
+            <p class="category">- Вебинары</p>
+            <p class="category">- Конференции</p>
+            <p class="category">- Тренинги</p>
+            <p class="category">- Курсы</p>
+        </div>
+    </div>
+</div>
+</div>
+

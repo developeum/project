@@ -1,4 +1,0 @@
-flask
-flask-sqlalchemy
-bcrypt
-flask-jwt-extended

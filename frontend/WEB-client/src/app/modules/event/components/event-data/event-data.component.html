@@ -1,0 +1,28 @@
+<div class="mainContainer" *ngIf = "eventData$ | async as event">
+    <div class="imgContainer">
+        <img class="eventImg" [src]="imgToShow" alt="">
+    </div>
+    <div class="container">
+        <div class="dataContainer">
+            <div class="timePlace">
+                <div class="time">
+                    <p>Время</p>
+                    <p>{{event.event.event_time.split('T')[0]}}</p>
+                </div>
+                <div class="place">
+                    <p>Место</p>
+                    <p>{{event.event.city.name}}</p>
+                </div>
+            </div> 
+            <div class="description">
+                <p class="dTitle">Описание</p>
+                <p>{{event.event.description}}</p>
+            </div>
+        </div>
+        <div class="linkContainer">
+            <a class="link" href="{{event.source_url}}" target="_blank" (click) = "onClick()">Перейти на сайт мероприятия</a>
+        </div>
+        
+    </div>
+</div>
+

@@ -1,0 +1,218 @@
+$primaryBackground: #f2f2f2;
+$secondaryBackground: #ddd;
+$primary: #7dbcbb;
+$textBlack: #2f2f2f;
+$textWhite: #fff;
+$errorColor: #C31F1F;
+
+$testBackColor: rgb(233, 233, 233);
+
+$containerWidth: 100%;
+
+
+
+.container{
+    font-family: 'gothamPro';
+    margin: 0;
+    width: $containerWidth;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url(../../../../imges/photos/auth.jpeg);
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
+}
+
+.loginContainer{
+    height: $containerWidth;
+    background-color: $primaryBackground;
+    border-radius: 1vh;
+    width: 28vw;
+    height: 80vh;
+    display: flex;
+
+}
+
+.imgContainer{
+    width: $containerWidth/2;
+    background-color: $primaryBackground;
+    height: $containerWidth;
+}
+
+.formContainer{
+    width: $containerWidth;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 68%;
+}
+
+.wrapInput{
+    position: relative;
+    display: flex;
+    width: 100%;
+}
+
+.input{
+    outline: none;
+    margin-top: -1vh;
+    border: 1px solid #555555;
+    border-radius: 1vh;
+    width: $containerWidth;
+    height: 4vh;
+    font-size: 2vh;
+    background-color: white;
+}
+
+.inputVisible{
+    position: absolute;
+    right: 10px;
+    z-index: 9;
+    width: 1vw;
+    background: url(../../../../imges/icons/icons8-closed-eye-50.png);
+    border: none;
+    background-size: 100%;
+}
+
+.inputVisible:hover{
+    background: url(../../../../imges/icons/icons8-eye-50.png);
+    background-size: 100%;
+}
+
+.select{
+    height: 4vh;
+    border-radius: 1vh;
+    outline: none;
+}
+
+.subButton{
+    background: linear-gradient(to bottom right, #76b1b1, #8cd3d2);
+    color: white;
+    margin-top: 2vh;
+    outline: none;
+    border: none;
+    width: $containerWidth;
+    height: 4vh;
+    border-radius: 1vh;
+    font-size: 1.5vh;
+    box-shadow: -6px -6px 16px 5px rgba(255,255,255,1), 6px 6px 16px 5px rgba(194, 189, 181, 0.51);
+}
+
+.subButton:active{
+    box-shadow: inset -6px -6px 16px 0 rgba(255,255,255,1), inset 6px 6px 16px 0 rgba(194, 189, 181, 0.51);
+    background: $primaryBackground;
+    background-color: $primaryBackground;
+    color: $primary;
+}
+
+.signUp{
+    margin-top: 15vh;
+    font-size: 2.5em;
+}
+
+.formGroup{
+    margin-bottom: 0.5vh;
+}
+
+.inputDescription{
+    margin-left: 1vw;
+}
+
+.errorMessageContainer{
+    border: 1px solid white;
+    background-color: $errorColor;
+    text-align: center;
+    color: $textWhite;
+    border-radius: 1vh;
+}
+
+.errorInput{
+    outline: none;
+    margin-top: -1vh;
+    border: 1px solid $errorColor;
+    border-radius: 1vh;
+    width: $containerWidth;
+    height: 4vh;
+    font-size: 2vh;
+    background-color: $primaryBackground;
+}
+
+.errorText{
+    margin-left: 1vw;
+    color: $errorColor;
+}
+
+.signIn{
+    color: $primary;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 1385px) {
+    .loginContainer{
+        width: 40vw;
+    }
+}
+
+@media screen and (max-width: 1070px) {
+    .loginContainer{
+        width: 50vw;
+    }
+}
+
+
+@media screen and(max-width: 420px) {
+    .container{
+        position: relative;
+    }
+
+    .loginContainer{
+        position: absolute;
+        justify-content: center;
+        width: 100vw;
+        height: 75vh;
+        bottom: 0;
+        border-radius: 0 9vh 0 0;
+    }
+
+    .formContainer{
+        justify-content: center;
+        position: absolute;
+        width: $containerWidth/1.5;
+        width: 100vw;
+    }
+
+    .input{
+        width: 100%;
+        height: 6vh;
+        font-size: 4vh;
+    }
+
+    .signUp{
+        margin-top:2vh;
+        margin-bottom: 0;
+        font-size: 5vh;
+    }
+
+    .inputDescription{
+        margin-left: 2vh;
+    }
+
+    .subButton{
+        width: 100%;
+        height: 6vh;
+        margin-top: 2vh;
+        font-size: 2vh;
+    }
+
+    form{
+        justify-content: space-evenly;
+    }
+}

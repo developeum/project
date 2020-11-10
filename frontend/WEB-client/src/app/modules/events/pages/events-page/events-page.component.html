@@ -1,0 +1,22 @@
+<div class="mainContainer">
+    <app-header (onChanged) = "onChanged($event)" class="header"></app-header>
+<div *ngIf = "visibility" class="container">
+    <div class="co">
+        <div class="titleContainer">
+            <p class="title">Мероприятия</p>
+            <div (click) = "changeFilterState()" [ngClass] = "{'filterIconChanged': filterState}" class="filterIcon"></div>
+        </div>
+        <div [ngClass] = "{'listOff': filterState}" class="event-list">
+            <ul class="list">
+                <li *ngFor = "let event of events" class="event" (click) = "navToEvent(event.id)">
+                    <p>{{event.name}}</p>
+                    <p class="eventTime">{{event.event_time}}</p>
+                </li>
+            </ul>
+        </div>
+        <button [ngClass] = "{'listOff': filterState}" class="btn" (click) = "loadMore()">Смотреть больше</button>
+    </div>
+    <app-filter class="filter" [ngClass] = "{'filterOn': filterState}" (setParams) = "setParams($event)"></app-filter>
+</div>
+</div>
+

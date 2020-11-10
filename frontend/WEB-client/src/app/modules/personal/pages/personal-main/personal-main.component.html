@@ -1,0 +1,9 @@
+<div class="mainContainer">
+    <app-header (onChanged) = "onChanged($event)" class="header"></app-header>
+    <div *ngIf = "visibility" class="container">
+        <app-user-info></app-user-info>
+        <app-fav-events></app-fav-events>
+    </div>
+</div>
+
+

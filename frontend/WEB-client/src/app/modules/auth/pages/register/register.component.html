@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="loginContainer">
+        <div class="formContainer">
+            <p class="signUp">SignUp</p>
+            <form [formGroup] = "registerForm" (ngSubmit) = "onSubmit()" >
+                <div class="formGroup">
+                    <p [ngClass] = "{'errorText': error}" class="inputDescription">Логин</p>
+                    <input [ngClass] = "{'errorInput': error}" formControlName = "username" class="input" type="text" placeholder="" />
+                </div>
+                <div class="formGroup">
+                    <p [ngClass] = "{'errorText': error}" class="inputDescription">Пароль</p>
+                    <div class="wrapInput">
+                        <input #password [ngClass] = "{'errorInput': error}" formControlName = "password" class="input" type="password" placeholder="" />
+                        <input class="inputVisible" type="text" (mouseenter) = "changePassVisibility($event)" (mouseleave) = "changePassVisibility($event)" value="">
+                    </div>                    
+                </div>
+                <div class="formGroup">
+                    <p [ngClass] = "{'errorText': error}" class="inputDescription">Имя</p>
+                    <input [ngClass] = "{'errorInput': error}" formControlName = "firstName" class="input" type="text" placeholder="" />
+                </div>
+                <div class="formGroup">
+                    <p [ngClass] = "{'errorText': error}" class="inputDescription">Фамилия</p>
+                    <input [ngClass] = "{'errorInput': error}" formControlName = "lastName" class="input" type="text" placeholder="" />
+                </div>
+                <select class="select" formControlName = "stack" name="select" id="">
+                    <option *ngFor = "let stack of stacks" value="stack.id">{{stack.name}}</option>
+                </select>  
+                <div *ngIf = "error" class="errorMessageContainer">
+                    <p *ngIf = "!errorType">Введены некоректные данные</p>
+                    <p *ngIf = "errorType">Неверные логин или пароль</p>
+                </div>   
+                <button type="submit button" class="subButton">Войти</button>
+                <a class="SignIn" routerLink = "/auth" href="">Уже есть аккаунт?</a>
+            </form>
+        </div>
+    </div>
+</div>
