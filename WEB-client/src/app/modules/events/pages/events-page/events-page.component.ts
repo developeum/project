@@ -19,6 +19,7 @@ export class EventsPageComponent implements OnInit {
   events: EventFL[] = [];
   filterState: boolean = false;
   visibility: boolean = true;
+  filterChanged: boolean = false;
 
   constructor(private pageService: EventsService, private router: Router) {
     this.params = new Filter;
@@ -30,18 +31,24 @@ export class EventsPageComponent implements OnInit {
   }
 
   loadEvents(){
-    this.events = [];
+    if(this.filterChanged){
+      this.events = [];
+    }
     this.pageService.getEvents(this.currSkip, this.params.types, this.params.categories, this.params.cities, this.params.starts_at_min, this.params.starts_at_max).subscribe(x => {
-      this.events = x;
-      this.events.forEach(event => {
+      x.forEach(event => {
+        this.events.push(event)
         let dateTime = event.event_time.split('T');
         let russianDate = dateTime[0].split('-')
         event.event_time = russianDate[2] + '.' + russianDate[1] + '.' + russianDate[0];
+      })
+      this.events.forEach(event => {
+        
       })
       console.log(x)
       console.log(this.params);
       console.log(this.currSkip)
     })
+    this.filterChanged = false;
   }
 
   loadClearEvents(){
@@ -66,6 +73,7 @@ export class EventsPageComponent implements OnInit {
   }
 
   setParams(params: Filter){
+    this.filterChanged = true;
     this.currSkip = 0;
     this.params = params;
     console.log(this.params);
