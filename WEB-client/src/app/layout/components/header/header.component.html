@@ -14,7 +14,7 @@
         <a *ngIf = "userIsLoggedIn" routerLink = "/user" class="user"><img [src]="imageToShow" class="userImg"></a>
         <div class="userMobile" routerLink = "/user"> </div>
     </div>
-    <div *ngIf = "events$ | async as events" class="searchResultContainer">
+    <div *ngIf = "events$ | async as events" class="searchResultContainer" #searchContainer>
 
             <div *ngFor = "let event of events" (click) = "navToEvent(event.id)" class="event">
                 <p class="eTitle">{{event.name}}</p>

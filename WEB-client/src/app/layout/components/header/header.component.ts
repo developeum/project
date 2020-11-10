@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { EventFL } from './../../../models/eventsFL';
 import { HeaderService } from './../../service/header.service';
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -17,13 +17,25 @@ export class HeaderComponent implements OnInit {
   searchVisibility: boolean = false;
   noEvents: boolean = false;
 
+  @ViewChild('searchContainer') element: ElementRef;
+
+  @HostListener ('click', ['$event']) onClick(e: MouseEvent){
+    if (!this.element.nativeElement.contains(e.target)){
+      this.events$ = null;
+    }
+  }
+
   @Output() onChanged = new EventEmitter<boolean>()
 
   change(){
     this.onChanged.emit(!this.searchVisibility)
   }
 
-  constructor(private headerService: HeaderService, private router: Router) { 
+  closeSearch(){
+    this.events$ = null
+  }
+
+  constructor(private headerService: HeaderService, private router: Router, private el: ElementRef) { 
     let reqInfo: {
       avatar: string;
       ok: boolean

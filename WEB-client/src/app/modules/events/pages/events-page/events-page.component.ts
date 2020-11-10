@@ -12,6 +12,7 @@ import { EventsService } from '../../servises/events.service';
 })
 export class EventsPageComponent implements OnInit {
 
+  currSkip = 0;
   params: Filter = null;
   num: number = 0;
   userId: string;
@@ -20,24 +21,31 @@ export class EventsPageComponent implements OnInit {
   visibility: boolean = true;
 
   constructor(private pageService: EventsService, private router: Router) {
-    
+    this.params = new Filter;
   }
 
   ngOnInit(): void {
-    this.params = new Filter;
+    
     this.loadClearEvents();
   }
 
   loadEvents(){
     this.events = [];
-    this.pageService.getEvents(this.params.types, this.params.categories, this.params.cities, this.params.starts_at_min, this.params.starts_at_max).subscribe(x => {
+    this.pageService.getEvents(this.currSkip, this.params.types, this.params.categories, this.params.cities, this.params.starts_at_min, this.params.starts_at_max).subscribe(x => {
       this.events = x;
+      this.events.forEach(event => {
+        let dateTime = event.event_time.split('T');
+        let russianDate = dateTime[0].split('-')
+        event.event_time = russianDate[2] + '.' + russianDate[1] + '.' + russianDate[0];
+      })
       console.log(x)
+      console.log(this.params);
+      console.log(this.currSkip)
     })
   }
 
   loadClearEvents(){
-    this.pageService.getClearEvents()
+    this.pageService.getEvents(this.currSkip)
     .subscribe(x => {
       this.events = x;
       this.events.forEach(event => {
@@ -47,7 +55,10 @@ export class EventsPageComponent implements OnInit {
       })
       console.log(x)
     })
+  }
 
+  loadNextClearEvents(){
+    this.pageService.getEvents(this.currSkip)
   }
 
   navToEvent(id){
@@ -55,6 +66,7 @@ export class EventsPageComponent implements OnInit {
   }
 
   setParams(params: Filter){
+    this.currSkip = 0;
     this.params = params;
     console.log(this.params);
     this.loadEvents();
@@ -62,6 +74,10 @@ export class EventsPageComponent implements OnInit {
   }
 
   loadMore(){
+    this.currSkip += 10;
+    if(this.params == null){
+      this.loadNextClearEvents();
+    }
     this.loadEvents();
   }
 

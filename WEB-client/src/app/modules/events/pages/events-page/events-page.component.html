@@ -14,7 +14,7 @@
                 </li>
             </ul>
         </div>
-        <button [ngClass] = "{'listOff': filterState}" class="btn" (click) = "loadMore()">Смотреть больше</button>
+        <button class="btn" (click) = "loadMore()">Смотреть больше</button>
     </div>
     <app-filter class="filter" [ngClass] = "{'filterOn': filterState}" (setParams) = "setParams($event)"></app-filter>
 </div>
