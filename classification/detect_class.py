@@ -3,10 +3,8 @@ import numpy as np
 import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-def Detect_class(json_in, json_out):
-    
+def Detect_class(events_df):
     pd.options.mode.chained_assignment = None
-    events_df = pd.read_json(json_in, lines=True)
                             
     clas = []
     ds = ['AI', 'Data Science', 'ai', 'data science', 'data engineering', 'data scientist', 'deep learning',
@@ -25,9 +23,8 @@ def Detect_class(json_in, json_out):
     for x in categories:
         count = []
         for i in range (len(class_list)):
-            mask = np.isin(x.split(','), class_list[i])
+            mask = np.isin(x, class_list[i])
             count.append(np.count_nonzero(mask == bool("True")))
-
         if np.count_nonzero(count) > 0:
             ind = np.argmax(count)
             clas.append(possible_class[ind])
@@ -98,4 +95,4 @@ def Detect_class(json_in, json_out):
     final_df = final_df.drop(['normalized_name'],axis=1)
     final_df = final_df.drop(['normalized_description'],axis=1)
 
-    final_df.to_json(json_out, orient='records', lines=True)
+    return final_df
