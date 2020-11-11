@@ -5,11 +5,11 @@ import nltk
 nltk.download("stopwords")
 from langdetect import detect
 
-def Normalize(json_in, json_out):
+def Normalize(events_df):
     from nltk.corpus import stopwords
     pd.options.mode.chained_assignment = None
 
-    events_df = pd.read_json(json_in, lines=True)
+    # events_df = pd.read_json(json_in, lines=True)
     events_df['normalized_name'] = events_df['name']
     events_df['normalized_description'] = events_df['description']
 
@@ -72,7 +72,8 @@ def Normalize(json_in, json_out):
     events_df['normalized_name'] = names_array
     events_df['normalized_description'] = descr_array
     events_df = events_df[
-        ['name', 'normalized_name', 'event_type', 'event_time', 'description', 'normalized_description', 'city',
+        ['id', 'name', 'normalized_name', 'event_type', 'event_time', 'description', 'normalized_description', 'city',
          'categories']]
 
-    events_df.to_json(json_out, orient='records', lines=True)
+    return events_df
+    # events_df.to_json(json_out, orient='records', lines=True)

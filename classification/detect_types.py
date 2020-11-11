@@ -1,9 +1,9 @@
 import pandas as pd
 
-def Detect_type(json_in, json_out):
+def Detect_type(events_df):
     pd.options.mode.chained_assignment = None
 
-    events_df = pd.read_json(json_in, lines=True)
+    # events_df = pd.read_json(json_in, lines=True)
 
     hackathon = ['hackathon', 'хакатон', 'Конкурс']
     webinar = ['webinar', 'вебинар', 'lecture', 'лекция', 'Вебинар', 'Лекция']
@@ -42,5 +42,5 @@ def Detect_type(json_in, json_out):
                         events_df['event_type'][i] = types[j]
                         is_defined = True
     events_df['event_type'] = events_df['event_type'].fillna(types[-1])
-
-    events_df.to_json(json_out, orient='records', lines=True)
+    return events_df
+    # events_df.to_json(json_out, orient='records', lines=True)
