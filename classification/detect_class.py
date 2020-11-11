@@ -3,10 +3,10 @@ import numpy as np
 import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-def Detect_class(csv_in, csv_out):
+def Detect_class(json_in, json_out):
     
     pd.options.mode.chained_assignment = None
-    events_df = pd.read_csv(csv_in)
+    events_df = pd.read_json(json_in, lines=True)
                             
     clas = []
     ds = ['AI', 'Data Science', 'ai', 'data science', 'data engineering', 'data scientist', 'deep learning',
@@ -98,7 +98,4 @@ def Detect_class(csv_in, csv_out):
     final_df = final_df.drop(['normalized_name'],axis=1)
     final_df = final_df.drop(['normalized_description'],axis=1)
 
-    final_df.to_csv(csv_out, index=False, index_label=False)
-
-
-Final_function('events_crawlers_02112020.csv', 'Ff_events_crawlers_02112020.csv')
+    final_df.to_json(json_out, orient='records', lines=True)
