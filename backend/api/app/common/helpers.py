@@ -1,4 +1,5 @@
 from functools import wraps
+from typing import List
 
 from flask import request
 
@@ -43,3 +44,16 @@ def accepts_json(**fields):
             return func(*args, **kwargs)
         return decorated
     return decorator
+
+def project(dict_obj: dict, fields: List[str]) -> dict:
+    return {
+        field: dict_obj.get(field, 'no such field')
+        for field in fields
+    }
+
+def parse_int_array(as_str: str) -> List[int]:
+    splitted = as_str.split(',')
+
+    return [
+        int(elem) for elem in splitted if elem.isdigit()
+    ]

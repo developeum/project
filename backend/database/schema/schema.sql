@@ -62,12 +62,15 @@ create table users (
         foreign key (city) references cities
 );
 
+create type visit_type as enum ('internal', 'external');
+
 create table user_visit_links (
     user_id     integer not null,
     event_id    integer not null,
     visit_time  timestamp,
+    visit_type  visit_type,
     constraint visited_pk
-        primary key (user_id, event_id),
+        primary key (user_id, event_id, visit_type),
     constraint visited_users_id_fk
         foreign key (user_id) references users,
     constraint visited_events_id_fk

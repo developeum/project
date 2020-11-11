@@ -1,4 +1,6 @@
-from .database import db, association_proxy
+import enum
+
+from .database import association_proxy, db
 
 class EventCategory(db.Model):
     __tablename__ = 'categories'
@@ -36,6 +38,10 @@ class EventType(db.Model):
     def as_json(self):
         return {'id': self.id, 'name': self.event_type}
 
+class VisitTypeEnum(enum.Enum):
+    internal = 1
+    external = 2
+
 class UserVisit(db.Model):
     __tablename__ = 'user_visit_links'
 
@@ -51,10 +57,15 @@ class UserVisit(db.Model):
                          primary_key=True)
     event = db.relationship('Event')
 
-    def __init__(self, event=None, user=None, visit_time=None):
+    visit_type = db.Column(db.Enum(VisitTypeEnum),
+                           primary_key=True)
+
+    def __init__(self, event=None, user=None,
+                 visit_time=None, visit_type=None):
         self.event = event
         self.user = user
         self.visit_time = visit_time
+        self.visit_type = visit_type
 
 class EventCategoryLink(db.Model):
     __tablename__ = 'event_category_links'

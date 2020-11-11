@@ -1,9 +1,8 @@
 from datetime import datetime
 
+from common.helpers import parse_int_array, project
 from common.models import Event, EventCategoryLink
 from flask import Blueprint, jsonify, request
-
-from .helpers import parse_int_array, project
 
 events_api = Blueprint('events_api', __name__)
 
@@ -77,7 +76,8 @@ def get_event_list():
 
     events = events_query[skip:skip+limit]
 
-    fields = request.args.get('fields', 'id,name,event_type,event_time').split(',')
+    default_keys = 'id,name,event_type,event_time'
+    fields = request.args.get('fields', default_keys).split(',')
 
     return jsonify([
         project(event.as_json(), fields) for event in events

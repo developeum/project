@@ -7,16 +7,17 @@ from flask import request
 from flask_jwt_extended import current_user, jwt_required
 
 from .helpers import get_file_extension
+from .messages import *
 
 @jwt_required
 def upload_avatar():
     avatar = request.files.get('avatar', None)
     if avatar is None:
-        return {'ok': False, 'reason': 'No file provided'}
+        return NO_FILE_PROVIDED, 200
 
     extension = get_file_extension(avatar.filename)
     if extension not in ALLOWED_EXTENSIONS:
-        return {'ok': False, 'reason': 'Such extension is not allowed'}
+        return EXTENSION_NOT_ALLOWED, 200
 
     filename = '{base}.{extension}'.format(base=uuid4(), extension=extension)
 
