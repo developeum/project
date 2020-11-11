@@ -18,7 +18,7 @@ def Detect_class(events_df):
     possible_class = ['ds', 'mobile', 'qa', 'web', 'devops', 'busorg']
     class_list = [ds, mobile, qa, web, devops, busorg]
     
-    categories = events_df['categories'].to_numpy().astype(str)
+    categories = events_df['categories'].to_numpy()
 
     for x in categories:
         count = []
