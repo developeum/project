@@ -1,8 +1,8 @@
 import pika
 import json
 import pandas as pd
-from normalize import Normalize
-from detect_types import Detect_type
+from classification.normalize import Normalize
+from classification.detect_types import Detect_type
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 channel = connection.channel()
