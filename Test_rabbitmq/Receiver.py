@@ -3,6 +3,7 @@ import json
 import pandas as pd
 from classification.normalize import Normalize
 from classification.detect_types import Detect_type
+from classification.detect_class import Detect_class
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 channel = connection.channel()
@@ -16,8 +17,7 @@ def on_request(ch, method, props, body):
     events_df = pd.DataFrame(new_data)
     events_df = Normalize(events_df)
     events_df = Detect_type(events_df)
-
-    # classification
+    events_df = Detect_class(events_df)
 
     response = events_df.to_dict(orient='records')
     response = json.dumps(response)
