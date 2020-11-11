@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from common.helpers import accepts_json
+from common.helpers import accepts_json, project
 from common.models import Event, UserVisit, VisitTypeEnum, db
 from flask import jsonify, request
 from flask_jwt_extended import current_user, jwt_required
@@ -50,13 +50,8 @@ def get_visited_pages():
 
     visited = current_user.visited[skip:skip+limit]
 
+    keys = ['id', 'name', 'event_type']
+
     return jsonify([
-        {
-            'id': event.id,
-            'name': event.name,
-            'type': {
-                'id': event.event_type.id,
-                'name': event.event_type.event_type
-            }
-        } for event in visited
+        project(event.as_json(), keys) for event in visited
     ]), 200

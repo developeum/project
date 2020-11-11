@@ -70,21 +70,22 @@ def login_user():
 )
 def update_credentials():
     body = request.get_json()
-    body['email'] = body['email'].lower()
+
+    email = body.get('email', current_user.email).lower()
+    password = body.get('password', '')
 
     if check_password(current_user, body['old_password']):
-        if 'email' in body:
-            if current_user.email != body['email']:
-                if not is_email_correct(body['email']):
-                    return INCORRECT_EMAIL_FORMAT, 200
+        if current_user.email != email:
+            if not is_email_correct(email):
+                return INCORRECT_EMAIL_FORMAT, 200
 
-                if is_email_registered(body['email']):
-                    return EMAIL_REGISTERED, 200
+            if is_email_registered(email):
+                return EMAIL_REGISTERED, 200
 
-                current_user.email = body['email']
+            current_user.email = email
 
-        if 'password' in body and body['password'] != '':
-            current_user.password = hash_password(body['password'])
+        if password != '':
+            current_user.password = hash_password(password)
 
         db.session.commit()
 
