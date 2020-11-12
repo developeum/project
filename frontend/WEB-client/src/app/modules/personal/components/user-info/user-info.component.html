@@ -1,59 +1,100 @@
-<div class="container">
-    <div class="infoContainer">
-        <div *ngIf="imageToShow" class="imgContainer">
-            <label class="image-upload-container btn btn-bwm">
-                <img class="userImg" [src]="imageToShow" alt=""> 
-            </label>
-            <input #imageInput
-                    type="file"
-                    accept="image/*"
-                    (change)="processFile(imageInput)">
-        </div> 
-        <div class="textContainer" [ngClass] = "{'changeContainer': changeMod}">
-            <div class="text" *ngIf = "!visibility">
-                <div class="infoContainer" *ngIf = "userInfo$ | async as user">
-                    <p class="FIO" *ngIf = "userInfo">{{user.first_name}} {{user.last_name}} <button class="changeBtn" (click) = "changeVisibility()"></button></p>
-                    <br>
-                    <p class="status" *ngIf = "userInfo">{{user.status.name}}</p>
-                    <p class="status" *ngIf = "userInfo">{{user.stack[0].name}}</p>
-                    <hr width="80%" size="1px"/>
-                    <p class="status" *ngIf = "userInfo">{{user.email}}</p>
-                    <p class="status" *ngIf = "userInfo">{{user.phone}}</p>
-                    <p class="status" *ngIf = "userInfo">{{user.city.name}}</p>
+<div class="mainContainer">
+    <div class="container">
+        <div class="infoContainer">
+            <div class="imgContainer">
+                <label for="imageInput">
+                    <img class="userImg" [src]="imageToShow"> 
+                </label>
+                <input id = 'imageInput' #imageInput  type="file"
+                        
+                        (change)="processFile(imageInput)">
+            </div> 
+            <div class="textContainer" [ngClass] = "{'changeContainer': changeMod}">
+                <div class="text">
+                    <div class="infoContainer" *ngIf = "userInfo$ | async as user">
+                        <p class="FIO" *ngIf = "userInfo">{{user.first_name}} {{user.last_name}}</p>
+                        <br>
+                        <p class="status" *ngIf = "userInfo">{{user.status.name}}</p>
+                        <p class="status" *ngIf = "userInfo">{{user.stack[0].name}}</p>
+                    <hr style="color: #b4b4b4; background-color: #cccccc; border-color: #b4b4b4;" width="80%" size="1px"/>
+                        <p class="status" *ngIf = "userInfo">{{user.email}}</p>
+                        <p class="status" *ngIf = "userInfo">{{user.phone}}</p>
+                        <p class="status" *ngIf = "userInfo">{{user.city.name}}</p>
+                    </div>
+                    <button class="logOutBtn" (click) = "logout()">Выйти</button>
+                </div>     
+            </div>
+        </div>
+    </div>
+    <div class="changeContainer">
+        <label class="title">Смена данных</label>
+        <div *ngIf = "userInfo$ | async as user" class="formContainer">
+            <form class="form" [formGroup] = "userInfoForm">
+                <div class="formGroup">
+                    <p class="name">Имя</p>
+                    <input class="infoChange" type="text" formControlName = "firstName">
                 </div>
-                <button class="logOutBtn" (click) = "logout()">Выйти</button>
-            </div>  
-            <div class="formContainer" *ngIf = "visibility">
-                <form class="form" [formGroup] = "userInfoForm">
-                    <div class="formGroup">
-                        <p class="name">Имя</p>
-                        <input class="infoChange" type="text" formControlName = "firstName">
-                    </div>
-                    <div class="formGroup">
-                        <p class="name">Фамилия</p>
-                        <input class="infoChange" type="text" formControlName = "lastName">
-                    </div>
-                    <div class="formGroup">
-                        <p class="name">Телефонный номер</p>
-                        <input class="infoChange" type="text" formControlName = "phone">
-                    </div>
+                <div class="formGroup">
+                    <p class="name">Фамилия</p>
+                    <input class="infoChange" type="text" formControlName = "lastName">
+                </div>
+                <div class="formGroup">
+                    <p class="name">Телефонный номер</p>
+                    <input class="infoChange" type="text" formControlName = "phone">
+                </div>
+                
+                <div class="formGroup">
                     <p class="name">Статус</p>
                     <select formControlName = "status" name="select" >
                         <option *ngFor = "let status of statuses, let i = index" [ngValue]="status.id">{{status.name}}</option>
                     </select>
+                </div>
+                <div class="formGroup">
                     <p class="name">Стэк</p>
                     <select formControlName = "stack" name="select" >
                         <option *ngFor = "let stack of stacks, let i = index" [ngValue]="stack.id">{{stack.name}}</option>
                     </select>
+                </div>
+                <div class="formGroup">
                     <p class="name">Город</p>
                     <select formControlName = "city" name="select">
                         <option *ngFor = "let city of cities, let i = index" [ngValue] = "city.id">{{city.name}}</option>
                     </select>
-                    <button class="subChanges" type="submit" (click) = "onSubmit()">Применить</button>
-                </form>
-            </div>     
+                </div>
+                <button class="subChanges logOutBtn infSub" type="submit" (click) = "onSubmit()">Применить</button>
+            </form>
+        </div>  
+    </div>
+    <div class="changePassLoginContainer">
+        <div class="changeLoginContainer">
+            <label class="title">Сменить почту</label>
+            <form class="formD" [formGroup] = "loginForm">
+                <div class="formGroup fG">
+                    <p class="name">Новая почта</p>
+                    <input formControlName = "login" class="infoChange" type="text">
+                </div>
+                <div class="formGroup">
+                    <p class="name">Пароль</p>
+                    <input formControlName = "password" class="infoChange" type="text">
+                </div>
+                <button class="subChanges logOutBtn logBtn" (click) = "changeEmail()">Применить</button>
+            </form>
+            
         </div>
-                
-        
+        <div class="changePassContainer">
+            <label class="title">Сменить пароль</label>
+            <form class="formD" [formGroup] = "passwordForm">
+                <div class="formGroup fG">
+                    <p class="name">Старый пароль</p>
+                    <input formControlName = "oldPass" class="infoChange" type="text">
+                </div>
+                <div class="formGroup">
+                    <p class="name">Новый пароль</p>
+                    <input formControlName = "password" class="infoChange" type="text">
+                </div>
+                <button class="subChanges logOutBtn logBtn" (click) = "changePass()">Применить</button>
+            </form>
+            
+        </div>
     </div>
 </div>

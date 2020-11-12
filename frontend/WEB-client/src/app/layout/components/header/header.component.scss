@@ -49,6 +49,12 @@ $containerWidth: 100%;
     font-family: 'Gotham Pro';
 }
 
+.textLog{
+    color: $textBlack;
+    margin: 1vw;
+    font-family: 'Gotham Pro';
+}
+
 .search{
     outline: none;
     border: none;
@@ -160,6 +166,10 @@ a{
         display: none;
     }
 
+    .textLog{
+        display: none;
+    }
+
     .img{
         outline: none;
         width: 53px;
@@ -265,9 +275,13 @@ a{
         height: 53px;
         background-image: url(../../../imges/icons/iconUser.svg);
         background-size: 100%;
-        margin-left: -10vw;
+        // margin-left: -10vw;
         border-radius: 2vh;
         box-shadow: -3px -3px 6px 5px  rgb(250, 248, 248), 3px 3px 6px 5px rgba(177, 173, 166, 0.51);
+    }
+
+    .marginUser{
+        margin-left: -10vw;
     }
 
     .putDown{

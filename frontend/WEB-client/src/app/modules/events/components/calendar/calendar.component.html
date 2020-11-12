@@ -1,16 +1,18 @@
-<div class="container">
-    <div class="monthCarusel">
-        <div class="left" (click) = "prevMonth()"></div>
-        <label class="month">{{months[chosenMonth].name}} {{fullDate.getFullYear()}}</label>
-        <div class="right" (click) = "nextMonth()"></div>
-    </div>
-    <div class="dates">
-        <div *ngFor = "let dayOfWeek of daysOfWeek" class="dayOfWeek">{{dayOfWeek}}</div>
-        <div class="lastMonth" *ngFor = "let date of lastMonthDates">
-            <p class="text">{{date}}</p>
+<div class="mainContainer">
+    <div class="container">
+        <div class="monthCarusel">
+            <div class="left" (click) = "prevMonth()"></div>
+            <label class="month">{{months[chosenMonth].name}} {{fullDate.getFullYear()}}</label>
+            <div class="right" (click) = "nextMonth()"></div>
         </div>
-        <div class="date" (click) = "setDate(date)" *ngFor = "let date of dates">
-            <p  class="text">{{date}}</p>
+        <div class="dates">
+            <div *ngFor = "let dayOfWeek of daysOfWeek" class="dayOfWeek">{{dayOfWeek}}</div>
+            <div class="lastMonth" *ngFor = "let date of lastMonthDates">
+                <p class="text">{{date}}</p>
+            </div>
+            <div id="i" [ngClass] = "{selectedItem: i == minDateNum || i == maxDateNum, betwinSelectedItems: i > minDateNum && i < maxDateNum}" class="date" (click) = "setDate(date)" *ngFor = "let date of dates ; let i = index">
+                <p  class="text">{{date}}</p>
+            </div>
         </div>
     </div>
 </div>
