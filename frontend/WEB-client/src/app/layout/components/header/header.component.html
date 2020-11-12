@@ -7,12 +7,12 @@
             <input  (keyup) = "searchEvents($event)" type="text" class="search input search-input" placeholder = "search by name"/>
         </div> 
         <div [ngClass] = "{putDownSearch: searchVisibility}" (click) = "changeSearchVisibility()" class="mobileSearch"></div>              
-        <a *ngIf = "!userIsLoggedIn" routerLink = "/auth" class = "text">Вход</a>
-        <a *ngIf = "!userIsLoggedIn" routerLink = "/auth/register" class = "text">Регистрация</a>
+        <a *ngIf = "!userIsLoggedIn" routerLink = "/auth" class = "textLog">Вход</a>
+        <a *ngIf = "!userIsLoggedIn" routerLink = "/auth/register" class = "textLog">Регистрация</a>
         <div [ngClass] = "{putDown: isEvents}" class="events" routerLink = "/events"></div>    
         <a routerLink = "/events" class="text">мероприятия</a>
         <a *ngIf = "userIsLoggedIn" routerLink = "/user" class="user"><img [src]="imageToShow" class="userImg"></a>
-        <div [ngClass] = "{putDown: isUser}" class="userMobile" routerLink = "/user"> </div>
+        <div [ngClass] = "{putDown: isUser, marginUser: userIsLoggedIn}" class="userMobile" routerLink = "/user"> </div>
     </div>
     <div [ngClass] = "{noLoggedInSearchContainer: !userIsLoggedIn}" *ngIf = "events$ | async as events" class="searchResultContainer" #searchContainer>
 

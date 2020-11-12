@@ -36,7 +36,6 @@ $containerColor: #fcfcfc;
 }
 
 .date{
-    font-family: 'gothamPro';
     text-align: center;
 }
 
@@ -45,9 +44,7 @@ $containerColor: #fcfcfc;
     align-items: center;
 }
 
-.checkName{
-    font-family: 'gothamPro';
-}
+
 
 .btn{
     outline: none;
@@ -90,7 +87,6 @@ hr{
 }
 
 .title{
-    font-family: 'gothamPro';
     margin-left: 9%;
     font-weight: bold;
 }
@@ -107,7 +103,6 @@ hr{
 }
 
 .check+label{
-    font-family: 'gothamPro';
     margin-top: 0;
     margin-bottom: 2vh;
     display: inline-flex;
