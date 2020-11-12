@@ -16,7 +16,7 @@
                         <br>
                         <p class="status" *ngIf = "userInfo">{{user.status.name}}</p>
                         <p class="status" *ngIf = "userInfo">{{user.stack[0].name}}</p>
-                        <hr width="80%" size="1px"/>
+                    <hr style="color: #b4b4b4; background-color: #cccccc; border-color: #b4b4b4;" width="80%" size="1px"/>
                         <p class="status" *ngIf = "userInfo">{{user.email}}</p>
                         <p class="status" *ngIf = "userInfo">{{user.phone}}</p>
                         <p class="status" *ngIf = "userInfo">{{user.city.name}}</p>
@@ -27,6 +27,7 @@
         </div>
     </div>
     <div class="changeContainer">
+        <label class="title">Смена данных</label>
         <div *ngIf = "userInfo$ | async as user" class="formContainer">
             <form class="form" [formGroup] = "userInfoForm">
                 <div class="formGroup">
@@ -41,27 +42,34 @@
                     <p class="name">Телефонный номер</p>
                     <input class="infoChange" type="text" formControlName = "phone">
                 </div>
-                <p class="name">Статус</p>
-                <select formControlName = "status" name="select" >
-                    <option *ngFor = "let status of statuses, let i = index" [ngValue]="status.id">{{status.name}}</option>
-                </select>
-                <p class="name">Стэк</p>
-                <select formControlName = "stack" name="select" >
-                    <option *ngFor = "let stack of stacks, let i = index" [ngValue]="stack.id">{{stack.name}}</option>
-                </select>
-                <p class="name">Город</p>
-                <select formControlName = "city" name="select">
-                    <option *ngFor = "let city of cities, let i = index" [ngValue] = "city.id">{{city.name}}</option>
-                </select>
-                <button class="subChanges" type="submit" (click) = "onSubmit()">Применить</button>
+                
+                <div class="formGroup">
+                    <p class="name">Статус</p>
+                    <select formControlName = "status" name="select" >
+                        <option *ngFor = "let status of statuses, let i = index" [ngValue]="status.id">{{status.name}}</option>
+                    </select>
+                </div>
+                <div class="formGroup">
+                    <p class="name">Стэк</p>
+                    <select formControlName = "stack" name="select" >
+                        <option *ngFor = "let stack of stacks, let i = index" [ngValue]="stack.id">{{stack.name}}</option>
+                    </select>
+                </div>
+                <div class="formGroup">
+                    <p class="name">Город</p>
+                    <select formControlName = "city" name="select">
+                        <option *ngFor = "let city of cities, let i = index" [ngValue] = "city.id">{{city.name}}</option>
+                    </select>
+                </div>
+                <button class="subChanges logOutBtn infSub" type="submit" (click) = "onSubmit()">Применить</button>
             </form>
         </div>  
     </div>
     <div class="changePassLoginContainer">
         <div class="changeLoginContainer">
-            <label>Сменить почту</label>
-            <form class="form" [formGroup] = "loginForm">
-                <div class="formGroup">
+            <label class="title">Сменить почту</label>
+            <form class="formD" [formGroup] = "loginForm">
+                <div class="formGroup fG">
                     <p class="name">Новая почта</p>
                     <input formControlName = "login" class="infoChange" type="text">
                 </div>
@@ -69,14 +77,14 @@
                     <p class="name">Пароль</p>
                     <input formControlName = "password" class="infoChange" type="text">
                 </div>
-                <button class="subChanges" (click) = "changeEmail()">Сменить почту</button>
+                <button class="subChanges logOutBtn logBtn" (click) = "changeEmail()">Применить</button>
             </form>
             
         </div>
         <div class="changePassContainer">
-            <label>Сменить пароль</label>
-            <form class="form" [formGroup] = "passwordForm">
-                <div class="formGroup">
+            <label class="title">Сменить пароль</label>
+            <form class="formD" [formGroup] = "passwordForm">
+                <div class="formGroup fG">
                     <p class="name">Старый пароль</p>
                     <input formControlName = "oldPass" class="infoChange" type="text">
                 </div>
@@ -84,7 +92,7 @@
                     <p class="name">Новый пароль</p>
                     <input formControlName = "password" class="infoChange" type="text">
                 </div>
-                <button class="subChanges" (click) = "changePass()">Сменить пароль</button>
+                <button class="subChanges logOutBtn logBtn" (click) = "changePass()">Применить</button>
             </form>
             
         </div>

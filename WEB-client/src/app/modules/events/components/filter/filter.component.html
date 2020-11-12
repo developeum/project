@@ -1,13 +1,13 @@
 <div class="container">
     <div class="filterContainer">
-        <div>
+        <div class="dateContainer">
             <label class="title">Дата проведения</label>
             <div>
-                <p class="date">От <input class="dateInput" type="date" name="startsMin" [(ngModel)] = "startsMin"> до <input class="dateInput" type="date" name="startsMax" [(ngModel)] = "startsMax"></p>
+                <p class="date" *ngIf = "startsMinToShow">{{startsMinToShow}} - {{startsMaxToShow}}</p>
                 <app-calendar (throwDate) = "throwDate($event)"></app-calendar>
             </div>
         </div>
-        <form [formGroup] = "filterForm" (ngSubmit) = "onSubmit()">
+        <form class="formContainer" [formGroup] = "filterForm" (ngSubmit) = "onSubmit()">
             <div class="formGroup">
                 <label class="title">Типы</label>
                 <div class="flexContainer">
@@ -17,6 +17,7 @@
                     </div>
                 </div>
             </div>
+            <hr>
             <div class="formGroup">
                 <label class="title">Категории</label>
                 <div class="flexContainer">
@@ -26,6 +27,7 @@
                     </div>
                 </div>
             </div>
+            <hr>
             <div class="formGroup">
                 <label class="title">Города</label>
                 <div class="flexContainer">

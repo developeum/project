@@ -6,7 +6,8 @@ $textWhite: #fff;
 $containerColor: #fcfcfc;
 
 .filterContainer{
-    width: 20vw;
+    position: relative;
+    width: 23vw;
     height: 70vh;
     background-color: $primaryBackground;
     border-radius: 1vh;
@@ -15,8 +16,17 @@ $containerColor: #fcfcfc;
     // display: flex;
     // flex-direction: column;
     // align-items: center;
-    padding: 2vh;
-    box-shadow: -6px -6px 16px 0 rgba(255,255,255,1), 6px 6px 16px 0 rgba(194, 189, 181, 0.51);
+    // padding: 2vh;
+    box-shadow: -3px -3px 10px 5px rgb(250, 248, 248), 3px 3px 10px 5px rgba(177, 173, 166, 0.51);
+}
+
+.dateContainer{
+    margin: 2vh;
+}
+
+.formContainer{
+    margin: 2vh;
+    margin-bottom: 0;
 }
 
 .dateInput{
@@ -27,6 +37,7 @@ $containerColor: #fcfcfc;
 
 .date{
     font-family: 'gothamPro';
+    text-align: center;
 }
 
 .checkboxContainer{
@@ -58,12 +69,35 @@ $containerColor: #fcfcfc;
 }
 
 .btnContainer{
+    background-color: $primaryBackground;
+    position: sticky;
     display: flex;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    bottom: 0;
+    height: 80px;
+}
+
+.formGroup{
+    margin-top: 2vh;
+}
+
+hr{
+    height: 1px;
+    border: none;
+    background-color:  #adb5bd;
 }
 
 .title{
     font-family: 'gothamPro';
+    margin-left: 9%;
+    font-weight: bold;
+}
+
+.flexContainer{
+    margin-top: 1vh;
+    margin-left: 2%;
 }
 
 .check{
@@ -111,20 +145,15 @@ $containerColor: #fcfcfc;
     .filterContainer{
         border-radius: 0;
         width: 92vw;
-        height: 75vh;
+        height: 90vh;
         box-shadow: none;
+        margin-bottom: 7vh;
     }
 
     .btn{
         width: 70vw;
         height: 5vh;
     }
-
-    .btnContainer{
-        margin-top: 4vh;
-    }
-
-    
 
     // .title{
     //     margin-top: 4vh;

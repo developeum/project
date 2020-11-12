@@ -47,6 +47,10 @@ export class LoginComponent implements OnInit {
     console.log("form changed")
   }
 
+  makeNoError(){
+    this.error = false;
+  }
+
   onSubmit(){
     if (this.loginForm.invalid){
       console.log("form is incorrect");

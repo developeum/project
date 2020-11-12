@@ -5,6 +5,31 @@ $textBlack: #2f2f2f;
 $textWhite: #fff;
 $containerColor: #fcfcfc;
 
+@font-face {
+	font-family: 'Gotham Pro Bold';
+	src: url('../../../../fonts/GothamPro/GothamPro-Bold.ttf');
+	// src: local('Gotham Pro Bold Italic'), local('GothamPro-BoldItalic'),
+	// 	url('GothamPro-BoldItalic.eot?#iefix') format('embedded-opentype'),
+	// 	url('GothamPro-BoldItalic.woff') format('woff'),
+	// 	url('GothamPro-BoldItalic.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gotham Pro';
+	src: url('../../../../fonts/GothamPro/GothamPro-Light.ttf');
+	font-weight: normal;
+	font-style: 300;
+}
+
+@font-face{
+    font-family: 'Ubuntu';
+    src: url('../../../../fonts/Ubuntu/Ubuntu-Bold.ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+
 .header{
     position: absolute;
     z-index: 5;
@@ -39,7 +64,7 @@ $containerColor: #fcfcfc;
 
 .title{
     font-size: 4em;
-    font-family: 'gothamPro';
+    font-family: 'Ubuntu';
     font-weight: bold;
     color: $textBlack;
     margin-bottom: 8vh;
@@ -49,7 +74,7 @@ $containerColor: #fcfcfc;
     margin-top: 5vh;
     font-size: 1.5em;
     color: $primary;
-    font-family: 'gothamPro';
+    font-family: 'Gotham Pro';
 }
 
 .regButton{
@@ -62,7 +87,7 @@ $containerColor: #fcfcfc;
     border-radius: 1vh;
     padding: 5px;
     padding-left: 15px;
-    font-family: 'gothamPro';
+    // font-family: 'gothamPro';
     outline: none;
     cursor: pointer;
 
@@ -80,6 +105,19 @@ $containerColor: #fcfcfc;
     height: 100vh;
     width: 100vw;
     margin-top: -20vh;
+    // overflow: hidden;
+    // box-sizing: border-box;
+    // position: relative;
+}
+
+.rectangle{
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    
+    
+    border: 220px solid transparent; border-right: 430px solid $primary; border-bottom: 320px solid $primary;
+    // overflow: hidden;
 }
 
 .secondImg{
@@ -102,40 +140,47 @@ $containerColor: #fcfcfc;
 }
 
 .smallTitle{
-    margin-top: 5vh;
+    margin-top: 3vh;
     margin-bottom: 3vh;
-    font-family: 'gothamPro';
+    font-family: 'Ubuntu';
     font-size: 3em;
 }
 
 .categories{
-    font-family: 'gothamPro';
+    font-family: 'Gotham Pro';
     font-size: 1.7em;
     color: $primary;
 }
 
 .regLink{
-    font-family: 'gothamPro';
+    font-family: 'Gotham Pro';
     margin-right: 1vw;
 }
 
 .hasAccount{
     font-size: 1.1em;
-    font-family: 'gothamPro';
+    // font-family: 'gothamPro';
     color: $primary;
     margin-top: 2vh;
-    margin-left: 80px;
+    // margin-left: 100px;
     outline: none;
     cursor: pointer;
-    width: 300px;
+    // width: 221px;
 }
 
 .category{
-    font-family: 'gothamPro';
+    font-family: 'Gotham Pro';
     font-size: 1.3em;
 }
 
-
+.enterContainer{
+    font-family: 'Gotham Pro';
+    display: flex;
+    width: 35vw;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 
 @media screen and(max-width: 420px) {
     .mainContainer{
@@ -158,7 +203,7 @@ $containerColor: #fcfcfc;
     .mobileLogo{
         width: 50vw;
         height: 12vh;
-        background-image: url(../../../../imges/logo/лого2.svg);
+        background-image: url(../../../../imges/logo/лого3.svg);
         background-size: 100%;
         margin-left: 25vw;
         margin-top: 1vh;
@@ -196,6 +241,7 @@ $containerColor: #fcfcfc;
     .regButton{
         margin-top: 0;
         width: 90%;
+        margin-left: 0;
     }
 
     .arrow{
@@ -208,7 +254,7 @@ $containerColor: #fcfcfc;
     .hasAccount{
         font-size: 1.5em;
         color: $primary;
-        margin-left: 18vw;
+        // margin-left: 18vw;
         margin-top: 3vh;
     }
 
@@ -238,17 +284,29 @@ $containerColor: #fcfcfc;
     .smallTitle{
         margin: 0;
         font-size: 2em;
+        margin-bottom: 1vh;
     }
 
     .categories{
         margin: 0;
-        margin-top: -10vh;
+        margin-top: -15vh;
+        margin-bottom: 2vh;
     }
 
     .category{
         margin: 1.5vw;
     }
     
+    .rectangle{
+        display: none;
+    }
+
+    .enterContainer{
+        width: 93%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+    }
 
 
 }

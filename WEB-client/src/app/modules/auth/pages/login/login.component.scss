@@ -8,8 +8,34 @@ $containerColor: #fcfcfc;
 
 $containerWidth: 100%;
 
+@font-face {
+	font-family: 'Gotham Pro Bold';
+	src: url('../../../../fonts/GothamPro/GothamPro-Bold.ttf');
+	// src: local('Gotham Pro Bold Italic'), local('GothamPro-BoldItalic'),
+	// 	url('GothamPro-BoldItalic.eot?#iefix') format('embedded-opentype'),
+	// 	url('GothamPro-BoldItalic.woff') format('woff'),
+	// 	url('GothamPro-BoldItalic.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gotham Pro';
+	src: url('../../../../fonts/GothamPro/GothamPro-Light.ttf');
+	font-weight: normal;
+	font-style: 300;
+}
+
+@font-face{
+    font-family: 'Ubuntu';
+    src: url('../../../../fonts/Ubuntu/Ubuntu-Bold.ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+
 .container{
-    font-family: 'gothamPro';
+    
+    font-family: 'Gotham Pro';
     margin: 0;
     width: $containerWidth;
     height: 100vh;
@@ -24,6 +50,7 @@ $containerWidth: 100%;
 }
 
 .loginContainer{
+    box-shadow: 0 5px 40px 4px #6d6d6d, inset -3px -3px 3px 0 rgba(196, 191, 182, 0.51), inset 6px 6px 16px 0 rgba(255, 255, 255, 1);
     height: $containerWidth;
     background-color: $primaryBackground;
     border-radius: 1vh;
@@ -61,12 +88,14 @@ form{
 .input{
     outline: none;
     margin-top: -1vh;
-    border: 1px solid #555555;
+    border: none;
     border-radius: 1vh;
-    width: $containerWidth;
+    width: 100%;
     height: 4vh;
     font-size: 2vh;
-    background-color: $containerColor;
+    background-color: $primaryBackground;
+    box-shadow: inset -3px -3px 3px 0 rgba(255,255,255,1), inset 6px 6px 6px 0 rgba(196, 191, 182, 0.51);
+    padding-left: 1vw;
 }
 
 .inputVisible{
@@ -110,6 +139,8 @@ form{
 .signIn{
     margin-top: 15vh;
     font-size: 2.5em;
+    font-family: 'Ubuntu';
+    color: $textBlack;
 }
 
 .formGroup{
@@ -131,7 +162,7 @@ form{
 .errorInput{
     outline: none;
     margin-top: -1vh;
-    border: 1px solid $errorColor;
+    box-shadow: inset -3px -3px 6px 0 rgb(221, 193, 193), inset 3px 3px 6px 0 rgba(128, 62, 62, 0.51);
     border-radius: 1vh;
     width: $containerWidth;
     height: 4vh;

@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { EventFL } from './../../../models/eventsFL';
 import { HeaderService } from './../../service/header.service';
@@ -10,7 +10,11 @@ import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, HostLis
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  imageToShow: any
+  isHome: boolean = false;
+  isEvents: boolean = false;
+  isUser: boolean = false;
+  routeParams: string = '';
+  imageToShow: any;
   userIsLoggedIn: boolean = false;
   events$: Observable<EventFL[]>;
   searchParam: string = '';
@@ -35,7 +39,25 @@ export class HeaderComponent implements OnInit {
     this.events$ = null
   }
 
-  constructor(private headerService: HeaderService, private router: Router, private el: ElementRef) { 
+  constructor(private headerService: HeaderService, private router: Router, private el: ElementRef) {
+    this.routeParams = this.router.url;
+    // switch (this.routeParams){
+    //   case ('/home'): {this.isHome = true; console.log(this.routeParams)};
+    //   case ('/events'): {this.isEvents = true; console.log(this.routeParams)};
+    //   case ('/user/id'): {this.isUser = true; console.log(this.routeParams)};
+    // }
+    if(this.routeParams == '/home'){
+      this.isHome = true
+      console.log(this.routeParams)
+    }
+    if(this.routeParams == '/events'){
+      this.isEvents = true
+      console.log(this.routeParams)
+    }
+    if(this.routeParams == '/user/id'){
+      this.isUser = true
+      console.log(this.routeParams)
+    }
     let reqInfo: {
       avatar: string;
       ok: boolean

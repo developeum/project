@@ -7,16 +7,23 @@ $containerColor: #fcfcfc;
 
 $containerWidth: 100%;
 
-@font-face{
-    font-family: gotham;
-    src: url(../../../../../node_modules/gotham-fonts/fonts/GothamRounded-Medium.ttf)
+@font-face {
+	font-family: 'Gotham Pro';
+	src: url('../../../fonts/GothamPro/GothamPro-Medium.ttf');
+	// src: local('Gotham Pro Medium'), local('GothamPro-Medium'),
+	// 	url('../../../fonts/GothamPro/GothamPro-Medium.eot?#iefix') format('embedded-opentype'),
+	// 	url('GothamPro-Medium.woff') format('woff'),
+	// 	url('GothamPro-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
 }
 
 .container{
-    font-family: "gothamPro";
+    font-family: 'Gotham Pro';
     display: flex;
     flex-direction: column;
     align-items: center;
+    //  border-bottom: 1px solid #dddddd ;
 }
 
 .containerHeader{
@@ -39,7 +46,7 @@ $containerWidth: 100%;
 .text{
     color: $textBlack;
     margin: 1vw;
-    font-family: 'gothamPro';
+    font-family: 'Gotham Pro';
 }
 
 .search{
@@ -50,7 +57,6 @@ $containerWidth: 100%;
     height: 3vh;
     font-size: 2vh;
     background-color: $primaryBackground;
-    font-family: 'gothamPro';
     
 }
 
@@ -69,7 +75,7 @@ $containerWidth: 100%;
 .img{
     width: 100px;
     height: 50px;
-    background-image: url(../../../imges/logo/лого2.svg) ;
+    background-image: url(../../../imges/logo/лого3.svg) ;
     background-size: 100%;
     outline: none;
     cursor: pointer;
@@ -83,7 +89,6 @@ $containerWidth: 100%;
 
 a{
     text-decoration: none;
-    font-family: gotham;
 }
 
 .searchResultContainer{
@@ -98,6 +103,10 @@ a{
     align-items: center;
     box-shadow: 0 5px 40px 4px #9e9e9e;
     border-radius: 1vh;
+}
+
+.noLoggedInSearchContainer{
+    margin-right: 14.5vw;
 }
 
 .event{
@@ -138,16 +147,27 @@ a{
         z-index: 1000;
     }
 
+    .mobileLogo{
+        width: 100px;
+    height: 50px;
+    background-image: url(../../../imges/logo/лого3.svg) ;
+    background-size: 100%;
+    outline: none;
+    cursor: pointer;
+    }
+
     .searchResultContainer{
         display: none;
     }
 
     .img{
         outline: none;
-        width: 50px;
-        height: 50px;
-        background-image: url(../../../imges/icons/icons8-home-96.png);
+        width: 53px;
+        height: 53px;
+        background-image: url(../../../imges/icons/iconHome.svg);
         background-size: 100%;
+        border-radius: 2vh;
+        box-shadow: -3px -3px 6px 5px  rgb(250, 248, 248), 3px 3px 6px 5px rgba(177, 173, 166, 0.51);
     }
 
     .inputContainer{
@@ -156,10 +176,12 @@ a{
 
     .mobileSearch{
         outline: none;
-        width: 50px;
-        height: 50px;
-        background-image: url(../../../imges/icons/icons8-search-96.png);
+        width: 53px;
+        height: 53px;
+        background-image: url(../../../imges/icons/iconSearch.svg);
         background-size: 100%;
+        border-radius: 2vh;
+        box-shadow: -3px -3px 6px 5px  rgb(250, 248, 248), 3px 3px 6px 5px rgba(177, 173, 166, 0.51);
     }
 
     .text{
@@ -168,10 +190,12 @@ a{
 
     .events{
         outline: none;
-        width: 50px;
-        height: 50px;
-        background-image: url(../../../imges/icons/events.png);
+        width: 53px;
+        height: 53px;
+        background-image: url(../../../imges/icons/iconEvent.svg);
         background-size: 100%;
+        border-radius: 2vh;
+        box-shadow: -3px -3px 6px 5px  rgb(250, 248, 248), 3px 3px 6px 5px rgba(177, 173, 166, 0.51);
     }
 
     .userImg{
@@ -195,19 +219,24 @@ a{
     }
 
     .mobileInput{
+        font-family: 'Gotham Pro';
         width: 90vw;
         height: 5vh;
         margin-top: 2vh;
         margin-bottom: 2vh;
         border-radius: 1vh;
-        border: 1px solid $textBlack;
-        font-size: 2rem;
+        border: none;
+        font-size: 1.2rem;
         outline: none;
+        background-color: $primaryBackground;
+        box-shadow: inset -3px -3px 3px 0 rgba(255,255,255,1), inset 6px 6px 6px 0 rgba(196, 191, 182, 0.51);
+        padding-left: 2vh;
     }
 
     .event{
         width: 90vw;
-        height: 15vh;
+        height: 12vh;
+        padding-left: 2vh;
         margin-bottom: 1vh;
         border: none;
         margin-bottom: 3vh;
@@ -232,11 +261,22 @@ a{
 
     .userMobile{
         outline: none;
-        width: 50px;
-        height: 50px;
-        background-image: url(../../../imges/icons/user.png);
+        width: 53px;
+        height: 53px;
+        background-image: url(../../../imges/icons/iconUser.svg);
         background-size: 100%;
         margin-left: -10vw;
+        border-radius: 2vh;
+        box-shadow: -3px -3px 6px 5px  rgb(250, 248, 248), 3px 3px 6px 5px rgba(177, 173, 166, 0.51);
+    }
+
+    .putDown{
+        box-shadow: inset -3px -3px 10px 0  rgb(250, 248, 248), inset 3px 3px 10px 0 rgba(177, 173, 166, 0.51);
+    }
+
+    .putDownSearch{
+        box-shadow: inset -3px -3px 10px 0  rgb(250, 248, 248), inset 3px 3px 10px 0 rgba(177, 173, 166, 0.51);
+        background-image: url(../../../imges/icons/iconSearchOff.svg);
     }
 }
 @media screen and(max-width: 380px) {
@@ -250,7 +290,7 @@ a{
         outline: none;
         width: 40px;
         height: 40px;
-        background-image: url(../../../imges/icons/icons8-home-96.png);
+        background-image: url(../../../imges/icons/iconHome.svg);
         background-size: 100%;
     }
 
@@ -262,7 +302,7 @@ a{
         outline: none;
         width: 40px;
         height: 40px;
-        background-image: url(../../../imges/icons/icons8-search-96.png);
+        background-image: url(../../../imges/icons/iconSearch.svg);
         background-size: 100%;
     }
 
@@ -287,7 +327,7 @@ a{
         outline: none;
         width: 40px;
         height: 40px;
-        background-image: url(../../../imges/icons/events.png);
+        background-image: url(../../../imges/icons/iconEvent.svg);
         background-size: 100%;
     }
 
@@ -300,7 +340,7 @@ a{
         margin-left: -10%;
         width: 40px;
         height: 40px;
-        background-image: url(../../../imges/icons/user.png);
+        background-image: url(../../../imges/icons/iconUser.svg);
         background-size: 100%;
     }
 }
