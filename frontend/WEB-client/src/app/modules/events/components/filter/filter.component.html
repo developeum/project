@@ -4,6 +4,7 @@
             <label class="title">Дата проведения</label>
             <div>
                 <p class="date">От <input class="dateInput" type="date" name="startsMin" [(ngModel)] = "startsMin"> до <input class="dateInput" type="date" name="startsMax" [(ngModel)] = "startsMax"></p>
+                <app-calendar (throwDate) = "throwDate($event)"></app-calendar>
             </div>
         </div>
         <form [formGroup] = "filterForm" (ngSubmit) = "onSubmit()">

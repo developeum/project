@@ -16,6 +16,6 @@ export class AuthGuard implements CanActivate {
             return true;
         }
         
-        return this.router.createUrlTree(['/', {message: 'You are not authorized'}])
+        return this.router.createUrlTree(['/auth', {message: 'You are not authorized'}])
     }
 }

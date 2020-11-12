@@ -22,11 +22,11 @@ $containerColor: #fcfcfc;
     align-items: center;
     position: relative;
     cursor: pointer;
-    box-shadow: -6px -6px 16px 0 rgba(255,255,255,1), 6px 6px 16px 0 rgba(194, 189, 181, 0.51);
+    box-shadow: -6px -6px 10px 5px rgba(255,255,255,1), 6px 6px 10px 5px rgba(177, 173, 166, 0.51);
 }
 
 .eventContainer:active{
-    box-shadow: inset -6px -6px 16px 0 rgba(255,255,255,1), inset 6px 6px 16px 0 rgba(194, 189, 181, 0.51);
+    box-shadow: inset -6px -6px 10px 5px rgba(255,255,255,1), inset 6px 6px 10px 5px rgba(177, 173, 166, 0.51);
 }
 
 .title{

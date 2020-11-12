@@ -62,9 +62,11 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("currentUser", token);
       this.router.navigate(['/'])
     },
-    (err) => {
-      this.error = true;
-      this.errorType = true;
+    (ok) => {
+      if(ok == false){
+        this.error = true;
+        this.errorType = true;
+      }    
     })
     
   }

@@ -66,11 +66,11 @@ $containerColor: #fcfcfc;
     outline: none;
     cursor: pointer;
 
-    box-shadow: -6px -6px 16px 0 rgba(255,255,255,1), 6px 6px 16px 0 rgba(194, 189, 181, 0.51);
+    box-shadow: -6px -6px 10px 5px rgba(255,255,255,1), 6px 6px 10px 5px rgba(194, 189, 181, 0.51);
 }
 
 .regButton:active{
-    box-shadow: inset -6px -6px 16px 0 rgba(255,255,255,1), inset 6px 6px 16px 0 rgba(194, 189, 181, 0.51);
+    box-shadow: inset -6px -6px 10px 5px rgba(255,255,255,1), inset 6px 6px 10px 5px rgba(194, 189, 181, 0.51);
 }
 
 .secondContainer{

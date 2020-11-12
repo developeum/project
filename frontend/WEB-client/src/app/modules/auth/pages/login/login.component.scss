@@ -70,6 +70,8 @@ form{
 }
 
 .inputVisible{
+    cursor: pointer;
+    outline: none;
     position: absolute;
     right: 10px;
     z-index: 9;
@@ -158,6 +160,17 @@ form{
 @media screen and(max-width: 420px) {
     .container{
         position: relative;
+    }
+
+    .inputVisible{
+        margin-top: 1vh;
+        position: absolute;
+        right: 10px;
+        z-index: 9;
+        width: 5vw;
+        background: url(../../../../imges/icons/icons8-closed-eye-50.png);
+        border: none;
+        background-size: 100%;
     }
 
     .loginContainer{

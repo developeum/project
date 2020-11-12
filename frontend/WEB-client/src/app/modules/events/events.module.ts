@@ -5,13 +5,14 @@ import { EventsPageComponent } from './pages/events-page/events-page.component';
 import { EventsRoutingModule } from './events-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterComponent } from './components/filter/filter.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 
 
 @NgModule({
   declarations: [
     EventsPageComponent, 
-    FilterComponent,
+    FilterComponent, CalendarComponent,
     
   ],
   imports: [
