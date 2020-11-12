@@ -49,31 +49,31 @@ export class PersonalService {
 
   getUserInfo(): Observable<User>{
     return this.http
-    .get<User>("http://localhost:8000/api/user/me", this.httpOptionsUser)
+    .get<User>("/api/user/me", this.httpOptionsUser)
     .pipe(retry(1))
   }
 
   getFavEvents(): Observable<EventFL[]>{
     return this.http
-    .get<EventFL[]>("http://localhost:8000/api/user/me/visited", this.httpOptionsUser)
+    .get<EventFL[]>("/api/user/me/visited", this.httpOptionsUser)
     .pipe(retry(1))
   }
 
   getStacks(){
     return this.http
-    .get("http://localhost:8000/api/general/categories", this.httpOptionsDefault)
+    .get("/api/general/categories", this.httpOptionsDefault)
     .pipe(retry(1))
   }
 
   getCities(){
     return this.http
-    .get("http://localhost:8000/api/general/cities", this.httpOptionsDefault)
+    .get("/api/general/cities", this.httpOptionsDefault)
     .pipe(retry(1))
   }
 
   postInfo(phone: string, first_name: string, last_name: string, status: any, city: any, stack: any){
     return this.http
-    .post("http://localhost:8000/api/user/me",{
+    .post("/api/user/me",{
       phone: phone,
       first_name: first_name,
       last_name: last_name,
@@ -86,7 +86,7 @@ export class PersonalService {
 
   postEmail(email: any, password: any){
     return this.http
-    .post("http://localhost:8000/api/user/me/credentials",{
+    .post("/api/user/me/credentials",{
       email: email,
       old_password: password
     },
@@ -96,7 +96,7 @@ export class PersonalService {
   postPassword(oldPass: any, newPass: any){
     console.log('hi')
     return this.http
-    .post("http://localhost:8000/api/user/me/credentials",{
+    .post("/api/user/me/credentials",{
       old_password: oldPass,
       password: newPass,
     },
@@ -104,7 +104,7 @@ export class PersonalService {
   }
 
   getImg(imageUrl: string): Observable<Blob>{
-    return this.http.get('http://localhost:8000' + imageUrl, {responseType: 'blob'})
+    return this.http.get(imageUrl, {responseType: 'blob'})
   }
 
   uploadImage(image: File){
@@ -113,6 +113,6 @@ export class PersonalService {
     formData.append('avatar', image, image.name);
 
     return this.http
-    .post('http://localhost:8000/api/user/me/avatar', formData, this.httpOptionsI)
+    .post('/api/user/me/avatar', formData, this.httpOptionsI)
   }
 }

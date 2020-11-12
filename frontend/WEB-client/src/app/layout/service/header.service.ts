@@ -19,12 +19,12 @@ export class HeaderService {
 
   getUserImgUrl():Observable <Avatar> {
     return this.http
-    .get<Avatar>('http://localhost:8000/api/user/me/avatar', this.httpOptionsI)
+    .get<Avatar>('/api/user/me/avatar', this.httpOptionsI)
   }
 
   getImg(url: string): Observable<Blob>{
     return this.http
-    .get('http://localhost:8000' + url, {responseType: 'blob'})
+    .get(url, {responseType: 'blob'})
   }
 
   getSerchingEvents(input: string){
@@ -37,6 +37,6 @@ export class HeaderService {
       }
     }
     return this.http
-    .get<EventFL[]>('http://localhost:8000/api/events', httpOptionsDefault)
+    .get<EventFL[]>('/api/events', httpOptionsDefault)
   }
 }

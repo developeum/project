@@ -25,13 +25,13 @@ export class EventService {
 
   getEventData(id: number): Observable<Event>{
     return this.http
-    .get<Event>("http://localhost:8000/api/events/" + id, this.httpOptions)
+    .get<Event>("/api/events/" + id, this.httpOptions)
     .pipe(retry(1))
   }
 
   postToVisited(data: number, type: string){
     return this.http
-    .post("http://localhost:8000/api/user/me/visited", {
+    .post("/api/user/me/visited", {
       event_id: Number(data),
       type: type
     },

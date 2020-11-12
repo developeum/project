@@ -43,7 +43,7 @@ export class EventsService {
         }
       };
       return this.http
-        .get<EventFL[]>("http://localhost:8000/api/events", httpOptionsUser)
+        .get<EventFL[]>("/api/events", httpOptionsUser)
         .pipe(retry(1))
     } else {
       let httpOption = {
@@ -60,32 +60,32 @@ export class EventsService {
         }
       };
       return this.http
-        .get<EventFL[]>("http://localhost:8000/api/events", httpOption)
+        .get<EventFL[]>("/api/events", httpOption)
         .pipe(retry(1))
     }
   }
 
   getClearEvents(): Observable<EventFL[]>{
     return this.http
-    .get<EventFL[]>('http://localhost:8000/api/events', this.httpOptions)
+    .get<EventFL[]>('/api/events', this.httpOptions)
     .pipe(retry(1))
   }
 
   getTypes(): Observable<Type[]>{
     return this.http
-    .get<Type[]>("http://localhost:8000/api/general/event_types", this.httpOptions)
+    .get<Type[]>("/api/general/event_types", this.httpOptions)
     .pipe(retry(1))
   }
 
   getStack(): Observable<Stack[]>{
     return this.http
-    .get<Stack[]>("http://localhost:8000/api/general/categories", this.httpOptions)
+    .get<Stack[]>("/api/general/categories", this.httpOptions)
     .pipe(retry(1))
   }
 
   getCities(): Observable<City[]>{
     return this.http
-    .get<City[]>("http://localhost:8000/api/general/cities", this.httpOptions)
+    .get<City[]>("/api/general/cities", this.httpOptions)
     .pipe(retry(1))
   }
 }

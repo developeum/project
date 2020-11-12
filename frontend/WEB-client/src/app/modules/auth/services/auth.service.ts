@@ -31,7 +31,7 @@ export class AuthService {
     
 
     return this.http
-      .post("http://localhost:8000/api/user/login", {
+      .post("/api/user/login", {
         email: username,
         password: password
       }, {responseType: 'text'})
@@ -43,7 +43,7 @@ export class AuthService {
     console.log("signing up")
 
     return this.http
-    .post("http://localhost:8000/api/user/register",{
+    .post("/api/user/register",{
       email: username,
       password: password,
       first_name: firstName,
@@ -65,7 +65,7 @@ export class AuthService {
 
   getStacks(): Observable<Stack[]>{
     return this.http
-    .get <Stack[]>('http://localhost:8000/api/general/categories', this.httpOptions)
+    .get <Stack[]>('/api/general/categories', this.httpOptions)
     .pipe(retry(1))
   }
 
