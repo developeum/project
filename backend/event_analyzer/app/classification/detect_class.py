@@ -1,11 +1,13 @@
-import pandas as pd
-import numpy as np
 import pickle
+
+import numpy as np
+import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-def Detect_class(events_df):
-    pd.options.mode.chained_assignment = None
-                            
+pd.options.mode.chained_assignment = None
+np.set_printoptions(precision=3, suppress=True)
+
+def Detect_class(events_df):                  
     clas = []
     ds = ['AI', 'Data Science', 'ai', 'data science', 'data engineering', 'data scientist', 'deep learning',
           'машинное обучение', 'нейросети']
@@ -35,15 +37,13 @@ def Detect_class(events_df):
 
     temp_df = events_df.join(cl, how='inner')
 
-    pkl_filename = "pickle_model_ada.pkl"
+    pkl_filename = "static/pickle_model_ada.pkl"
     with open(pkl_filename, 'rb') as file:
         pickle_model = pickle.load(file)
 
-    pkl_vec_filename = "pickle_vect.pkl"
+    pkl_vec_filename = "static/pickle_vect.pkl"
     with open(pkl_vec_filename, 'rb') as file:
         pickle_vec = pickle.load(file)
-
-    np.set_printoptions(precision=3, suppress=True)
 
     label = temp_df['class_tmp'].to_numpy()
     desc = temp_df['normalized_description'].to_numpy()

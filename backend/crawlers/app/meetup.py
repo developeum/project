@@ -1,11 +1,18 @@
 import json
 import logging
 from datetime import datetime, timedelta, timezone
-from os import listdir
+from os import getenv, listdir
 
 import requests
+from nameko.standalone.events import event_dispatcher
 
-from utils.db_worker import commit_changes, store_event
+dispatch = event_dispatcher({
+    'AMQP_URI': 'pyamqp://{user}:{password}@e{host}'.format(
+        user=getenv('RABBITMQ_DEFAULT_USER'),
+        password=getenv('RABBITMQ_DEFAULT_PASS'),
+        host=getenv('RABBITMQ_HOST')
+    )
+})
 
 logging.basicConfig(filename='.meetup.log',
                     filemode='a',
@@ -103,6 +110,7 @@ def extract_info(event: dict) -> dict:
 
     return {
         'name': event['name'],
+        'event_type': None,
         'event_time': event_time,
         'city': city,
         'place': place,
@@ -142,15 +150,12 @@ def get_events() -> None:
             if event['created'] <= last_create_timestamp:
                 continue
 
-            info = extract_info(event)
-            store_event(**info)
+            dispatch('timepad_crawler', 'event', extract_info(event))
 
             new_create_timestamp = max(new_create_timestamp,
                                        event['created'])
 
         save_timestamp(urlname, new_create_timestamp)
-
-    commit_changes()
 
 if __name__ == '__main__':
     init_state_file()
