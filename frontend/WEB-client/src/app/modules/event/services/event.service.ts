@@ -32,12 +32,8 @@ export class EventService {
   postToVisited(data: number, type: string){
     return this.http
     .post("/api/user/me/visited", {
-<<<<<<< HEAD:frontend/WEB-client/src/app/modules/event/services/event.service.ts
-      event_id: Number(data)
-=======
       event_id: Number(data),
       type: type
->>>>>>> design:frontend/WEB-client/src/app/modules/event/services/event.service.ts
     },
     this.httpUserOptions
     )

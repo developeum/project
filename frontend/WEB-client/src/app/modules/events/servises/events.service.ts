@@ -60,11 +60,7 @@ export class EventsService {
         }
       };
       return this.http
-<<<<<<< HEAD:frontend/WEB-client/src/app/modules/events/servises/events.service.ts
-        .get<EventFL[]>("/api/events", options)
-=======
         .get<EventFL[]>("/api/events", httpOption)
->>>>>>> design:frontend/WEB-client/src/app/modules/events/servises/events.service.ts
         .pipe(retry(1))
     }
   }

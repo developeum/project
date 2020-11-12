@@ -61,11 +61,7 @@ export class PersonalService {
 
   getStacks(){
     return this.http
-<<<<<<< HEAD:frontend/WEB-client/src/app/modules/personal/services/personal.service.ts
-    .get("/api/general/stacks", this.httpOptionsDefault)
-=======
     .get("/api/general/categories", this.httpOptionsDefault)
->>>>>>> design:frontend/WEB-client/src/app/modules/personal/services/personal.service.ts
     .pipe(retry(1))
   }
 
