@@ -1,8 +1,8 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { EventFL } from './../../../models/eventsFL';
 import { HeaderService } from './../../service/header.service';
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -10,12 +10,24 @@ import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/cor
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  imageToShow: any
+  isHome: boolean = false;
+  isEvents: boolean = false;
+  isUser: boolean = false;
+  routeParams: string = '';
+  imageToShow: any;
   userIsLoggedIn: boolean = false;
   events$: Observable<EventFL[]>;
   searchParam: string = '';
   searchVisibility: boolean = false;
   noEvents: boolean = false;
+
+  @ViewChild('searchContainer') element: ElementRef;
+
+  @HostListener ('click', ['$event']) onClick(e: MouseEvent){
+    if (!this.element.nativeElement.contains(e.target)){
+      this.events$ = null;
+    }
+  }
 
   @Output() onChanged = new EventEmitter<boolean>()
 
@@ -23,11 +35,39 @@ export class HeaderComponent implements OnInit {
     this.onChanged.emit(!this.searchVisibility)
   }
 
-  constructor(private headerService: HeaderService, private router: Router) { 
+  closeSearch(){
+    this.events$ = null
+  }
+
+  constructor(private headerService: HeaderService, private router: Router, private el: ElementRef) {
+    this.routeParams = this.router.url;
+    // switch (this.routeParams){
+    //   case ('/home'): {this.isHome = true; console.log(this.routeParams)};
+    //   case ('/events'): {this.isEvents = true; console.log(this.routeParams)};
+    //   case ('/user/id'): {this.isUser = true; console.log(this.routeParams)};
+    // }
+    if(this.routeParams == '/home'){
+      this.isHome = true
+      console.log(this.routeParams)
+    }
+    if(this.routeParams == '/events'){
+      this.isEvents = true
+      console.log(this.routeParams)
+    }
+    if(this.routeParams == '/user/id'){
+      this.isUser = true
+      console.log(this.routeParams)
+    }
+    let reqInfo: {
+      avatar: string;
+      ok: boolean
+    } 
     if(localStorage.getItem('currentUser') != null){
       this.userIsLoggedIn = true;
       this.headerService.getUserImgUrl().subscribe(x => {
-        this.loadImg(x)
+        reqInfo = x;
+        // console.log(reqInfo.avatar)
+        this.loadImg(reqInfo.avatar)
       })
     }
   }
@@ -36,11 +76,11 @@ export class HeaderComponent implements OnInit {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       this.imageToShow = reader.result;
-      console.log(this.imageToShow)
+      // console.log(this.imageToShow)
     }, false);
 
     if (image) {
-      console.log("made")
+      // console.log("made")
 
       reader.readAsDataURL(image)
     }
@@ -75,7 +115,7 @@ export class HeaderComponent implements OnInit {
 
   searchEvents(event: any){
     if( event.target.value != ''){
-      console.log(event.target.value);
+      // console.log(event.target.value);
       this.loadSearchinEvents(event.target.value)
     } else {
       this.events$ = null

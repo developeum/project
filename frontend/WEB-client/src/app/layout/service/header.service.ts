@@ -1,3 +1,4 @@
+import { Avatar } from './../../models/avatar';
 import { EventFL } from './../../models/eventsFL';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -16,14 +17,14 @@ export class HeaderService {
 
   constructor(private http: HttpClient) { }
 
-  getUserImgUrl(): Observable<string>{
+  getUserImgUrl():Observable <Avatar> {
     return this.http
-    .get<string>('http://localhost:8000/api/user/me/avatar', this.httpOptionsI)
+    .get<Avatar>('/api/user/me/avatar', this.httpOptionsI)
   }
 
   getImg(url: string): Observable<Blob>{
     return this.http
-    .get('http://localhost:8000' + url, {responseType: 'blob'})
+    .get(url, {responseType: 'blob'})
   }
 
   getSerchingEvents(input: string){
@@ -36,6 +37,6 @@ export class HeaderService {
       }
     }
     return this.http
-    .get<EventFL[]>('http://localhost:8000/api/events', httpOptionsDefault)
+    .get<EventFL[]>('/api/events', httpOptionsDefault)
   }
 }

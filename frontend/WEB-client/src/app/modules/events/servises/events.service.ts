@@ -26,11 +26,11 @@ export class EventsService {
     
   }
 
-  getEvents(type?: [number], stack?: [number], city?: [number], starts_at_min?: string, starts_at_max?: string){
+  getEvents(skip?: number, type: number[] = [], stack: number[] = [], city: number[] = [], starts_at_min: string = "", starts_at_max: string = ""){
     if (localStorage.getItem("currentUser") != null) {
       let httpOptionsUser = {
         headers:{
-          "Content-Type": "application/json; charset=utf-8",
+          "Content-Type": "application/json",
           "X-Session-Token": `${localStorage.getItem("currentUser")}`
         },
         params:{
@@ -38,25 +38,33 @@ export class EventsService {
           'category': stack.toString(),
           'city': city.toString(),
           'starts_at_min': starts_at_min,
-          'starts_at_max': starts_at_max
+          'starts_at_max': starts_at_max,
+          'skip': skip.toString(),
         }
       };
       return this.http
         .get<EventFL[]>("/api/events", httpOptionsUser)
         .pipe(retry(1))
     } else {
-      console.log("byt")
-      let headers = new HttpHeaders({"Content-Type": "application/json; charset=utf-8"})
-      let httpParams = new HttpParams()
-      .set('type', type.toString())
-      .set('categories', stack.toString())
-      .set('cities', city.toString())
-      .set('starts_at_min', starts_at_min)
-      .set('starts_at_max', starts_at_max);
-      console.log(httpParams)
-      let options = {headers, httpParams}
+      let httpOption = {
+        headers:{
+          "Content-Type": "application/json",
+        },
+        params:{
+          'type': type.toString(),
+          'category': stack.toString(),
+          'city': city.toString(),
+          'starts_at_min': starts_at_min,
+          'starts_at_max': starts_at_max,
+          'skip': skip.toString(),
+        }
+      };
       return this.http
+<<<<<<< HEAD:frontend/WEB-client/src/app/modules/events/servises/events.service.ts
         .get<EventFL[]>("/api/events", options)
+=======
+        .get<EventFL[]>("/api/events", httpOption)
+>>>>>>> design:frontend/WEB-client/src/app/modules/events/servises/events.service.ts
         .pipe(retry(1))
     }
   }

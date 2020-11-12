@@ -26,7 +26,9 @@ export class FilterComponent implements OnInit {
   categories: any = [];
   places: any = [];
   startsMin: string = '';
+  startsMinToShow: string = '';
   startsMax: string = '';
+  startsMaxToShow: string = '';
 
   @Output() setParams = new EventEmitter<Filter>();
 
@@ -188,6 +190,10 @@ export class FilterComponent implements OnInit {
   throwDate(date: string[]){
     this.startsMin = date[0];
     this.startsMax = date[1];
+    let russianDate = this.startsMin.split('-')
+    this.startsMinToShow = russianDate[2] + '.' + russianDate[1] + '.' + russianDate[0];
+    russianDate = this.startsMax.split('-')
+    this.startsMaxToShow = russianDate[2] + '.' + russianDate[1] + '.' + russianDate[0];
     console.log(this.startsMin)
   }
 

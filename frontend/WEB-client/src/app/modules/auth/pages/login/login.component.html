@@ -5,12 +5,14 @@
             <form [formGroup] = "loginForm" (ngSubmit) = "onSubmit()" >
                 <div class="formGroup">
                     <p [ngClass] = "{'errorText': error}" class="inputDescription">Логин</p>
-                    <input formControlName = "username" (change) = "fixForm()" class="input" [ngClass] = "{'errorInput': error}" type="text" placeholder="login" />
+                    <div class="wrapInput">
+                        <input (keyup) = "makeNoError" formControlName = "username" (change) = "fixForm()" class="input" [ngClass] = "{'errorInput': error}" type="text"  />
+                    </div>         
                 </div>
                 <div class="formGroup">
                     <p [ngClass] = "{'errorText': error}" class="inputDescription">Пароль</p>
                     <div class="wrapInput">
-                        <input #password formControlName = "password" (change) = "fixForm()" class="input" [ngClass] = "{'errorInput': error}" type="password" placeholder="password" />
+                        <input #password (keyup) = "makeNoError()" formControlName = "password" (change) = "fixForm()" class="input" [ngClass] = "{'errorInput': error}" type="password"  />
                         <input class="inputVisible" type="text" (mouseenter) = "changePassVisibility($event)" (mouseleave) = "changePassVisibility($event)" value="">
                     </div>                    
                 </div>

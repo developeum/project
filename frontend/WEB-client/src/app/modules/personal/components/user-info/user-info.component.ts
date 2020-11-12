@@ -19,6 +19,8 @@ export class UserInfoComponent implements OnInit {
   changeMod: boolean = false;
   imageToShow: any;
   userInfoForm: FormGroup;
+  loginForm: FormGroup;
+  passwordForm: FormGroup;
   currentUserId: string;
   stacks: any;
   cities: any;
@@ -54,6 +56,7 @@ export class UserInfoComponent implements OnInit {
     this.loadUserInfo();
     this.loadStacks();
     this.loadCities();
+    this.createChangeLogPassForms();
   }
 
   loadUserInfo(){
@@ -62,9 +65,8 @@ export class UserInfoComponent implements OnInit {
   }
 
   processUserInfo(data: any){
-    console.log(data)
+    console.log('loadingData')
     this.userInfo = data;
-    console.log(this.userInfo)
     this.userInfoForm = this.formBuilder.group({
       phone: [this.userInfo.phone, Validators.required],
       firstName: [this.userInfo.first_name, Validators.required],
@@ -76,6 +78,17 @@ export class UserInfoComponent implements OnInit {
     if(data.profile_img != null){
       this.loadImg(data.profile_img);
     }
+  }
+
+  createChangeLogPassForms(){
+    this.loginForm = this.formBuilder.group({
+      login: ["", Validators.required],
+      password: ["", Validators.required]
+    });
+    this.passwordForm = this.formBuilder.group({
+      oldPass: ["", Validators.required],
+      password: ["", Validators.required]
+    })
   }
 
   loadStacks(){
@@ -92,6 +105,14 @@ export class UserInfoComponent implements OnInit {
 
   get form(){
     return this.userInfoForm.controls;
+  }
+
+  get logForm(){
+    return this.loginForm.controls;
+  }
+
+  get passForm(){
+    return this.passwordForm.controls;
   }
 
   logout(){
@@ -124,7 +145,6 @@ export class UserInfoComponent implements OnInit {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       this.imageToShow = reader.result;
-      console.log(this.imageToShow)
     }, false);
 
     if (image) {
@@ -169,7 +189,17 @@ export class UserInfoComponent implements OnInit {
   }
 
   changeEmail(){
+    console.log(this.logForm.login.value)
+    this.pageService.postEmail(this.logForm.login.value, this.logForm.password.value).subscribe(x => {
+      console.log(x)
+      this.loadUserInfo();
+    })
+  }
 
+  changePass(){
+    this.pageService.postPassword(this.passForm.oldPass.value, this.passForm.password.value).subscribe(x => {
+      console.log(x)
+    })
   }
 
 }

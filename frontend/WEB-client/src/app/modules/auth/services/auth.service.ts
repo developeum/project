@@ -65,7 +65,11 @@ export class AuthService {
 
   getStacks(): Observable<Stack[]>{
     return this.http
+<<<<<<< HEAD:frontend/WEB-client/src/app/modules/auth/services/auth.service.ts
     .get <Stack[]>('/api/general/stacks', this.httpOptions)
+=======
+    .get <Stack[]>('/api/general/categories', this.httpOptions)
+>>>>>>> design:frontend/WEB-client/src/app/modules/auth/services/auth.service.ts
     .pipe(retry(1))
   }
 

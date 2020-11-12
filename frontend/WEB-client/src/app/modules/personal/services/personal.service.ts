@@ -61,12 +61,15 @@ export class PersonalService {
 
   getStacks(){
     return this.http
+<<<<<<< HEAD:frontend/WEB-client/src/app/modules/personal/services/personal.service.ts
     .get("/api/general/stacks", this.httpOptionsDefault)
+=======
+    .get("/api/general/categories", this.httpOptionsDefault)
+>>>>>>> design:frontend/WEB-client/src/app/modules/personal/services/personal.service.ts
     .pipe(retry(1))
   }
 
   getCities(){
-    console.log('getting')
     return this.http
     .get("/api/general/cities", this.httpOptionsDefault)
     .pipe(retry(1))
@@ -82,6 +85,25 @@ export class PersonalService {
       city: city,
       stack: stack
     }, 
+    this.httpOptionsUser)
+  }
+
+  postEmail(email: any, password: any){
+    return this.http
+    .post("/api/user/me/credentials",{
+      email: email,
+      old_password: password
+    },
+    this.httpOptionsUser)
+  }
+
+  postPassword(oldPass: any, newPass: any){
+    console.log('hi')
+    return this.http
+    .post("/api/user/me/credentials",{
+      old_password: oldPass,
+      password: newPass,
+    },
     this.httpOptionsUser)
   }
 

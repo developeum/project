@@ -11,7 +11,9 @@ export class CalendarComponent implements OnInit {
   checkMonth: number;
   checkYear: number;
   minDate: string;
+  minDateNum: number;
   maxDate: string;
+  maxDateNum: number;
 
   fullDate = new Date();
   currMonth = this.fullDate.getMonth()+1;
@@ -161,14 +163,18 @@ export class CalendarComponent implements OnInit {
         if(this.currMonth/10 < 1){
           if (currentDate/10 < 1){
             this.minDate = this.fullDate.getFullYear() + '-0' + this.currMonth + '-0' + currentDate;
+            this.minDateNum = currentDate - 1
           } else {
             this.minDate = this.fullDate.getFullYear() + '-0' + this.currMonth + '-' + currentDate;
+            this.minDateNum = currentDate - 1
           }
         } else {
           if (currentDate/10 < 1){
             this.minDate = this.fullDate.getFullYear() + '-' + this.currMonth + '-0' + currentDate;
+            this.minDateNum = currentDate - 1
           } else {
             this.minDate = this.fullDate.getFullYear() + '-' + this.currMonth + '-' + currentDate;
+            this.minDateNum = currentDate - 1
           }
         } 
       } 
@@ -176,14 +182,18 @@ export class CalendarComponent implements OnInit {
         if(this.currMonth/10 < 1){
           if (currentDate/10 < 1){
             this.maxDate = this.fullDate.getFullYear() + '-0' + this.currMonth + '-0' + currentDate;
+            this.maxDateNum = currentDate - 1
           } else {
             this.maxDate = this.fullDate.getFullYear() + '-0' + this.currMonth + '-' + currentDate;
+            this.maxDateNum = currentDate - 1
           }
         } else {
           if (currentDate/10 < 1){
             this.maxDate = this.fullDate.getFullYear() + '-' + this.currMonth + '-0' + currentDate;
+            this.maxDateNum = currentDate - 1
           } else {
             this.maxDate = this.fullDate.getFullYear() + '-' + this.currMonth + '-' + currentDate;
+            this.maxDateNum = currentDate - 1
           }
         }
       } 
@@ -260,5 +270,4 @@ export class CalendarComponent implements OnInit {
     console.log(monthDates);
     return {extraMonthDates, monthDates};
   }
-
 }

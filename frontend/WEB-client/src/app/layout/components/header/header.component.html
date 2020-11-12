@@ -1,20 +1,20 @@
 <div class="container">
     <div class="containerHeader">
         <div class="title">
-            <div class="img" routerLink = "/"></div>
+            <div [ngClass] = "{putDown: isHome}" class="img" routerLink = "/"></div>
         </div>
         <div class="inputContainer">
-            <input (keyup) = "searchEvents($event)" type="text" class="search input search-input" placeholder = "search by name"/>
+            <input  (keyup) = "searchEvents($event)" type="text" class="search input search-input" placeholder = "search by name"/>
         </div> 
-        <div (click) = "changeSearchVisibility()" class="mobileSearch"></div>              
+        <div [ngClass] = "{putDownSearch: searchVisibility}" (click) = "changeSearchVisibility()" class="mobileSearch"></div>              
         <a *ngIf = "!userIsLoggedIn" routerLink = "/auth" class = "text">Вход</a>
         <a *ngIf = "!userIsLoggedIn" routerLink = "/auth/register" class = "text">Регистрация</a>
-        <div class="events" routerLink = "/events"></div>    
+        <div [ngClass] = "{putDown: isEvents}" class="events" routerLink = "/events"></div>    
         <a routerLink = "/events" class="text">мероприятия</a>
         <a *ngIf = "userIsLoggedIn" routerLink = "/user" class="user"><img [src]="imageToShow" class="userImg"></a>
-        <div class="userMobile" routerLink = "/user"> </div>
+        <div [ngClass] = "{putDown: isUser}" class="userMobile" routerLink = "/user"> </div>
     </div>
-    <div *ngIf = "events$ | async as events" class="searchResultContainer">
+    <div [ngClass] = "{noLoggedInSearchContainer: !userIsLoggedIn}" *ngIf = "events$ | async as events" class="searchResultContainer" #searchContainer>
 
             <div *ngFor = "let event of events" (click) = "navToEvent(event.id)" class="event">
                 <p class="eTitle">{{event.name}}</p>
