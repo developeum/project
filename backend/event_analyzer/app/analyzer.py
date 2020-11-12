@@ -6,7 +6,6 @@ from nameko.events import event_handler
 from classification.detect_class import Detect_class
 from classification.detect_types import Detect_type
 from classification.normalize import Normalize
-
 from consts import class_mappings, type_mappings
 
 class EventAnalyzer:
@@ -17,10 +16,14 @@ class EventAnalyzer:
         events_df = pd.DataFrame(payload)
 
         events_df = Normalize(events_df)
-        events_df = Detect_type(events_df)
-        events_df = Detect_class(events_df)
-
-        result = events_df.to_dict(orient='records')[0]
+        if events_df.empty:
+            result = payload
+            result['class'] = 'other'
+            result['event_type'] = 'others'
+        else:
+            events_df = Detect_type(events_df)
+            events_df = Detect_class(events_df)
+            result = events_df.to_dict(orient='records')[0]
 
         result['event_time'] = datetime.strptime(result['event_time'],
                                                  '%Y-%m-%dT%H:%M:%S')

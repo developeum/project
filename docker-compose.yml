@@ -14,6 +14,8 @@ services:
     build: ./frontend/
     volumes:
       - images_volume:/var/www/html/static/:ro
+    depends_on:
+      - api
     ports:
       - 2020:80
   api:
@@ -22,6 +24,9 @@ services:
       - images_volume:/static/
     env_file:
       - ./environment/database.env
+    environment:
+      POSTGRES_HOST: "postgres"
+      POSTGRES_PORT: "5432"
     depends_on:
       - postgres
   event_analyzer:

@@ -7,7 +7,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 pd.options.mode.chained_assignment = None
 np.set_printoptions(precision=3, suppress=True)
 
-def Detect_class(events_df):                  
+def Detect_class(events_df):
     clas = []
     ds = ['AI', 'Data Science', 'ai', 'data science', 'data engineering', 'data scientist', 'deep learning',
           'машинное обучение', 'нейросети']
@@ -19,12 +19,12 @@ def Detect_class(events_df):
 
     possible_class = ['ds', 'mobile', 'qa', 'web', 'devops', 'busorg']
     class_list = [ds, mobile, qa, web, devops, busorg]
-    
-    categories = events_df['categories'].to_numpy().astype(str)
+
+    categories = events_df['categories'].to_numpy()
 
     for x in categories:
         count = []
-        for i in range (len(class_list)):
+        for i in range(len(class_list)):
             mask = np.isin(x, class_list[i])
             count.append(np.count_nonzero(mask == bool("True")))
         if np.count_nonzero(count) > 0:
