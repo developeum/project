@@ -1,18 +1,11 @@
 import json
 import logging
 from datetime import datetime, timedelta, timezone
-from os import getenv, listdir
+from os import listdir
 
 import requests
-from nameko.standalone.events import event_dispatcher
 
-dispatch = event_dispatcher({
-    'AMQP_URI': 'pyamqp://{user}:{password}@{host}'.format(
-        user=getenv('RABBITMQ_DEFAULT_USER'),
-        password=getenv('RABBITMQ_DEFAULT_PASS'),
-        host=getenv('RABBITMQ_HOST')
-    )
-})
+from common import dispatch
 
 logging.basicConfig(filename='.meetup.log',
                     filemode='a',
@@ -150,7 +143,7 @@ def get_events() -> None:
             if event['created'] <= last_create_timestamp:
                 continue
 
-            dispatch('timepad_crawler', 'event', extract_info(event))
+            dispatch('crawlers', 'event', extract_info(event))
 
             new_create_timestamp = max(new_create_timestamp,
                                        event['created'])

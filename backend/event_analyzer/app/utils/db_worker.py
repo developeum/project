@@ -1,4 +1,5 @@
 from datetime import datetime
+from functools import lru_cache
 from typing import List, Optional
 
 import psycopg2
@@ -15,8 +16,8 @@ connection = psycopg2.connect(
 )
 
 cursor = connection.cursor()
-table_cache = dict()
 
+@lru_cache(maxsize=None)
 def select_or_insert(table: str, column: str, value: str):
     """ 
         Find entry in list-like table if provided value exists in that table
@@ -28,46 +29,42 @@ def select_or_insert(table: str, column: str, value: str):
     insert_query = 'INSERT INTO {} ({}) '\
                    'VALUES (%s) RETURNING id'.format(table, column)
 
-    if table not in table_cache:
-        table_cache[table] = dict()
+    cursor.execute(select_query, (value,))
+    entry = cursor.fetchone()
 
-    id_cache = table_cache[table]
-
-    if value in id_cache:
-        return id_cache[value]
-    else:
-        cursor.execute(select_query, (value,))
+    if entry is None:
+        cursor.execute(insert_query, (value,))
         entry = cursor.fetchone()
 
-        if entry is None:
-            cursor.execute(insert_query, (value,))
-            entry = cursor.fetchone()
-
-        id_cache[value] = entry[0]
-        return entry[0]
+    return entry[0]
 
 def store_event(name: str, event_time: datetime, city: str, place: str,
                 source_url: str, description: str,
+                event_type: Optional[str] = None,
                 categories: Optional[List[str]] = [],
                 logo_path: Optional[str] = None):
     """
         Add event to database, but do not commit changes
     """
 
-    event_insert_query = 'INSERT INTO events (name, event_time, city, '\
-                         'place, source_url, description, logo_path) '\
-                         'VALUES (%s, %s, %s, %s, %s, %s, %s) RETURNING id'
-    links_insert_query = 'INSERT INTO event_category_links (event_id, '\
+    event_insert_query = 'INSERT INTO events (name, event_time, event_type,' \
+                         'city, place, source_url, description, logo_path) ' \
+                         'VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING id'
+    links_insert_query = 'INSERT INTO event_category_links (event_id, ' \
                          'category_id) VALUES (%s, %s)'
 
     name = sanitize(name)
+    city = sanitize(city)
     place = sanitize(place)
+    event_type = sanitize(event_type)
     description = sanitize(description)
 
     city_id = select_or_insert('cities', 'city', city)
+    event_type_id = select_or_insert('event_types', 'event_type', event_type)
 
-    cursor.execute(event_insert_query, (name, event_time, city_id, place, 
-                                        source_url, description, logo_path))
+    cursor.execute(event_insert_query, (name, event_time, event_type_id,
+                                        city_id, place, source_url,
+                                        description, logo_path))
     event_id = cursor.fetchone()[0]
 
     for category in categories:

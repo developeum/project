@@ -5,8 +5,8 @@ from typing import Optional
 
 import requests
 
+from common import dispatch
 from config import TIMEPAD_API_TOKEN
-from utils.db_worker import commit_changes, store_event
 
 logging.basicConfig(filename='.timepad.log',
                     filemode='a',
@@ -138,12 +138,9 @@ def get_events() -> None:
                                                          remaining))
 
         for event in events:
-            info = extract_info(event)
-            store_event(**info)
+            dispatch('crawlers', 'event', extract_info(event))
 
         params['skip'] += limit
-
-    commit_changes()
 
 if __name__ == '__main__':
     init_state_file()

@@ -32,8 +32,11 @@ services:
   event_analyzer:
     build: ./backend/event_analyzer/
     env_file:
+      - ./environment/database.env
       - ./environment/rabbit.env
     environment:
+      POSTGRES_HOST: "postgres"
+      POSTGRES_PORT: "5432"
       RABBITMQ_HOST: "rabbit"
     depends_on:
       - rabbit

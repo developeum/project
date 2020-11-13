@@ -7,11 +7,12 @@ from classification.detect_class import Detect_class
 from classification.detect_types import Detect_type
 from classification.normalize import Normalize
 from consts import class_mappings, type_mappings
+from utils.db_worker import commit_changes, store_event
 
 class EventAnalyzer:
     name = 'event_analyzer'
 
-    @event_handler('timepad_crawler', 'event')
+    @event_handler('crawlers', 'event')
     def add_event(self, payload):
         events_df = pd.DataFrame(payload)
 
@@ -42,4 +43,5 @@ class EventAnalyzer:
             'logo_path': result['logo_path']
         }
 
-        print(result)
+        store_event(**result)
+        commit_changes()
