@@ -1,6 +1,5 @@
-backend/event_analyzer/app/config.py
-backend/crawlers/app/config.py
-backend/api/app/config.py
+environment/jwt_sign_key.env
+environment/timepad.env
 backend/api/app/static/
 .DS_Store
 .vscode

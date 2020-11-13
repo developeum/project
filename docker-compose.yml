@@ -23,6 +23,7 @@ services:
     volumes:
       - images_volume:/static/
     env_file:
+      - ./environment/jwt_sign_key.env
       - ./environment/database.env
     environment:
       POSTGRES_HOST: "postgres"
@@ -43,6 +44,7 @@ services:
   crawlers:
     build: ./backend/crawlers/
     env_file:
+      - ./environment/timepad.env
       - ./environment/rabbit.env
     environment:
       RABBITMQ_HOST: "rabbit"
