@@ -12,7 +12,7 @@ def Create_user_set (user_id):
 
 def Update_user_set(user_id, stack):
     key1 = str(user_id) + '_class'
-    r.zincrby(key1, 2, stack[0])
+    r.zincrby(key1, 10, stack[0])
 
 def Trigger_it_when_registrate_user(json_in):
     user_id = json_in.get('id')
