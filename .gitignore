@@ -1,3 +1,4 @@
+backend/event_analyzer/app/config.py
 backend/crawlers/app/config.py
 backend/api/app/config.py
 backend/api/app/static/
