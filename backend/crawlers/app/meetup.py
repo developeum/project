@@ -5,7 +5,7 @@ from os import listdir
 
 import requests
 
-from utils.db_worker import commit_changes, store_event
+from common import dispatch
 
 logging.basicConfig(filename='.meetup.log',
                     filemode='a',
@@ -103,6 +103,7 @@ def extract_info(event: dict) -> dict:
 
     return {
         'name': event['name'],
+        'event_type': None,
         'event_time': event_time,
         'city': city,
         'place': place,
@@ -142,15 +143,12 @@ def get_events() -> None:
             if event['created'] <= last_create_timestamp:
                 continue
 
-            info = extract_info(event)
-            store_event(**info)
+            dispatch('crawlers', 'event', extract_info(event))
 
             new_create_timestamp = max(new_create_timestamp,
                                        event['created'])
 
         save_timestamp(urlname, new_create_timestamp)
-
-    commit_changes()
 
 if __name__ == '__main__':
     init_state_file()

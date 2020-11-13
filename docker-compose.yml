@@ -6,19 +6,49 @@ services:
       - ./environment/database.env
     volumes:
       - ./backend/database/schema/:/docker-entrypoint-initdb.d/
+  rabbit:
+    image: rabbitmq:3
+    env_file:
+      - ./environment/rabbit.env
+  nginx:
+    build: ./frontend/
+    volumes:
+      - images_volume:/var/www/html/static/:ro
+    depends_on:
+      - api
+    ports:
+      - 2020:80
   api:
     build: ./backend/api/
     volumes:
       - images_volume:/static/
     env_file:
+      - ./environment/jwt_sign_key.env
       - ./environment/database.env
+    environment:
+      POSTGRES_HOST: "postgres"
+      POSTGRES_PORT: "5432"
     depends_on:
       - postgres
-  nginx:
-    build: ./frontend/
-    volumes:
-      - images_volume:/var/www/html/static/:ro
-    ports:
-      - 2020:80
+  event_analyzer:
+    build: ./backend/event_analyzer/
+    env_file:
+      - ./environment/database.env
+      - ./environment/rabbit.env
+    environment:
+      POSTGRES_HOST: "postgres"
+      POSTGRES_PORT: "5432"
+      RABBITMQ_HOST: "rabbit"
+    depends_on:
+      - rabbit
+  crawlers:
+    build: ./backend/crawlers/
+    env_file:
+      - ./environment/timepad.env
+      - ./environment/rabbit.env
+    environment:
+      RABBITMQ_HOST: "rabbit"
+    depends_on: 
+      - event_analyzer
 volumes:
   images_volume: {}
