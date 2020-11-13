@@ -1,5 +1,4 @@
 import redis
-import json
 import numpy as np
 
 #r = redis.Redis() 
