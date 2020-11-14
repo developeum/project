@@ -47,6 +47,7 @@ $containerColor: #e9e9e9;
     height: 60vh;
     background-color: $containerColor;
     border-radius: 1vh;
+    overflow-y: scroll;
 }
 
 .timePlace{

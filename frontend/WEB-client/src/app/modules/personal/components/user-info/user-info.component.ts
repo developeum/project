@@ -60,12 +60,11 @@ export class UserInfoComponent implements OnInit {
   }
 
   loadUserInfo(){
-    this.userInfo$ = this.pageService.getUserInfo();
     this.pageService.getUserInfo().subscribe(x => this.processUserInfo(x))
   }
 
   processUserInfo(data: any){
-    console.log('loadingData')
+    this.userInfo$ = this.pageService.getUserInfo();
     this.userInfo = data;
     this.userInfoForm = this.formBuilder.group({
       phone: [this.userInfo.phone, Validators.required],

@@ -47,6 +47,7 @@ $containerColor: #fcfcfc;
     flex-direction: row;
     justify-content: space-evenly;
     font-family: 'Gotham Pro';
+    margin-bottom: 5vh;
 }
 
 .title{
@@ -58,6 +59,10 @@ $containerColor: #fcfcfc;
     list-style: none;
     padding: 0;
     
+}
+
+.eventTitle{
+    width: 35vw;
 }
 
 .event{
@@ -136,6 +141,7 @@ $containerColor: #fcfcfc;
         margin-top: 0;
         display: flex;
         flex-direction: column;
+        margin-bottom: 10vh;
     }
 
     .filter{
