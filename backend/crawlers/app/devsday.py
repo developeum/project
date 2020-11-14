@@ -11,9 +11,10 @@ from common import dispatch
 
 url_base = 'https://devsday.ru/Event/FilterEvents/'
 
-state_filename = 'devsday_state.json'
+blacklist_filename = 'static/devsday_blacklist.json'
+state_filename = 'state/devsday_state.json'
 
-logging.basicConfig(filename='.devsday.log',
+logging.basicConfig(filename='logs/devsday.log',
                     filemode='a',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
@@ -31,10 +32,6 @@ event_types = [
     "Выставка",
     "Церемония",
     "Другое"
-]
-
-organizer_blacklist = [
-    'ООО "Среда 31"'
 ]
 
 def load_state() -> List[int]:
@@ -67,6 +64,14 @@ def init_state_file() -> None:
 
         with open(state_filename, 'w') as handle:
             handle.write('[]')
+
+def get_organizer_blacklist() -> List[str]:
+    """
+        Get list of organizers that are in blacklist
+    """
+
+    with open(blacklist_filename, 'r') as handle:
+        return json.load(handle)
 
 def extract_info(event: dict) -> dict:
     """
@@ -123,6 +128,8 @@ def get_events() -> None:
         'IsArchived': False,
         'Page': 0
     }
+
+    organizer_blacklist = get_organizer_blacklist()
 
     last_handled_events = load_state()
     handled_events = []

@@ -7,7 +7,7 @@ import requests
 
 from common import dispatch
 
-logging.basicConfig(filename='.meetup.log',
+logging.basicConfig(filename='logs/meetup.log',
                     filemode='a',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
@@ -15,8 +15,9 @@ logging.basicConfig(filename='.meetup.log',
 
 api_base_url = 'https://api.meetup.com'
 
-groups_filename = 'meetup_groups.json'
-state_filename = 'meetup_state.json'
+blacklist_filename = 'static/meetup_blacklist.json'
+groups_filename = 'static/meetup_groups.json'
+state_filename = 'state/meetup_state.json'
 
 additional_fields = ','.join([
     'plain_text_no_images_description',
@@ -69,6 +70,16 @@ def get_groups() -> list:
     with open(groups_filename, 'r', encoding='utf8') as handle:
         return json.load(handle)
 
+# Because there are too much same events of that groups
+# They differ only in the date
+def get_group_blacklist() -> list:
+    """
+        Get urlnames of groups that are in blacklist
+    """
+
+    with open(blacklist_filename, 'r') as handle:
+        return json.load(handle)
+
 def extract_info(event: dict) -> dict:
     """
         Extract only fields we have to store from raw event provided
@@ -119,10 +130,16 @@ def get_events() -> None:
     """
 
     base_url = api_base_url + '/{urlname}/events'
+
+    group_blacklist = get_group_blacklist()
     groups = get_groups()
 
     for group in groups:
         urlname = group['urlname']
+
+        if urlname in group_blacklist:
+            continue
+
         url = base_url.format(urlname=urlname)
 
         last_create_timestamp = load_timestamp(urlname)

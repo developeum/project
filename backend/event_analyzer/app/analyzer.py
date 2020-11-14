@@ -12,7 +12,7 @@ from utils.db_worker import commit_changes, store_event
 class EventAnalyzer:
     name = 'event_analyzer'
 
-    @event_handler('crawlers', 'event')
+    @event_handler('crawlers', 'new_event')
     def add_event(self, payload):
         events_df = pd.DataFrame(payload)
 

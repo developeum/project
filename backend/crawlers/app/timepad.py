@@ -8,7 +8,7 @@ import requests
 from common import dispatch
 from config import TIMEPAD_API_TOKEN
 
-logging.basicConfig(filename='.timepad.log',
+logging.basicConfig(filename='logs/timepad.log',
                     filemode='a',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
@@ -17,7 +17,8 @@ logging.basicConfig(filename='.timepad.log',
 api_base_url = 'https://api.timepad.ru'
 events_url = api_base_url + '/v1/events'
 
-state_filename = '.last_update_timepad'
+state_filename = 'state/last_update_timepad'
+
 time_template = '%Y-%m-%dT%H:%M:%S%z'
 
 session = requests.Session()

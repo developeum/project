@@ -23,6 +23,6 @@ def sanitize(text: str):
     for key, value in replaces.items():
         text = text.replace(key, value)
 
-    text = re.sub(r'\s+', ' ', text).strip()
+    text = re.sub(r'[ \t]+', ' ', text).strip()
 
     return text
