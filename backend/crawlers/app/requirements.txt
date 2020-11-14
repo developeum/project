@@ -1,2 +1,3 @@
 requests
 nameko
+beautifulsoup4

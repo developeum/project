@@ -137,7 +137,7 @@ def get_events() -> None:
     has_more = True
 
     # For logging
-    events = 0
+    events_num = 0
 
     while has_more:
         response = requests.post(url_base, data=params).json()
@@ -153,12 +153,12 @@ def get_events() -> None:
 
             if event['EventId'] not in last_handled_events:
                 dispatch(extract_info(event))
-                events += 1
+                events_num += 1
 
         params['Page'] += 1
 
-    logging.info('%d new events from %d pages saved into database' % 
-                 (events, params['Page']))
+    logging.info('%d new events from %d pages saved into database' %
+                 (events_num, params['Page']))
 
     dump_state(handled_events)
 
