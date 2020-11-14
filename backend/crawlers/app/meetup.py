@@ -143,7 +143,7 @@ def get_events() -> None:
             if event['created'] <= last_create_timestamp:
                 continue
 
-            dispatch('crawlers', 'event', extract_info(event))
+            dispatch(extract_info(event))
 
             new_create_timestamp = max(new_create_timestamp,
                                        event['created'])

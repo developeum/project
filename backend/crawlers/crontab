@@ -1,2 +1,3 @@
-0 15 * * * cd /app && python3 /app/timepad.py
-5 15 * * * cd /app && python3 /app/meetup.py
+00 15 * * * cd /app && python3 /app/timepad.py
+05 15 * * * cd /app && python3 /app/meetup.py
+10 15 * * * cd /app && python3 /app/devsday.py

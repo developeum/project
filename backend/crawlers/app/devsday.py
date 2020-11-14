@@ -1,9 +1,23 @@
-import requests
+import json
+import logging
 from datetime import datetime
+from os import listdir
+from typing import List
+
+import requests
 from bs4 import BeautifulSoup
-from utils.db_worker import store_event, commit_changes
+
+from common import dispatch
 
 url_base = 'https://devsday.ru/Event/FilterEvents/'
+
+state_filename = 'devsday_state.json'
+
+logging.basicConfig(filename='.devsday.log',
+                    filemode='a',
+                    format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    level=logging.INFO)
 
 event_types = [
     "Конференция",
@@ -19,7 +33,46 @@ event_types = [
     "Другое"
 ]
 
+organizer_blacklist = [
+    'ООО "Среда 31"'
+]
+
+def load_state() -> List[int]:
+    """
+        Load events handled on last crawler launch
+    """
+
+    logging.info('Crawler state loaded')
+
+    with open(state_filename, 'r') as handle:
+        return json.load(handle)
+
+def dump_state(handled_events: List[int]) -> None:
+    """
+        Save already handled events into crawler state
+    """
+
+    logging.info('Crawler state saved')
+
+    with open(state_filename, 'w') as handle:
+        json.dump(handled_events, handle)
+
+def init_state_file() -> None:
+    """
+        Create crawler state file if it doesn't exist
+    """
+
+    if state_filename not in listdir('.'):
+        logging.info('Crawler started at the first time')
+
+        with open(state_filename, 'w') as handle:
+            handle.write('[]')
+
 def extract_info(event: dict) -> dict:
+    """
+        Extract only fields we have to store from raw event provided
+    """
+
     details_url = 'https://devsday.ru/event/details/%d' % event['EventId']
 
     raw_date = event['Start']
@@ -48,34 +101,60 @@ def extract_info(event: dict) -> dict:
 
     return {
         'name': event['Title'],
+        'event_type': event_types[event['Category']-1],
         'event_time': event_time,
         'city': event['CityName'],
         'place': place,
         'source_url': details_url,
         'description': description,
         'categories': tags,
-        'logo_path': logo_path,
-        'event_type': event_types[event['Category']-1]
+        'logo_path': logo_path
     }
 
-params = {
-    'SearchText': '',
-    # Only Russian events
-    'CountryId': 1,
-    'IsArchived': True,
-    'Page': 0
-}
+def get_events() -> None:
+    """
+        Store events that have been created since last launch in database
+    """
 
-for page in range(100):
-    print(page)
+    params = {
+        'SearchText': '',
+        # Only Russian events
+        'CountryId': 1,
+        'IsArchived': False,
+        'Page': 0
+    }
 
-    response = requests.post(url_base, data=params)
-    events = response.json()['Data']['Items']
+    last_handled_events = load_state()
+    handled_events = []
 
-    for event in events:
-        info = extract_info(event)
-        store_event(**info)
+    has_more = True
 
-    params['Page'] += 1
+    # For logging
+    events = 0
 
-commit_changes()
+    while has_more:
+        response = requests.post(url_base, data=params).json()
+
+        has_more = response['Data']['HasMore']
+        events = response['Data']['Items']
+
+        for event in events:
+            if event['Organizer'] in organizer_blacklist:
+                continue
+
+            handled_events.append(event['EventId'])
+
+            if event['EventId'] not in last_handled_events:
+                dispatch(extract_info(event))
+                events += 1
+
+        params['Page'] += 1
+
+    logging.info('%d new events from %d pages saved into database' % 
+                 (events, params['Page']))
+
+    dump_state(handled_events)
+
+if __name__ == '__main__':
+    init_state_file()
+    get_events()

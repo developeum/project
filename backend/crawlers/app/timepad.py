@@ -138,7 +138,7 @@ def get_events() -> None:
                                                          remaining))
 
         for event in events:
-            dispatch('crawlers', 'event', extract_info(event))
+            dispatch(extract_info(event))
 
         params['skip'] += limit
 

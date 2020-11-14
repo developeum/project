@@ -5,7 +5,7 @@ COPY app/ /app/
 
 # Install requirements
 RUN apt-get update
-RUN apt-get install -y libpq-dev python3-dev gcc python3 python3-pip cron
+RUN apt-get install -y python3-dev gcc python3 python3-pip cron
 RUN pip3 install -r /app/requirements.txt
 
 # Create cron task and user for that task
