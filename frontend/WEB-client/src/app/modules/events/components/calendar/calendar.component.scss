@@ -1,0 +1,114 @@
+$primaryBackground: #e9e9e9;
+$secondaryBackground: #ddd;
+$primary: #7dbcbb;
+$textBlack: #2f2f2f;
+$textWhite: #fff;
+
+.mainContainer{
+    margin-top: 3vh;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+.container{
+    width: 80%;
+    box-shadow: inset -3px -3px 10px 5px rgb(250, 248, 248), inset 3px 3px 10px 5px rgba(177, 173, 166, 0.51);
+    border-radius: 1vh;
+    margin-bottom: 2vh;
+    padding: 1vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dayOfWeek{
+    text-align: center;
+}
+
+.dates{
+    width: 90%;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr ;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.lastMonth{
+    cursor: not-allowed;
+    opacity: 0.3;
+    height: 3vh;
+    // width: 3vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.date{
+    cursor: pointer;
+    height: 3vh;
+    // width: 3vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.date:hover{
+    // box-shadow: inset -6px -6px 10px 0 rgb(241, 241, 241), inset 6px 6px 10px 0 rgba(196, 191, 184, 0.51);
+    border-radius: 5px;
+    background-color: $primary;
+    color: #fff;
+    opacity: 0.7;
+}
+
+.monthCarusel{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1vh;
+    width: 90%;
+    align-items: center;
+}
+
+.right{
+    cursor: pointer;
+    background-image: url(../../../../imges/icons/rightArrow.png);
+    width: 30px;
+    height: 30px;
+    background-size: 100%;
+}
+
+.left{
+    cursor: pointer;
+    background-image: url(../../../../imges/icons/leftArrow.png);
+    width: 30px;
+    height: 30px;
+    background-size: 100%;
+}
+
+.selectedItem{
+    background-color: $primary;
+    color: $textWhite;
+    // border-radius: 5px;
+}
+
+.betwinSelectedItems{
+    background-color: $primary;
+    color: #fff;
+    opacity: 0.6;
+}
+
+@media screen and(max-width: 420px) {
+    .mainContainer{
+        width: 85vw;
+        height: 35vh;
+    }
+
+    .container{
+        width: 100vw;
+        height: 35vh;
+    }
+
+    .date{
+        height: 4vh;
+    }
+}

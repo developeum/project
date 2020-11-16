@@ -1,0 +1,279 @@
+$primaryBackground: #e9e9e9;
+$secondaryBackground: #ddd;
+$primary: #7dbcbb;
+$textBlack: #2f2f2f;
+$textWhite: #fff;
+$errorColor: #C31F1F;
+
+$testBackColor: rgb(233, 233, 233);
+
+$containerWidth: 100%;
+
+@font-face {
+	font-family: 'Gotham Pro Bold';
+	src: url('../../../../fonts/GothamPro/GothamPro-Bold.ttf');
+	// src: local('Gotham Pro Bold Italic'), local('GothamPro-BoldItalic'),
+	// 	url('GothamPro-BoldItalic.eot?#iefix') format('embedded-opentype'),
+	// 	url('GothamPro-BoldItalic.woff') format('woff'),
+	// 	url('GothamPro-BoldItalic.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gotham Pro';
+	src: url('../../../../fonts/GothamPro/GothamPro-Light.ttf');
+	font-weight: normal;
+	font-style: 300;
+}
+
+@font-face{
+    font-family: 'Ubuntu';
+    src: url('../../../../fonts/Ubuntu/Ubuntu-Bold.ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.container{
+    color: $textBlack;
+    font-family: 'Gotham Pro';
+    margin: 0;
+    width: $containerWidth;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url(../../../../imges/photos/auth.jpeg);
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
+}
+
+.loginContainer{
+    height: $containerWidth;
+    background-color: $primaryBackground;
+    border-radius: 1vh;
+    width: 28vw;
+    height: 80vh;
+    display: flex;
+
+}
+
+.imgContainer{
+    width: $containerWidth/2;
+    background-color: $primaryBackground;
+    height: $containerWidth;
+}
+
+.formContainer{
+    width: $containerWidth;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 68%;
+}
+
+.wrapInput{
+    position: relative;
+    display: flex;
+    width: 100%;
+}
+
+.input{
+    padding-left: 1vh;
+    outline: none;
+    margin-top: -1vh;
+    background-color: $primaryBackground;
+    border: none;
+    box-shadow: inset -3px -3px 3px 0 rgba(255,255,255,1), inset 6px 6px 6px 0 rgba(196, 191, 182, 0.51);
+    border-radius: 1vh;
+    width: $containerWidth;
+    height: 4vh;
+    font-size: 2vh;
+}
+
+.inputVisible{
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    right: 10px;
+    z-index: 9;
+    width: 1vw;
+    background: url(../../../../imges/icons/icons8-closed-eye-50.png);
+    border: none;
+    background-size: 100%;
+}
+
+.inputVisible:hover{
+    background: url(../../../../imges/icons/icons8-eye-50.png);
+    background-size: 100%;
+}
+
+.select{
+    appearance: 2vh;
+    padding-left: 1vh;
+    height: 4vh;
+    border-radius: 1vh;
+    outline: none;
+    margin-top: -1vh;
+    background-color: $primaryBackground;
+    border: none;
+    box-shadow: inset -3px -3px 3px 0 rgba(255,255,255,1), inset 6px 6px 6px 0 rgba(196, 191, 182, 0.51);
+}
+
+.subButton{
+    background: linear-gradient(to bottom right, #76b1b1, #8cd3d2);
+    color: white;
+    margin-top: 6vh;
+    outline: none;
+    border: none;
+    width: $containerWidth;
+    height: 4vh;
+    border-radius: 1vh;
+    font-size: 1.5vh;
+    box-shadow: -6px -6px 16px 5px rgba(255,255,255,1), 6px 6px 16px 5px rgba(194, 189, 181, 0.51);
+}
+
+.subButton:active{
+    box-shadow: inset -6px -6px 16px 0 rgba(255,255,255,1), inset 6px 6px 16px 0 rgba(194, 189, 181, 0.51);
+    background: $primaryBackground;
+    background-color: $primaryBackground;
+    color: $primary;
+}
+
+.signUp{
+    margin-top: 10vh;
+    font-size: 2.5em;
+    font-family: 'Ubuntu';
+    color: $textBlack;
+}
+
+.formGroup{
+    margin-bottom: 0.5vh;
+}
+
+.inputDescription{
+    margin-left: 1vw;
+}
+
+.errorMessageContainer{
+    border: 1px solid white;
+    background-color: $errorColor;
+    text-align: center;
+    color: $textWhite;
+    border-radius: 1vh;
+}
+
+.errorInput{
+    outline: none;
+    margin-top: -1vh;
+    border: 1px solid $errorColor;
+    border-radius: 1vh;
+    width: $containerWidth;
+    height: 4vh;
+    font-size: 2vh;
+    background-color: $primaryBackground;
+}
+
+.errorText{
+    margin-left: 1vw;
+    color: $errorColor;
+}
+
+.signIn{
+    color: $primary;
+    text-decoration: none;
+    outline: none;
+
+}
+
+.btnContainer{
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+@media screen and (max-width: 1385px) {
+    .loginContainer{
+        width: 40vw;
+    }
+}
+
+@media screen and (max-width: 1070px) {
+    .loginContainer{
+        width: 50vw;
+    }
+}
+
+
+@media screen and(max-width: 420px) {
+    .container{
+        position: relative;
+    }
+
+    .inputVisible{
+        margin-top: 1vh;
+        position: absolute;
+        right: 10px;
+        z-index: 9;
+        width: 5vw;
+        background: url(../../../../imges/icons/icons8-closed-eye-50.png);
+        border: none;
+        background-size: 100%;
+    }
+
+    .loginContainer{
+        position: absolute;
+        justify-content: center;
+        width: 100vw;
+        height: 75vh;
+        bottom: 0;
+        border-radius: 0 9vh 0 0;
+    }
+
+    .formContainer{
+        justify-content: center;
+        position: absolute;
+        width: $containerWidth/1.5;
+        width: 100vw;
+    }
+
+    .input{
+        width: 100%;
+        height: 6vh;
+        font-size: 4vh;
+    }
+
+    .select{
+        height: 6vh;
+    }
+
+    .signUp{
+        margin-top:2vh;
+        margin-bottom: 0;
+        font-size: 5vh;
+    }
+
+    .inputDescription{
+        margin-left: 2vh;
+    }
+
+    .subButton{
+        width: 100%;
+        height: 6vh;
+        margin-top: 2vh;
+        font-size: 2vh;
+    }
+
+    form{
+        justify-content: space-evenly;
+    }
+}

@@ -1,2 +1,6 @@
-crawlers/app/config.py
-*__pycache*
+environment/jwt_sign_key.env
+environment/timepad.env
+backend/api/app/static/
+.DS_Store
+.vscode
+*__pycache__*

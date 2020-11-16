@@ -1,0 +1,361 @@
+$primaryBackground: #e9e9e9;
+$secondaryBackground: #ddd;
+$primary: #7dbcbb;
+$textBlack: #2f2f2f;
+$textWhite: #fff;
+$containerColor: #fcfcfc;
+
+$containerWidth: 100%;
+
+@font-face {
+	font-family: 'Gotham Pro';
+	src: url('../../../fonts/GothamPro/GothamPro-Medium.ttf');
+	// src: local('Gotham Pro Medium'), local('GothamPro-Medium'),
+	// 	url('../../../fonts/GothamPro/GothamPro-Medium.eot?#iefix') format('embedded-opentype'),
+	// 	url('GothamPro-Medium.woff') format('woff'),
+	// 	url('GothamPro-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+
+.container{
+    font-family: 'Gotham Pro';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    //  border-bottom: 1px solid #dddddd ;
+}
+
+.containerHeader{
+    width: 100vw;
+    margin-top: 0;
+    height: 10vh;
+    background-color: $primaryBackground;
+
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    text-align: center;   
+}
+
+.title{
+    display: flex;
+    font-size: 2vh;
+}
+
+.text{
+    color: $textBlack;
+    margin: 1vw;
+    font-family: 'Gotham Pro';
+}
+
+.textLog{
+    color: $textBlack;
+    margin: 1vw;
+    font-family: 'Gotham Pro';
+}
+
+.search{
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #555555;
+    width: 35vw;
+    height: 3vh;
+    font-size: 2vh;
+    background-color: $primaryBackground;
+    
+}
+
+.search:focus{
+    border-bottom: 2px solid rgb(37, 37, 37);
+    transition: all 0.4s;
+}
+
+.inputContainer{
+    width: $containerWidth/1.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.img{
+    width: 100px;
+    height: 50px;
+    background-image: url(../../../imges/logo/лого3.svg) ;
+    background-size: 100%;
+    outline: none;
+    cursor: pointer;
+}
+
+.userImg{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+
+a{
+    text-decoration: none;
+}
+
+.searchResultContainer{
+    margin-top: -2vh;
+    margin-right: 5.5vw;
+    width: 35vw;
+    height: 50vh;
+    background-color: $primaryBackground;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 5px 40px 4px #9e9e9e;
+    border-radius: 1vh;
+}
+
+.noLoggedInSearchContainer{
+    margin-right: 14.5vw;
+}
+
+.event{
+    cursor: pointer;
+    width: 100%;
+    background-color: $primaryBackground;
+    height: 7vh;
+    margin-bottom: 0;
+    border-bottom: 1px solid #dadada;
+    display: flex;
+    align-items: center;
+    
+}
+
+.event:hover{
+    background-color: $primaryBackground;
+}
+
+.eventsTitle{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+.eTitle{
+    margin-left: 2vw;
+}
+
+.mobileSearchContainer{
+    display: none;
+}
+
+@media screen and(max-width: 420px) {
+    .containerHeader{
+        width: 100vw;
+        position: fixed;
+        bottom: 0;
+        justify-content: space-evenly;
+        z-index: 1000;
+    }
+
+    .mobileLogo{
+        width: 100px;
+    height: 50px;
+    background-image: url(../../../imges/logo/лого3.svg) ;
+    background-size: 100%;
+    outline: none;
+    cursor: pointer;
+    }
+
+    .searchResultContainer{
+        display: none;
+    }
+
+    .textLog{
+        display: none;
+    }
+
+    .img{
+        outline: none;
+        width: 53px;
+        height: 53px;
+        background-image: url(../../../imges/icons/iconHome.svg);
+        background-size: 100%;
+        border-radius: 2vh;
+        box-shadow: -3px -3px 6px 5px  rgb(250, 248, 248), 3px 3px 6px 5px rgba(177, 173, 166, 0.51);
+    }
+
+    .inputContainer{
+        display: none;
+    }
+
+    .mobileSearch{
+        outline: none;
+        width: 53px;
+        height: 53px;
+        background-image: url(../../../imges/icons/iconSearch.svg);
+        background-size: 100%;
+        border-radius: 2vh;
+        box-shadow: -3px -3px 6px 5px  rgb(250, 248, 248), 3px 3px 6px 5px rgba(177, 173, 166, 0.51);
+    }
+
+    .text{
+        display: none;
+    }
+
+    .events{
+        outline: none;
+        width: 53px;
+        height: 53px;
+        background-image: url(../../../imges/icons/iconEvent.svg);
+        background-size: 100%;
+        border-radius: 2vh;
+        box-shadow: -3px -3px 6px 5px  rgb(250, 248, 248), 3px 3px 6px 5px rgba(177, 173, 166, 0.51);
+    }
+
+    .userImg{
+        display: none;
+    }
+
+    .inputContainer{
+        display: none;
+    }
+
+    .mobileSearchContainer{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100vw;
+        height: 90vh;
+        background-color: $primaryBackground;
+        overflow-y: scroll;
+        margin-top: 0;
+    }
+
+    .mobileInput{
+        font-family: 'Gotham Pro';
+        width: 90vw;
+        height: 5vh;
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+        border-radius: 1vh;
+        border: none;
+        font-size: 1.2rem;
+        outline: none;
+        background-color: $primaryBackground;
+        box-shadow: inset -3px -3px 3px 0 rgba(255,255,255,1), inset 6px 6px 6px 0 rgba(196, 191, 182, 0.51);
+        padding-left: 2vh;
+    }
+
+    .event{
+        width: 90vw;
+        height: 12vh;
+        padding-left: 2vh;
+        margin-bottom: 1vh;
+        border: none;
+        margin-bottom: 3vh;
+        background-color: $primaryBackground;
+        border-radius: 1vh;
+        box-shadow: -6px -6px 16px 0 rgba(255,255,255,1), 6px 6px 16px 0 rgba(194, 189, 181, 0.51);
+    }
+
+    .noMobileEvents{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 80vh;
+    }
+
+    .sadPhoto{
+        background-image: url(../../../imges/icons/icons8-sad-100.png);
+        width: 100px;
+        height: 100px;
+    }
+
+    .userMobile{
+        outline: none;
+        width: 53px;
+        height: 53px;
+        background-image: url(../../../imges/icons/iconUser.svg);
+        background-size: 100%;
+        // margin-left: -10vw;
+        border-radius: 2vh;
+        box-shadow: -3px -3px 6px 5px  rgb(250, 248, 248), 3px 3px 6px 5px rgba(177, 173, 166, 0.51);
+    }
+
+    .marginUser{
+        margin-left: -10vw;
+    }
+
+    .putDown{
+        box-shadow: inset -3px -3px 10px 0  rgb(250, 248, 248), inset 3px 3px 10px 0 rgba(177, 173, 166, 0.51);
+    }
+
+    .putDownSearch{
+        box-shadow: inset -3px -3px 10px 0  rgb(250, 248, 248), inset 3px 3px 10px 0 rgba(177, 173, 166, 0.51);
+        background-image: url(../../../imges/icons/iconSearchOff.svg);
+    }
+}
+@media screen and(max-width: 380px) {
+    .containerHeader{
+        position: fixed;
+        bottom: 0;
+        justify-content: space-evenly;
+    }
+
+    .img{
+        outline: none;
+        width: 40px;
+        height: 40px;
+        background-image: url(../../../imges/icons/iconHome.svg);
+        background-size: 100%;
+    }
+
+    .inputContainer{
+        display: none;
+    }
+
+    .mobileSearch{
+        outline: none;
+        width: 40px;
+        height: 40px;
+        background-image: url(../../../imges/icons/iconSearch.svg);
+        background-size: 100%;
+    }
+
+    
+
+    .text{
+        display: none;
+    }
+
+    // .event{
+    //     width: 90vw;
+    //     height: 15vh;
+    //     margin-bottom: 1vh;
+    //     border: none;
+    //     margin-bottom: 3vh;
+    //     background-color: $primaryBackground;
+    //     border-radius: 1vh;
+    //     box-shadow: -6px -6px 16px 0 rgba(255,255,255,1), 6px 6px 16px 0 rgba(194, 189, 181, 0.51);
+    // }
+
+    .events{
+        outline: none;
+        width: 40px;
+        height: 40px;
+        background-image: url(../../../imges/icons/iconEvent.svg);
+        background-size: 100%;
+    }
+
+    .userImg{
+        display: none;
+    }
+
+    .userMobile{
+        outline: none;
+        margin-left: -10%;
+        width: 40px;
+        height: 40px;
+        background-image: url(../../../imges/icons/iconUser.svg);
+        background-size: 100%;
+    }
+}
+

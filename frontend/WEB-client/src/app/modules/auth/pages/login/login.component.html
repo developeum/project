@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="loginContainer">
+        <div class="formContainer">
+            <p class="signIn">Вход</p>
+            <form [formGroup] = "loginForm" (ngSubmit) = "onSubmit()" >
+                <div class="formGroup">
+                    <p [ngClass] = "{'errorText': error}" class="inputDescription">Логин</p>
+                    <div class="wrapInput">
+                        <input (keyup) = "makeNoError" formControlName = "username" (change) = "fixForm()" class="input" [ngClass] = "{'errorInput': error}" type="text"  />
+                    </div>         
+                </div>
+                <div class="formGroup">
+                    <p [ngClass] = "{'errorText': error}" class="inputDescription">Пароль</p>
+                    <div class="wrapInput">
+                        <input #password (keyup) = "makeNoError()" formControlName = "password" (change) = "fixForm()" class="input" [ngClass] = "{'errorInput': error}" type="password"  />
+                        <input class="inputVisible" type="text" (mouseenter) = "changePassVisibility($event)" (mouseleave) = "changePassVisibility($event)" value="">
+                    </div>                    
+                </div>
+                <div *ngIf = "error" class="errorMessageContainer">
+                    <p *ngIf = "!errorType">Введены некоректные данные</p>
+                    <p *ngIf = "errorType">Неверные логин или пароль</p>
+                </div>             
+                <button type="submit button" class="subButton">Войти</button>
+            </form>
+        </div>
+    </div>
+</div>
