@@ -1,4 +1,4 @@
-from common.helpers import accepts_json
+from common.helpers import accepts_json, dispatch
 from common.models import EventCategory, User, db
 from flask import request
 from flask_jwt_extended import create_access_token, current_user, jwt_required
@@ -6,6 +6,7 @@ from flask_jwt_extended import create_access_token, current_user, jwt_required
 from .helpers import (check_password, hash_password, is_email_correct,
                       is_email_registered)
 from .messages import *
+
 
 @accepts_json(
     email=(True, str),
@@ -41,7 +42,13 @@ def register_user():
     db.session.add(new_user)
     db.session.commit()
 
+    dispatch('user_registered', {
+        'id': new_user.id,
+        'stack': [category.id for category in new_user.stack]
+    })
+
     return create_access_token(new_user), 200
+
 
 @accepts_json(
     email=(True, str),
@@ -61,6 +68,7 @@ def login_user():
         return INCORRECT_CREDENTIALS, 200
 
     return create_access_token(user_to_check), 200
+
 
 @jwt_required
 @accepts_json(
