@@ -9,6 +9,7 @@ from classification.normalize import Normalize
 from consts import class_mappings, type_mappings
 from utils.db_worker import commit_changes, store_event
 
+
 class EventAnalyzer:
     name = 'event_analyzer'
 

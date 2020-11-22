@@ -10,6 +10,7 @@ replaces = {
     '\u200b': '',
 }
 
+
 def sanitize(text: str):
     """
         Sanitize text removing html encoded parts, double spaces and so on

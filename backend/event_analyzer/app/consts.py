@@ -3,7 +3,7 @@ class_mappings = {
     'mobile': 'Мобильная разработка',
     'qa': 'QA',
     'web': 'Веб-разработка',
-    'devops':'DevOps',
+    'devops': 'DevOps',
     'busorg': 'Бизнес',
     'other': 'Прочее'
 }

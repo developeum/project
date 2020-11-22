@@ -1,5 +1,6 @@
 import requests
 
+
 def shorten_url(long_url: str) -> str:
     """
         Shorten URL with bit.ly service

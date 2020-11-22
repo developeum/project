@@ -10,6 +10,8 @@ services:
     image: rabbitmq:3
     env_file:
       - ./environment/rabbit.env
+  redis:
+    image: redis
   nginx:
     build: ./frontend/
     volumes:
@@ -17,7 +19,7 @@ services:
     depends_on:
       - api
     ports:
-      - 2020:80
+      - 127.0.0.1:2020:80
   api:
     build: ./backend/api/
     volumes:
@@ -50,5 +52,15 @@ services:
       RABBITMQ_HOST: "rabbit"
     depends_on: 
       - event_analyzer
+  recommendation_service:
+    build: ./backend/recommendation_service/
+    env_file:
+      - ./environment/rabbit.env
+    environment:
+      REDIS_HOST: "redis"
+      RABBITMQ_HOST: "rabbit"
+    depends_on:
+      - redis
+      - rabbit
 volumes:
   images_volume: {}
