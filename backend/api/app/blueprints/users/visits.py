@@ -1,11 +1,12 @@
 from datetime import datetime
 
-from common.helpers import accepts_json, project
+from common.helpers import accepts_json, project, dispatch
 from common.models import Event, UserVisit, VisitTypeEnum, db
 from flask import jsonify, request
 from flask_jwt_extended import current_user, jwt_required
 
 from .messages import *
+
 
 @jwt_required
 @accepts_json(
@@ -39,9 +40,18 @@ def add_visited_page():
     else:
         visit.visit_time = now
 
+    dispatch('event_visited', {
+        'user_id': current_user.id,
+        'event_id': event.id,
+        'visit_type': body.get('type', 'external'),
+        'categories': [category.id for category in event.categories],
+        'event_type': event.event_type_id
+    })
+
     db.session.commit()
 
     return {'ok': True}, 200
+
 
 @jwt_required
 def get_visited_pages():

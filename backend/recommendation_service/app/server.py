@@ -20,6 +20,10 @@ class RecommendationService:
 
     # Awards
     _award_for_registration = 10
+    _award_for_visit = {
+        'internal': 1,
+        'external': 2
+    }
 
     def _dump_interest_vector(self, user_id: int,
                               vector_name: str,
@@ -60,3 +64,20 @@ class RecommendationService:
                                    event_category_vector)
         self._dump_interest_vector(user['id'], 'event_types',
                                    event_type_vector)
+
+    @event_handler('api', 'event_visited')
+    def handle_users_visit(self, payload):
+        """
+            Called within a user event visit to update their interest vectors
+        """
+
+        award = self._award_for_visit.get(payload['visit_type'], 0)
+        event_category_key = self._key_format.format(id=payload['user_id'],
+                                                     name='event_categories')
+        event_type_key = self._key_format.format(id=payload['user_id'],
+                                                 name='event_types')
+
+        for category in payload['categories']:
+            self._redis.hincrby(event_category_key, category, award)
+
+        self._redis.hincrby(event_type_key, payload['event_type'], award)
