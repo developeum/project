@@ -81,3 +81,18 @@ class RecommendationService:
             self._redis.hincrby(event_category_key, category, award)
 
         self._redis.hincrby(event_type_key, payload['event_type'], award)
+
+    @event_handler('api', 'user_stack_changed')
+    def handle_user_stack_change(self, payload):
+        """
+            Called within a user stack change to update their interest vectors
+        """
+
+        key = self._key_format.format(id=payload['user_id'],
+                                      name='event_categories')
+
+        for category in payload['old_stack']:
+            self._redis.hincrby(key, category, -self._award_for_registration)
+
+        for category in payload['new_stack']:
+            self._redis.hincrby(key, category, self._award_for_registration)

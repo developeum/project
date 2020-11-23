@@ -1,13 +1,15 @@
-from common.helpers import accepts_json
+from common.helpers import accepts_json, dispatch
 from common.models import City, EventCategory, UserStatus, db
 from flask import request
 from flask_jwt_extended import current_user, jwt_required
 
 from .messages import *
 
+
 @jwt_required
 def get_profile_info():
     return current_user.as_json(), 200
+
 
 @jwt_required
 @accepts_json(
@@ -49,6 +51,10 @@ def update_profile_info():
 
             current_user.city = new_city
         elif field == 'stack':
+            if current_user.stack == body['stack']:
+                continue
+
+            old_stack = [category.id for category in current_user.stack]
             current_user.stack = []
 
             for category_id in body['stack']:
@@ -59,6 +65,14 @@ def update_profile_info():
                     return INCORRECT_CATEGORY_ID, 200
 
                 current_user.stack.append(category)
+
+            new_stack = [category.id for category in current_user.stack]
+
+            dispatch('user_stack_changed', {
+                'user_id': current_user.id,
+                'old_stack': old_stack,
+                'new_stack': new_stack
+            })
         else:
             setattr(current_user, field, body[field])
 
