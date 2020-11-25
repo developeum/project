@@ -55,5 +55,6 @@ services:
     depends_on:
       - redis
       - rabbit
+      - postgres
 volumes:
   images_volume: {}
