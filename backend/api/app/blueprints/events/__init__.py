@@ -1,10 +1,12 @@
 from datetime import datetime
 
-from common.helpers import parse_int_array, project
+from common.helpers import parse_int_array, project, rpc_cluster
 from common.models import Event, EventCategoryLink
 from flask import Blueprint, jsonify, request
+from flask_jwt_extended import get_jwt_identity, jwt_optional
 
 events_api = Blueprint('events_api', __name__)
+
 
 @events_api.route('/<int:event_id>')
 def get_event_info(event_id: int):
@@ -19,8 +21,12 @@ def get_event_info(event_id: int):
         'event': event.as_json()
     }, 200
 
+
 @events_api.route('')
+@jwt_optional
 def get_event_list():
+    current_user = get_jwt_identity()
+
     skip = request.args.get('skip', 0, type=int)
     limit = request.args.get('limit', 20, type=int)
 
@@ -33,7 +39,14 @@ def get_event_list():
 
     name = request.args.get('name', '')
 
-    events_query = Event.query
+    # TODO: enable and test recommendation service here
+    # if current_user is None:
+    if True:
+        events_query = Event.query
+    else:
+        events_query = rpc_cluster.recommendation_service.get_recommendations({
+            'user_id': current_user.id
+        })
 
     date_format = '%Y-%m-%d'
 

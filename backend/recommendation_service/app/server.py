@@ -1,10 +1,16 @@
+from datetime import datetime
 from typing import Dict
 
 from nameko.events import event_handler
-# from nameko.rpc import rpc
+from nameko.rpc import rpc
 from redis import Redis
+from sqlalchemy.orm import scoped_session, sessionmaker
 
-from config import REDIS_HOST, REDIS_PORT
+from config import REDIS_HOST, REDIS_PORT, engine
+from models import Event, EventCategory
+
+factory = sessionmaker(bind=engine)
+Session = scoped_session(factory)
 
 
 class RecommendationService:
@@ -56,9 +62,9 @@ class RecommendationService:
 
         award_vector = dict.fromkeys(user['stack'],
                                      self._award_for_registration)
-        event_category_vector = dict.fromkeys(self._event_category_range, 0)
+        event_category_vector = dict.fromkeys(self._event_category_range, 1)
         event_category_vector.update(award_vector)
-        event_type_vector = dict.fromkeys(self._event_type_range, 0)
+        event_type_vector = dict.fromkeys(self._event_type_range, 1)
 
         self._dump_interest_vector(user['id'], 'event_categories',
                                    event_category_vector)
@@ -96,3 +102,51 @@ class RecommendationService:
 
         for category in payload['new_stack']:
             self._redis.hincrby(key, category, self._award_for_registration)
+
+    @rpc
+    def get_recommendations(self, payload):
+        """
+            Make events recommendations for a user based
+            on info collected by recommendation service
+        """
+
+        session = Session()
+
+        event_category_vector = self._load_interest_vector(payload['user_id'],
+                                                           'event_categories')
+        event_types_vector = self._load_interest_vector(payload['user_id'],
+                                                        'event_types')
+
+        categories_sum = sum(event_category_vector.values())
+        types_sum = sum(event_types_vector.values())
+
+        all_events_query = session.query(Event).filter(
+            Event.event_time >= datetime.utcnow()
+        )
+        total_events_num = all_events_query.count()
+
+        result_query = session.query.filter(False)
+
+        for category, category_score in event_category_vector.items():
+            category_percent = category_score / categories_sum
+
+            category_events_query = all_events_query.filter(
+                Event.categories.any(EventCategory.id == category)
+            )
+
+            for event_type, event_type_score in event_types_vector.items():
+                type_percent = event_type_score / types_sum
+                limit = total_events_num * category_percent * type_percent
+
+                filtered_query = category_events_query.filter(
+                    Event.event_type_id == event_type
+                ).limit(limit)
+
+                result_query = result_query.union(filtered_query)
+
+        result_query = result_query.order_by(Event.event_time)
+
+        Session.remove()
+
+        # TODO: check if it will be sent over RabbitMQ
+        return result_query

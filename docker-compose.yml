@@ -28,10 +28,6 @@ services:
       - ./environment/jwt_sign_key.env
       - ./environment/database.env
       - ./environment/rabbit.env
-    environment:
-      POSTGRES_HOST: "postgres"
-      POSTGRES_PORT: "5432"
-      RABBITMQ_HOST: "rabbit"
     depends_on:
       - postgres
       - rabbit
@@ -41,10 +37,6 @@ services:
     env_file:
       - ./environment/database.env
       - ./environment/rabbit.env
-    environment:
-      POSTGRES_HOST: "postgres"
-      POSTGRES_PORT: "5432"
-      RABBITMQ_HOST: "rabbit"
     depends_on:
       - rabbit
   crawlers:
@@ -52,17 +44,14 @@ services:
     env_file:
       - ./environment/timepad.env
       - ./environment/rabbit.env
-    environment:
-      RABBITMQ_HOST: "rabbit"
     depends_on: 
       - event_analyzer
   recommendation_service:
     build: ./backend/recommendation_service/
     env_file:
       - ./environment/rabbit.env
-    environment:
-      REDIS_HOST: "redis"
-      RABBITMQ_HOST: "rabbit"
+      - ./environment/redis.env
+      - ./environment/database.env
     depends_on:
       - redis
       - rabbit
