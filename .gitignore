@@ -1,5 +1,6 @@
-crawlers/app/config.py
-api/config.py
-api/static/
+environment/jwt_sign_key.env
+environment/timepad.env
+backend/api/app/static/
 .DS_Store
+.vscode
 *__pycache__*

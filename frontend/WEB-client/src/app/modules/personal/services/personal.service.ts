@@ -71,7 +71,7 @@ export class PersonalService {
     .pipe(retry(1))
   }
 
-  postInfo(phone: string, first_name: string, last_name: string, status: any, city: any, stack: any){
+  postInfo(phone: string = '', first_name: string, last_name: string, status: any, city: any, stack: any){
     return this.http
     .post("/api/user/me",{
       phone: phone,

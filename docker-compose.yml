@@ -1,0 +1,60 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:latest
+    env_file:
+      - ./environment/database.env
+    volumes:
+      - ./backend/database/schema/:/docker-entrypoint-initdb.d/
+  rabbit:
+    image: rabbitmq:3
+    env_file:
+      - ./environment/rabbit.env
+  redis:
+    image: redis
+  nginx:
+    build: ./frontend/
+    volumes:
+      - images_volume:/var/www/html/static/:ro
+    depends_on:
+      - api
+    ports:
+      - 127.0.0.1:2020:80
+  api:
+    build: ./backend/api/
+    volumes:
+      - images_volume:/static/
+    env_file:
+      - ./environment/jwt_sign_key.env
+      - ./environment/database.env
+      - ./environment/rabbit.env
+    depends_on:
+      - postgres
+      - rabbit
+      - recommendation_service
+  event_analyzer:
+    build: ./backend/event_analyzer/
+    env_file:
+      - ./environment/database.env
+      - ./environment/rabbit.env
+    depends_on:
+      - rabbit
+  crawlers:
+    build: ./backend/crawlers/
+    env_file:
+      - ./environment/timepad.env
+      - ./environment/rabbit.env
+    depends_on: 
+      - event_analyzer
+  recommendation_service:
+    build: ./backend/recommendation_service/
+    env_file:
+      - ./environment/rabbit.env
+      - ./environment/redis.env
+      - ./environment/database.env
+    depends_on:
+      - redis
+      - rabbit
+      - postgres
+volumes:
+  images_volume: {}
