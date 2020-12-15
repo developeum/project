@@ -1,2 +1,0 @@
-0 15 * * * cd /app && python3 /app/timepad.py
-5 15 * * * cd /app && python3 /app/meetup.py

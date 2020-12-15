@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="filterContainer">
+        <div class="dateContainer">
+            <label class="title">Дата проведения</label>
+            <div>
+                <p class="date" *ngIf = "startsMinToShow">{{startsMinToShow}} - {{startsMaxToShow}}</p>
+                <app-calendar (throwDate) = "throwDate($event)"></app-calendar>
+            </div>
+        </div>
+        <form class="formContainer" [formGroup] = "filterForm" (ngSubmit) = "onSubmit()">
+            <div class="formGroup">
+                <label class="title">Типы</label>
+                <div class="flexContainer">
+                    <div *ngFor = "let type of filterForm?.get('types')['controls']; let i = index;" class="checkboxContainer">
+                        <input class="check" type="checkbox" [formControl] = "type" id="type {{i}}">
+                        <label for="type {{i}}">{{types[i].name}}</label>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="formGroup">
+                <label class="title">Категории</label>
+                <div class="flexContainer">
+                    <div *ngFor = "let category of filterForm?.get('categories')['controls']; let i = index;" class="checkboxContainer">
+                        <input class="check" type="checkbox" [formControl] = "category" id="category {{i}}">
+                        <label for="category {{i}}">{{categories[i].name}}</label>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="formGroup">
+                <label class="title">Города</label>
+                <div class="flexContainer">
+                    <div *ngFor = "let place of filterForm?.get('places')['controls']; let i = index;" class="checkboxContainer">
+                        <input class="check" type="checkbox" [formControl] = "place" id="place {{i}}">
+                        <label for="place {{i}}">{{places[i].name}}</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="btnContainer">
+            <button class="btn" type="submit" (click) = "onSubmit()">Применить</button>
+        </div>       
+    </div>
+</div>

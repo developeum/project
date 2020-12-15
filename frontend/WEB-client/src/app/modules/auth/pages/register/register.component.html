@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="loginContainer">
+        <div class="formContainer">
+            <p class="signUp">Регистрация</p>
+            <form [formGroup] = "registerForm" (ngSubmit) = "onSubmit()" >
+                <div class="formGroup">
+                    <p [ngClass] = "{'errorText': error}" class="inputDescription">Логин</p>
+                    <div class="wrapInput">
+                        <input [ngClass] = "{'errorInput': error}" formControlName = "username" class="input" type="text" placeholder="" />
+                    </div>
+                </div>
+                <div class="formGroup">
+                    <p [ngClass] = "{'errorText': error}" class="inputDescription">Пароль</p>
+                    <div class="wrapInput">
+                        <input #password [ngClass] = "{'errorInput': error}" formControlName = "password" class="input" type="password" placeholder="" />
+                        <input class="inputVisible" type="text" (mouseenter) = "changePassVisibility($event)" (mouseleave) = "changePassVisibility($event)" value="">
+                    </div>                    
+                </div>
+                <div class="formGroup">
+                    <p [ngClass] = "{'errorText': error}" class="inputDescription">Имя</p>
+                    <div class="wrapInput">
+                        <input [ngClass] = "{'errorInput': error}" formControlName = "firstName" class="input" type="text" placeholder="" />
+                    </div>                   
+                </div>
+                <div class="formGroup">
+                    <p [ngClass] = "{'errorText': error}" class="inputDescription">Фамилия</p>
+                    <div class="wrapInput">
+                        <input [ngClass] = "{'errorInput': error}" formControlName = "lastName" class="input" type="text" placeholder="" />
+                    </div>                   
+                </div>
+                <p class="inputDescription">Стек</p>
+                <select class="select" formControlName = "stack" name="select" id="">
+                    <option *ngFor = "let stack of stacks" value="stack.id">{{stack.name}}</option>
+                </select>  
+                <div *ngIf = "error" class="errorMessageContainer">
+                    <p *ngIf = "!errorType">Введены некоректные данные</p>
+                    <p *ngIf = "errorType">Неверные логин или пароль</p>
+                </div>
+                <div class="btnContainer">
+                    <button type="submit button" class="subButton">Войти</button>
+                    <p class="SignIn" routerLink = "/auth">Уже есть аккаунт?</p>
+                </div>   
+                
+            </form>
+        </div>
+    </div>
+</div>

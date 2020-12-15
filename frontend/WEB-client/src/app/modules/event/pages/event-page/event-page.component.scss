@@ -1,0 +1,25 @@
+.container{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 13vh;
+}
+
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.header{
+    position: absolute;
+}
+
+@media screen and(max-width: 420px) {
+    .container{
+        margin-top: 0;
+    }
+
+    .mainContainer{
+        align-items: center;
+    }
+}

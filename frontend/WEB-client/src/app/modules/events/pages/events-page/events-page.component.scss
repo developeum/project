@@ -1,0 +1,199 @@
+$primaryBackground: #e9e9e9;
+$secondaryBackground: #ddd;
+$primary: #7dbcbb;
+$textBlack: #2f2f2f;
+$textWhite: #fff;
+$containerColor: #fcfcfc;
+
+@font-face {
+	font-family: 'Gotham Pro Bold';
+	src: url('../../../../fonts/GothamPro/GothamPro-Bold.ttf');
+	// src: local('Gotham Pro Bold Italic'), local('GothamPro-BoldItalic'),
+	// 	url('GothamPro-BoldItalic.eot?#iefix') format('embedded-opentype'),
+	// 	url('GothamPro-BoldItalic.woff') format('woff'),
+	// 	url('GothamPro-BoldItalic.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gotham Pro';
+	src: url('../../../../fonts/GothamPro/GothamPro-Light.ttf');
+	font-weight: normal;
+	font-style: 300;
+}
+
+@font-face{
+    font-family: 'Ubuntu';
+    src: url('../../../../fonts/Ubuntu/Ubuntu-Bold.ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.header{
+    position: absolute;
+    z-index: 9;
+}
+
+.container{
+    margin-top: 13vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-family: 'Gotham Pro';
+    margin-bottom: 5vh;
+}
+
+.title{
+    font-size: 3.5vh;
+    font-family: 'Ubuntu';
+}
+
+.list{
+    list-style: none;
+    padding: 0;
+    
+}
+
+.eventTitle{
+    width: 35vw;
+}
+
+.event{
+    cursor: pointer;
+    width: 50vw;
+    height: 8vh;
+    // font-family: "GothamPro";
+    padding: 7px 20px;
+    margin-bottom:40px;
+    border-radius: 1vh;
+    // border: 1px solid $containerColor;
+    font-size: 20px;
+    letter-spacing: 2px;
+    transition: 0.3s all linear;
+    background-color: $primaryBackground;
+    box-shadow: -3px -3px 10px 5px rgb(250, 248, 248), 3px 3px 10px 5px rgba(177, 173, 166, 0.51);
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.event:active{
+    box-shadow: inset -6px -6px 16px 0 rgba(255,255,255,1), inset 6px 6px 16px 0 rgba(194, 189, 181, 0.51);
+}
+
+.eventTime{
+    position: absolute;
+    right: 2vw;
+}
+
+.noShow{
+    display: none;
+}
+
+.co{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn{
+    
+    background: linear-gradient(to bottom right, #76b1b1, #8cd3d2);
+    border: none;
+    border-radius: 1vh;
+    width: 200px;
+    height: 5vh;
+    color: $textWhite;
+    font-size: 1.1rem;
+    box-shadow: -6px -6px 16px 5px rgba(255,255,255,1), 6px 6px 16px 5px rgba(194, 189, 181, 0.51);
+    // font-family: 'gothamPro';
+    outline: none;
+    z-index: -1;
+    position: absolute;
+    bottom: -4vh;
+}
+
+.btn:active{
+    box-shadow: inset -6px -6px 16px 0 rgba(255,255,255,1), inset 6px 6px 16px 0 rgba(194, 189, 181, 0.51);
+    background: $primaryBackground;
+    background-color: $primaryBackground;
+    color: $primary;
+}
+
+.filterIcon{
+    display: none;
+}
+
+@media screen and(max-width: 420px) {
+    .mainContainer{
+        align-items: center;
+        
+    }
+
+    .container{
+        margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10vh;
+    }
+
+    .filter{
+        display: none;
+    }
+
+    .event{
+        width: 80vw;
+        height: 13vh;
+        margin-top: 0;
+        margin-bottom: 4vh;
+    }
+
+    .btn{
+        width: 70vw;
+        height: 6vh;
+    }
+
+    .filterIcon{
+        display: block;
+        background-image: url(../../../../imges/icons/filterOn.png);
+        background-size: 100%;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        right: 0;
+    }
+
+    .filterIconChanged{
+        display: block;
+        background-image: url(../../../../imges/icons/filterOff.png);
+        background-size: 100%;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        right: 0;
+    }
+
+    .titleContainer{
+        display: flex;
+        position: relative;
+        width: 85vw; 
+        align-items: center;
+        justify-content: center;       
+    }
+
+    .filterOn{
+        display: block;
+    }
+
+    .listOff{
+        display: none;
+    }
+}
+
