@@ -10,6 +10,8 @@ services:
     image: rabbitmq:3
     env_file:
       - ./environment/rabbit.env
+  redis:
+    image: redis
   nginx:
     build: ./frontend/
     volumes:
@@ -17,7 +19,7 @@ services:
     depends_on:
       - api
     ports:
-      - 2020:80
+      - 127.0.0.1:2020:80
   api:
     build: ./backend/api/
     volumes:
@@ -25,20 +27,16 @@ services:
     env_file:
       - ./environment/jwt_sign_key.env
       - ./environment/database.env
-    environment:
-      POSTGRES_HOST: "postgres"
-      POSTGRES_PORT: "5432"
+      - ./environment/rabbit.env
     depends_on:
       - postgres
+      - rabbit
+      - recommendation_service
   event_analyzer:
     build: ./backend/event_analyzer/
     env_file:
       - ./environment/database.env
       - ./environment/rabbit.env
-    environment:
-      POSTGRES_HOST: "postgres"
-      POSTGRES_PORT: "5432"
-      RABBITMQ_HOST: "rabbit"
     depends_on:
       - rabbit
   crawlers:
@@ -46,9 +44,17 @@ services:
     env_file:
       - ./environment/timepad.env
       - ./environment/rabbit.env
-    environment:
-      RABBITMQ_HOST: "rabbit"
     depends_on: 
       - event_analyzer
+  recommendation_service:
+    build: ./backend/recommendation_service/
+    env_file:
+      - ./environment/rabbit.env
+      - ./environment/redis.env
+      - ./environment/database.env
+    depends_on:
+      - redis
+      - rabbit
+      - postgres
 volumes:
   images_volume: {}

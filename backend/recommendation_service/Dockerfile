@@ -5,4 +5,4 @@ COPY app/ .
 
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-ENTRYPOINT ["nameko", "run", "--config", "config.yml", "server:EventAnalyzer"]
+ENTRYPOINT ["nameko", "run", "--config", "config.yml", "server:RecommendationService"]

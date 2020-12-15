@@ -1,14 +1,29 @@
 from functools import wraps
 from typing import List
 
+from config import RABBITMQ_HOST, RABBITMQ_PASS, RABBITMQ_USER
 from flask import request
+from nameko.standalone.events import event_dispatcher
+from nameko.standalone.rpc import ClusterRpcProxy
+
+ONLY_JSON = 'Request body must be a json object'
+KEY_NOT_PROVIDED = 'Required key is not provided: %s'
+INCORRECT_TYPE = 'Incorrect key type: %s'
+
+_config = {
+    'AMQP_URI': 'pyamqp://{user}:{password}@{host}'.format(
+        user=RABBITMQ_USER,
+        password=RABBITMQ_PASS,
+        host=RABBITMQ_HOST
+    )
+}
+
+_dispatch = event_dispatcher(_config)
+rpc_cluster = ClusterRpcProxy(_config)
+
 
 def accepts_json(**fields):
     def decorator(func):
-        ONLY_JSON = 'Request body must be a json object'
-        KEY_NOT_PROVIDED = 'Required key is not provided: %s'
-        INCORRECT_TYPE = 'Incorrect key type: %s'
-
         @wraps(func)
         def decorated(*args, **kwargs):
             body = request.get_json()
@@ -45,11 +60,13 @@ def accepts_json(**fields):
         return decorated
     return decorator
 
+
 def project(dict_obj: dict, fields: List[str]) -> dict:
     return {
         field: dict_obj.get(field, 'no such field')
         for field in fields
     }
+
 
 def parse_int_array(as_str: str) -> List[int]:
     splitted = as_str.split(',')
@@ -57,3 +74,7 @@ def parse_int_array(as_str: str) -> List[int]:
     return [
         int(elem) for elem in splitted if elem.isdigit()
     ]
+
+
+def dispatch(type_: str, payload: str) -> None:
+    _dispatch('api', type_, payload)

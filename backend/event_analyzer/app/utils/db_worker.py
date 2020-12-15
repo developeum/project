@@ -17,9 +17,10 @@ connection = psycopg2.connect(
 
 cursor = connection.cursor()
 
+
 @lru_cache(maxsize=None)
 def select_or_insert(table: str, column: str, value: str):
-    """ 
+    """
         Find entry in list-like table if provided value exists in that table
         Create new one if it doesn't
     """
@@ -37,6 +38,7 @@ def select_or_insert(table: str, column: str, value: str):
         entry = cursor.fetchone()
 
     return entry[0]
+
 
 def store_event(name: str, event_time: datetime, city: str, place: str,
                 source_url: str, description: str,
@@ -70,6 +72,7 @@ def store_event(name: str, event_time: datetime, city: str, place: str,
     for category in categories:
         category_id = select_or_insert('categories', 'category', category)
         cursor.execute(links_insert_query, (event_id, category_id))
+
 
 def commit_changes():
     """
